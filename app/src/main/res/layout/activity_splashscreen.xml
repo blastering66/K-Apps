@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".activity.Splashscreen">
+
+    <VideoView
+        android:id="@+id/video_kufed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:text="K"
+        android:textSize="100sp"
+        android:textColor="@android:color/white"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btn_exit"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:src="@drawable/img_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.kufed.id.customview.KufedButton
+            android:id="@+id/btn_login"
+            android:text="Sign In"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedButton
+            android:id="@+id/btn_register"
+            android:text="Register"
+            android:textColor="@android:color/black"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/selector_btn_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>
