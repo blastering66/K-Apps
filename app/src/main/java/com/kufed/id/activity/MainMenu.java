@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kufed.id.customadapter.RVAdapter_Slider;
+import com.kufed.id.fragment.Fragment_Notification;
 import com.kufed.id.fragment.Fragment_Shop_Categories;
 
 import butterknife.Bind;
@@ -135,6 +136,11 @@ public class MainMenu extends AppCompatActivity
             case 2:
                 Fragment fragment_shop = new Fragment_Shop_Categories();
                 fm.beginTransaction().replace(R.id.frame_container,fragment_shop).commit();
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+            case 3:
+                Fragment fragment_notif = new Fragment_Notification();
+                fm.beginTransaction().replace(R.id.frame_container,fragment_notif).commit();
                 drawer.closeDrawer(GravityCompat.START);
                 break;
         }

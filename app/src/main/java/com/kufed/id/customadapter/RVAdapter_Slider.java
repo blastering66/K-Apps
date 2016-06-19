@@ -91,6 +91,16 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
                 case 3:
                     holder.img.setImageResource(R.drawable.img_notif);
                     holder.tv.setText("Notification");
+                    holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onChangeFragmentContentPosition(position);
+
+                            holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                            holder.img.setImageResource(R.drawable.img_notif_after);
+                        }
+                    });
+
                     break;
                 case 4:
                     holder.img.setVisibility(View.GONE);
