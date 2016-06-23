@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <android.support.v4.view.ViewPager
+        android:background="@color/color_black"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_name"
+            android:padding="10dp"
+            android:text="Sashiko Teddy Bear"
+            android:textSize="@dimen/size_title"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_brand"
+            android:paddingLeft="10dp"
+            android:text="FDMTL"
+            android:textSize="@dimen/size_subtitle"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_user"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/size_standard"
+            android:text="jnchandra"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_price"
+            android:text="RP 99.999.000"
+            android:textSize="@dimen/size_title"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
