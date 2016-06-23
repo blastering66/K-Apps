@@ -39,6 +39,7 @@ public class Fragment_VP_Image extends Fragment {
         img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
+        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(getActivity()).load(cUrl).asBitmap().into(img);
         return img;
     }

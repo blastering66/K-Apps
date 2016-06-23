@@ -1,2 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/glide-3.7.0_0f8af6cfbbbdc986ac92579a66bc294fcbfff2ea.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/okhttp-2.5.0_0df5009fab39a4c5d12dc10407ba5449f7821f35.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/converter-gson/2.0.0-beta2/392c3d09e0f5e7087544093cc0cb23bb9c7af5fa/converter-gson-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="392c3d09e0f5e7087544093cc0cb23bb9c7af5fa">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/converter-gson-2.0.0-beta2_12ca4d4ecd832c3d7f797c2a3f7682c6dbf3bafa.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/2.0.0-beta2/880d9e0997b2d1bfc98e0d121ced33ee5d04aac4/retrofit-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="880d9e0997b2d1bfc98e0d121ced33ee5d04aac4">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/retrofit-2.0.0-beta2_d20fd9718d8b0a3c5faf3af7ec5dc67217e0bbac.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.pacioianu.david/ink-page-indicator/1.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0146f1c2b895315ca51b7299b99b60ae87e6f45f">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.pacioianu.david-ink-page-indicator-1.1.1_cbdc891d46e8c43bd94ba16ce090b47c1a3e2f5f.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/okio-1.6.0_fce5e70c27a6bd11800e06589ffcde6174723a2c.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/support-v13/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f4d7a07120e76988f3a15403838d323c2400db83">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_139f58fe5ec99a2df45c3914db10e0a1dd3c09ee.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/butterknife-7.0.1_012fa683d218863d683a22371f2f6950e5107cdd.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.0.17/1a653d18a3e41fae66a473d172649a0625cff107/rxjava-1.0.17.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1a653d18a3e41fae66a473d172649a0625cff107">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/rxjava-1.0.17_4cdcab114913cf174c3511398e3db8e224338495.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/it.neokree/MaterialTabs/0.11/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fef6aa7ea0bb2d6adf10965d0a5bb8e353517bff">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/it.neokree-MaterialTabs-0.11_1fada52ef8d6a75f8024a366efdeb86817b279af.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.github.markushi/android-ui/1.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="96436aef5f48b09aca1e0183dfcd7782aa580bd6">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.github.markushi-android-ui-1.2_2a3110e628a7b298b77e8e0cda2d3ea37c4d6dda.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_7897e06033b5e97df711cc77a99cbb89b2139e6b.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_e78b434320542983aaf5f2ab47553119435d31fc.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.wdullaer/materialdatetimepicker/2.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a95fd025efad7b05be3d29737bec37652e0fdb9e">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.wdullaer-materialdatetimepicker-2.3.0_d5810b2264bd88221261769477343905b095f4bb.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/io.reactivex/rxandroid/0.23.0/9c437ce12df38b57fde4e3bb38ef6859f85ff737/rxandroid-0.23.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9c437ce12df38b57fde4e3bb38ef6859f85ff737">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/rxandroid-0.23.0_d90667d9d3b6ea526f515abff1c7710fb4a2bf96.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.pkmmte.view/circularimageview/1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c341a7ad32bc2eef9dcfab239262b77ac60788cc">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.pkmmte.view-circularimageview-1.1_8b974916db17317d1fe3210efda1d935e4b1503a.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/gson-2.3.1_5b765d10dd6089223597e54057113aa33ddcda38.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.3.0_ba372c16b1e3f6ae189ed17955536d5bb78ae95a.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/internal_impl-23.3.0_2815aef393cc78103084b0bbb96c07547d942e91.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/support-annotations-23.3.0_d9449c3820a87fbbaacb0bebde32362d5b9f6415.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.1.1_361c8b6a12f01453edb98bc99b749cca90012ae3.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/adapter-rxjava/2.0.0-beta2/3a233746381a03dbb0f5f3ed10b11c3e72dba499/adapter-rxjava-2.0.0-beta2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3a233746381a03dbb0f5f3ed10b11c3e72dba499">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/adapter-rxjava-2.0.0-beta2_48dea3e0976df66224d6c66b5eeb7201419943ca.jar" />
+    </item>
+    <item
+        jar="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/exploded-aar/com.android.support/support-v13/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5ddf5f4817565c9db82613c16093f76640a54e15">
+        <dex dex="/Users/macbook/Desktop/Android Studio Repo Workspace/K-Apps/app/build/intermediates/pre-dexed/debug/com.android.support-support-v13-23.1.1_4babb1ba22c39a80dfade7d514ea797cecf9584c.jar" />
+    </item>
+
+</items>
