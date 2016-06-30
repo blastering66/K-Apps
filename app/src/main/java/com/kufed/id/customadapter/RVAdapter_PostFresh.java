@@ -37,9 +37,10 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
     public void onBindViewHolder(ViewHolder holder, int position) {
         final PojoPostFresh.Post item = data.get(position);
 
-//        Glide.with(context).load(item.getNormalImagePath()).asBitmap().into(holder.img);
-        Glide.with(context).load("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/2010-1465207439-full.jpg").asBitmap().into(holder.img);
-        holder.tv_name.setText(item.getPostTitle());
+        Glide.with(context).load(item.getNormalImagePath()).asBitmap().into(holder.img);
+//        Glide.with(context).load("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/2010-1465207439-full.jpg").asBitmap().into(holder.img);
+//        holder.tv_name.setText(item.getPostTitle());
+        holder.tv_name.setText(item.getProduct().getProductTitle());
         holder.tv_user.setText(item.getBrandName());
 
         NumberFormat nf = NumberFormat.getNumberInstance();

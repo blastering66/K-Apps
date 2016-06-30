@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/tabhostHeight"
+        android:layout_marginRight="@dimen/tabhostHeight"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_title_custom"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/size_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_dropdown"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -19,7 +19,16 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/transparent</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorAccent">@color/black_overlay</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppTheme_WhiteActionbar" parent="AppTheme.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_actionbar</item>
+        <item name="colorPrimaryDark">@color/color_actionbar</item>
+        <item name="colorAccent">@color/color_black</item>
+        <item name="windowActionBarOverlay">true</item>
     </style>
 
     <style name="FullscreenTheme" parent="AppTheme">

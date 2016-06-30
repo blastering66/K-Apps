@@ -7,8 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kufed.id.customadapter.RVAdapter_Slider;
+import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.fragment.Fragment_Home;
 import com.kufed.id.fragment.Fragment_Shop_Categories;
 
@@ -31,17 +35,26 @@ public class MainMenu extends AppCompatActivity
     @Bind(R.id.rv_content_slider)RecyclerView rv;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter layoutAdapter;
+    Toolbar toolbar;
+    KufedTextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
-        toolbar.setBackgroundColor(Color.BLACK);
-        toolbar.setTitle("Kufed");
+        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.transparent));
+        toolbar.setTitle("FEATURED");
         setSupportActionBar(toolbar);
+
+        LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
+        View view = mInflater.inflate(R.layout.layout_custom_toolbar, null);
+        tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
+        tv_title.setText("FEATURED");
+        toolbar.removeAllViews();;
+        toolbar.addView(view);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -162,14 +162,16 @@
             android:padding="20dp">
 
             <ImageView
+                android:layout_gravity="center_vertical"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/img_like_icon" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_likes"
+                android:scrollbars="none"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="50dp" />
         </LinearLayout>
 
         <View
@@ -185,11 +187,12 @@
             android:text="COMMENTS"
             android:textAllCaps="true" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_comments"
+        <include
+            layout="@layout/item_detail_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" />
+            />
+
 
         <com.kufed.id.customview.KufedTextView
             android:id="@+id/tv_all_comments"
@@ -232,8 +235,10 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_soldby_store"
+            android:padding="10dp"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="150dp" />
 
 
         <View
@@ -253,8 +258,10 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_related_item"
+            android:padding="10dp"
+            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="150dp" />
 
     </LinearLayout>
 
