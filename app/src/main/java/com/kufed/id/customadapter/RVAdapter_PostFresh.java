@@ -3,6 +3,7 @@ package com.kufed.id.customadapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,20 @@ import com.kufed.id.activity.Detail_Product;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.pojo.PojoPostFresh;
+import com.kufed.id.pojo.PojoResponseRegister;
+import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.rowdata.Rowdata_PostFresh;
+import com.kufed.id.util.Param_Collection;
 
 import java.text.NumberFormat;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by macbook on 6/21/16.
@@ -27,14 +35,19 @@ import butterknife.ButterKnife;
 public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFresh.ViewHolder> {
     private Context context;
     private List<PojoPostFresh.Post> data;
+    private Rest_Adapter adapter;
+    private String access_token;
 
-    public RVAdapter_PostFresh(Context context, List<PojoPostFresh.Post> data) {
+    public RVAdapter_PostFresh(Context context, List<PojoPostFresh.Post> data, Rest_Adapter adapter,
+                               String access_token) {
         this.context = context;
         this.data = data;
+        this.adapter = adapter;
+        this.access_token =access_token;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final PojoPostFresh.Post item = data.get(position);
 
         Glide.with(context).load(item.getNormalImagePath()).asBitmap().into(holder.img);
@@ -51,18 +64,69 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Detail_Product.class);
+                intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getPostId().toString());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
+
+//        holder.tv_likes.setText(item.getLikesCount());
+//        holder.tv_likes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                click_like(item.getPostId().toString(), holder.img_like);
+//            }
+//        });
+
+        holder.img_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click_like(item.getPostId().toString(), holder.img_like);
+            }
+        });
+
+        holder.img_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click_share();
+            }
+        });
+    }
+
+
+
+    private void click_like(String id, final ImageView img){
+        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PojoResponseRegister>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("","");
+                        img.setImageResource(R.drawable.img_like_icon_after);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+
+                    }
+                });
+
+    }
+
+    private void click_share(){
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post_fresh, null);
-
         ViewHolder viewHolder = new ViewHolder(view);
-
         return viewHolder;
     }
 
@@ -77,6 +141,9 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         @Bind(R.id.tv_price)KufedTextView tv_price;
         @Bind(R.id.tv_user)KufedTextView tv_user;
         @Bind(R.id.wrapper)View wrapper;
+        @Bind(R.id.tv_likes)KufedTextView tv_likes;
+        @Bind(R.id.img_like)ImageView img_like;
+        @Bind(R.id.img_share)ImageView img_share;
 
         public ViewHolder(View itemView) {
             super(itemView);

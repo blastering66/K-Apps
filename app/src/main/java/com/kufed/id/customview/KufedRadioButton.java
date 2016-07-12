@@ -2,14 +2,10 @@ package com.kufed.id.customview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
-import android.widget.Button;
-import android.widget.RadioButton;
 
-import com.kufed.id.activity.R;
 import com.kufed.id.util.Font;
 
 /**
@@ -41,7 +37,7 @@ public class KufedRadioButton extends AppCompatRadioButton{
 //            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
             int textColor = Color.parseColor("#ffffff");
             setSupportButtonTintList(ColorStateList.valueOf(textColor));
-            setTypeface(Font.setTypeface_Overpass_Regular(context));
+            setTypeface(Font.setTypeface_Regular(context));
         }
     }
 }

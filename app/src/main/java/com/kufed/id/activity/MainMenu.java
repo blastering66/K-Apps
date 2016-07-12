@@ -45,7 +45,7 @@ public class MainMenu extends AppCompatActivity
         ButterKnife.bind(this);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
-        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.transparent));
+//        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.black));
         toolbar.setTitle("FEATURED");
         setSupportActionBar(toolbar);
 

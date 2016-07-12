@@ -3,7 +3,6 @@ package com.kufed.id.customview;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.kufed.id.util.Font;
 
@@ -34,7 +33,7 @@ public class KufedButton extends Button{
     private void init() {
         if (!isInEditMode()) {
 //            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
-            setTypeface(Font.setTypeface_Overpass_Regular(context));
+            setTypeface(Font.setTypeface_Regular(context));
         }
     }
 }

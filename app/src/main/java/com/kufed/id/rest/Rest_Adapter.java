@@ -1,12 +1,15 @@
 package com.kufed.id.rest;
 
 import retrofit.http.GET;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
 import com.kufed.id.pojo.PojoPostFresh;
+import com.kufed.id.pojo.PojoPostInfo;
+import com.kufed.id.pojo.PojoPostLikes;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
 
@@ -58,6 +61,18 @@ public interface Rest_Adapter {
             @Query("access_token") String access_token
     );
 
+    @GET("posts/{id}/info?")
+    Observable<PojoPostInfo> get_post_info(
+            @Path("id") String id,
+            @Query("access_token") String access_token
+    );
+
+    @GET("posts/{id}/likes?")
+    Observable<PojoPostLikes> get_post_likes(
+            @Path("id") String id,
+            @Query("access_token") String access_token
+    );
+
     @GET("/product/category?")
     Observable<PojoResponseCategories> get_categories(
             @Query("access_token") String access_token
@@ -75,5 +90,42 @@ public interface Rest_Adapter {
             @Field("username") String username
 //            @Field("phone") String phone,
 //            @Field("questions") String questions
+    );
+
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/posts/{id}/like")
+    Observable<PojoResponseRegister> like_post(
+            @Path("id") String id,
+            @Field("access_token") String access_token
+    );
+
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/profile/{id}/follow")
+    Observable<PojoResponseRegister> follow_profile(
+            @Path("id") String id,
+            @Field("access_token") String access_token
+    );
+
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/profile/{id}/follow")
+    Observable<PojoResponseRegister> unfollow_profile(
+            @Path("id") String id,
+            @Field("access_token") String access_token
+    );
+
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/posts/{id}/comments")
+    Observable<PojoResponseRegister> comment_post(
+            @Path("id") String id,
+            @Field("comment") String comment,
+            @Field("access_token") String access_token
     );
 }

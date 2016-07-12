@@ -90,7 +90,7 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
                     break;
                 case 3:
                     holder.img.setImageResource(R.drawable.img_notif);
-                    holder.tv.setText("Notification");
+                    holder.tv.setText("Notifications");
                     break;
                 case 4:
                     holder.img.setVisibility(View.GONE);

@@ -9,53 +9,53 @@ public class Font {
 	public static Typeface mFont;
 	
 	public static final Hashtable<String, Typeface> cache = new Hashtable<String, Typeface>();
-	private static final String url_font_garomond = "fonts/alte_haas_grotesk_bold.ttf";
-	private static final String url_font_overpass_regular = "fonts/Overpass_Regular.ttf";
-	private static final String url_font_frutiger_italic = "fonts/Frutiger_CE_56_Italic.ttf";
+	private static final String url_font = "fonts/alte_haas_grotesk_bold.ttf";
+	private static final String url_font_regular = "fonts/arial.ttf";
+	private static final String url_font_italic = "fonts/arial_italic.ttf";
 	
 	public static Typeface setFontGaramond(Context c) {
 		synchronized (cache) {
-			if (!cache.containsKey(url_font_garomond)) {
+			if (!cache.containsKey(url_font)) {
 				try {
 					Typeface t = Typeface.createFromAsset(c.getAssets(),
-							url_font_garomond);
-					cache.put(url_font_garomond, t);
+							url_font);
+					cache.put(url_font, t);
 				} catch (Exception e) {
 					return null;
 				}
 			}
-			return cache.get(url_font_garomond);
+			return cache.get(url_font);
 		}
 	}
 	
-	public static Typeface setTypeface_Overpass_Regular(Context c) {
+	public static Typeface setTypeface_Regular(Context c) {
 		synchronized (cache) {
-			if (!cache.containsKey(url_font_overpass_regular)) {
+			if (!cache.containsKey(url_font_regular)) {
 				try {
 					Typeface t = Typeface.createFromAsset(c.getAssets(),
-							url_font_overpass_regular);
-					cache.put(url_font_overpass_regular, t);
+							url_font_regular);
+					cache.put(url_font_regular, t);
 				} catch (Exception e) {
 					return null;
 				}
 			}
-			return cache.get(url_font_overpass_regular);
+			return cache.get(url_font_regular);
 		}
 	}
 
 
-	public static Typeface setTypeface_Frutiger_Italic(Context c) {
+	public static Typeface setTypeface_Italic(Context c) {
 		synchronized (cache) {
-			if (!cache.containsKey(url_font_frutiger_italic)) {
+			if (!cache.containsKey(url_font_italic)) {
 				try {
 					Typeface t = Typeface.createFromAsset(c.getAssets(),
-							url_font_frutiger_italic);
-					cache.put(url_font_frutiger_italic, t);
+							url_font_italic);
+					cache.put(url_font_italic, t);
 				} catch (Exception e) {
 					return null;
 				}
 			}
-			return cache.get(url_font_frutiger_italic);
+			return cache.get(url_font_italic);
 		}
 	}
 }

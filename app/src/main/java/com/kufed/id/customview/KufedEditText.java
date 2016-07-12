@@ -33,8 +33,6 @@ public class KufedEditText extends EditText{
 
     private void init() {
         if (!isInEditMode()) {
-//            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
-            setTypeface(Font.setTypeface_Frutiger_Italic(context));
         }
     }
 }

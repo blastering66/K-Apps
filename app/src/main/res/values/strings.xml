@@ -24,7 +24,7 @@
         <item>What musical instrument did you learn when you were young?</item>
     </string-array>
     <string name="title_activity_main_menu">MainMenu</string>
-
+    <string name="title_activity_notification">Notifications</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

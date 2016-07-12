@@ -78,12 +78,24 @@ public class PojoAccessToken {
 
     public class Status {
 
+        @SerializedName("error_messages")
+        @Expose
+        private String error_messages;
+
         @SerializedName("code")
         @Expose
         private Integer code;
         @SerializedName("description")
         @Expose
         private String description;
+
+        public String getError_messages() {
+            return error_messages;
+        }
+
+        public void setError_messages(String error_messages) {
+            this.error_messages = error_messages;
+        }
 
         /**
          * @return The code

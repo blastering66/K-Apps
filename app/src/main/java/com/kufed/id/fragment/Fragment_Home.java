@@ -73,7 +73,7 @@ public class Fragment_Home extends Fragment {
                 .subscribe(new Observer<PojoPostFresh>() {
                     @Override
                     public void onCompleted() {
-                        layoutAdapter = new RVAdapter_PostFresh(getActivity(), data);
+                        layoutAdapter = new RVAdapter_PostFresh(getActivity(), data, adapter, access_token);
                         layoutManager = new GridLayoutManager(getActivity(), 1);
                         rv.setLayoutManager(layoutManager);
                         rv.setAdapter(layoutAdapter);
@@ -92,7 +92,6 @@ public class Fragment_Home extends Fragment {
 
                         if(pojoPostFresh.getData().getPosts().size() > 0){
                             data = pojoPostFresh.getData().getPosts();
-
                         }
                     }
                 });

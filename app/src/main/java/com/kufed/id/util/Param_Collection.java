@@ -14,11 +14,12 @@ public class Param_Collection {
     public static int REQ_CODE_FROM_REGISTER =11;
     public static int REQ_CODE_FROM_REGISTER_FORGOT =12;
 
-    //Internal
-//    public static String BASE_URL=  "http://192.168.4.168:7070/";
-
+    public static String EXTRA_POST_ID=  "post_id";
     public static String URL_FOLDER_IMG = "/Kufed/temp/";
-    public static String BASE_URL=  "http://gemini.kliktoday.com/";
+
+    //Internal
+    public static String BASE_URL=  "http://192.168.4.168:7070/";
+//    public static String BASE_URL=  "http://gemini.kliktoday.com/";
     public static String ACCESS_TOKEN=  "Mgu7BzyPLiz6pyEywYkVGZejMeSvUa2gn5aeL4zs";
 
     public static String GRANT_TYPE_TOKENONLY =  "client_credentials";

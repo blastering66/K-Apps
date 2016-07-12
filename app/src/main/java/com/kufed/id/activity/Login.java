@@ -1,5 +1,6 @@
 package com.kufed.id.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -9,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.kufed.id.customview.KufedDialogProgress;
 import com.kufed.id.customview.KufedEditText;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
@@ -41,6 +44,8 @@ public class Login extends AppCompatActivity {
     @Bind(R.id.ed_password)
     KufedEditText ed_password;
 
+    private KufedDialogProgress pDialog;
+
     @OnClick(R.id.btn_back)
     public void back() {
         finish();
@@ -51,6 +56,9 @@ public class Login extends AppCompatActivity {
         if (!ed_username.getText().toString().equals("") && !ed_password.getText().toString().equals("")) {
 
             //        getAccessTokenWithLogin("ibnuaaa","vvIH9kssl72Cvjo2Jf9EzA==");
+
+            pDialog.show(getSupportFragmentManager(),"");
+
             getAccessTokenWithLogin(ed_username.getText().toString(), ed_password.getText().toString());
 
         } else {
@@ -75,12 +83,21 @@ public class Login extends AppCompatActivity {
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<PojoAccessToken>() {
                     String access_token = "";
+                    String message = "";
+                    boolean isSukses = false;
+
 
                     @Override
                     public void onCompleted() {
                         Log.e("OnComplete", "");
-                        spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token).commit();
-                        getProfile(access_token);
+                        if(isSukses){
+                            spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token).commit();
+                            getProfile(access_token);
+
+                        }else{
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                        }
+
 //                        getPostFresh(access_token);
                     }
 
@@ -93,7 +110,16 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onNext(PojoAccessToken pojoAccessToken) {
                         Log.e("OnNext", pojoAccessToken.toString());
-                        access_token = pojoAccessToken.getData().getAccessToken();
+                        String code_status = pojoAccessToken.getStatus().getCode().toString();
+                        if(code_status.equals("200")){
+                            access_token = pojoAccessToken.getData().getAccessToken();
+                            isSukses = true;
+                        }else if(code_status.equals("422")){
+                            message = pojoAccessToken.getStatus().getError_messages().toString();
+                        }else{
+                            message = pojoAccessToken.getStatus().getError_messages().toString();
+                        }
+
 
                     }
                 });
@@ -108,6 +134,7 @@ public class Login extends AppCompatActivity {
                     public void onCompleted() {
                         Log.e("OnComplete", "");
 
+                        pDialog.dismiss();
                         setResult(RESULT_OK);
                         finish();
                         startActivity(new Intent(getApplicationContext(), MainMenu.class));
