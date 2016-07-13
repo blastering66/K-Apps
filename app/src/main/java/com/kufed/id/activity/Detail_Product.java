@@ -15,7 +15,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -84,6 +86,7 @@ public class Detail_Product extends AppCompatActivity {
     @Bind(R.id.tv_price)KufedTextView tv_price;
     @Bind(R.id.tv_desc)KufedTextView tv_desc;
     Toolbar toolbar;
+    KufedTextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +99,8 @@ public class Detail_Product extends AppCompatActivity {
 //        get_RelatedItems();
 //        get_Top3Comments();
 
-        iniView();
-
         //Statis
+        iniView();
         getPostInfo("910");
 //        getPostInfo(post_id);
 
@@ -120,8 +122,17 @@ public class Detail_Product extends AppCompatActivity {
         Observable<PojoPostInfo> observable = adapter.get_post_info(post_id, access_token);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<PojoPostInfo>() {
+
+            String title_product_name;
+
             @Override
             public void onCompleted() {
+//                LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
+//                View view = mInflater.inflate(R.layout.layout_custom_toolbar_title_detail, null);
+//                tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
+//                tv_title.setText(title_product_name);
+//                toolbar.removeAllViews();;
+//                toolbar.addView(view);
                 Log.e("", "");
                 Toast.makeText(getApplicationContext(), "TEST INFO SUCCESS", Toast.LENGTH_LONG).show();
             }
@@ -134,9 +145,13 @@ public class Detail_Product extends AppCompatActivity {
 
             @Override
             public void onNext(PojoPostInfo pojoPostInfo) {
-                toolbar.setTitle(pojoPostInfo.getData().getProduct().getProductTitle());
-                setSupportActionBar(toolbar);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//                toolbar.setTitle(pojoPostInfo.getData().getProduct().getProductTitle());
+//                setSupportActionBar(toolbar);
+
+                title_product_name = pojoPostInfo.getData().getProduct().getProductTitle();
 
                 tv_name.setText(pojoPostInfo.getData().getProduct().getProductTitle());
                 tv_brand.setText(pojoPostInfo.getData().getBrandName());
@@ -153,6 +168,7 @@ public class Detail_Product extends AppCompatActivity {
 //
 //                    }
                     for (PojoPostInfo.Image element : pojoPostInfo.getData().getImages()) {
+                        data_image_vp.add(element.getNormalImagePath());
                         data_image_vp.add(element.getNormalImagePath());
                     }
 
@@ -251,12 +267,26 @@ public class Detail_Product extends AppCompatActivity {
 
     }
 
+    private void initActionBarCustom(){
+        LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
+        View view = mInflater.inflate(R.layout.layout_custom_toolbar_title_detail, null);
+        tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
+//        tv_title.setText("FEATURED");
+        toolbar.removeAllViews();;
+        toolbar.addView(view);
+
+    }
+
     private void iniView() {
         spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
         access_token = spf.getString(Param_Collection.ACCESS_TOKEN, "");
 
         post_id = getIntent().getStringExtra(Param_Collection.EXTRA_POST_ID);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setPadding(0,toolbar.getHeight(), 0,0);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        layoutAdapter_Likes = new RVAdapter_Detail_Like(Detail_Product.this, data_likes);
 //        layoutAdapter_SoldBy = new RVAdapter_Detail_SoldByStore(getApplicationContext(), data_soldbystore);

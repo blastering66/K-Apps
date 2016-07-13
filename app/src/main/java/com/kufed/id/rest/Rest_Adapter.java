@@ -7,6 +7,7 @@ import rx.Observable;
 
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
+import com.kufed.id.pojo.PojoLoginFB;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
@@ -49,6 +50,13 @@ public interface Rest_Adapter {
             @Field("client_secret") String client_secret,
             @Field("username") String username,
             @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("account/facebook_login")
+    Observable<PojoLoginFB> access_token_with_facebook_login(
+            @Field("access_token") String access_token,
+            @Field("facebook_id") String facebook_id
     );
 
     @GET("profile/me/info?")

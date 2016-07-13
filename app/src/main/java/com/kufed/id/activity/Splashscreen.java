@@ -3,10 +3,14 @@ package com.kufed.id.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +26,9 @@ import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.util.Font;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -74,6 +81,8 @@ public class Splashscreen extends AppCompatActivity {
     private void initView(){
         ButterKnife.bind(this);
         getSupportActionBar().hide();
+
+        showHashKey();
 
         spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
 
@@ -214,5 +223,24 @@ public class Splashscreen extends AppCompatActivity {
     }
 
 
+    private void showHashKey()
+    {
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.kufed.id.activity",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash FB:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
+    }
 
 }

@@ -1,5 +1,8 @@
 package com.kufed.id.activity;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +11,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,12 +37,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainMenu extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RVAdapter_Slider.onSliderItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RVAdapter_Slider.onSliderItemSelectedListener,
+        SearchView.OnQueryTextListener{
     @Bind(R.id.rv_content_slider)RecyclerView rv;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter layoutAdapter;
     Toolbar toolbar;
     KufedTextView tv_title;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +106,34 @@ public class MainMenu extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchManager searchManager = (SearchManager)MainMenu.this.getSystemService(Context.SEARCH_SERVICE);
+        if(searchItem != null){
+            searchView = (SearchView)searchItem.getActionView();
+        }
+
+        if(searchView != null){
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainMenu.this.getComponentName()));
+
+        }
+
+        searchView.setOnQueryTextListener(this);
+
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//        searchView.setOnQueryTextListener(this);
+//
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(
+//                new ComponentName(this, MainMenu.class)));
+//        searchView.setIconifiedByDefault(false);
+
         return true;
     }
 
@@ -160,5 +195,23 @@ public class MainMenu extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
                 break;
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if (!searchView.isIconified()) {
+            searchView.setIconified(false);
+        }
+
+        Intent intent_search = new Intent(getApplicationContext(), SearchResultsActivity.class);
+        intent_search.putExtra("FetchType", "ItemSearch");
+        intent_search.putExtra("CatId", query);
+        startActivity(intent_search);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

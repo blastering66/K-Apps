@@ -13,14 +13,31 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.kufed.id.customview.KufedDialogProgress;
 import com.kufed.id.customview.KufedEditText;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
+import com.kufed.id.pojo.PojoLoginFB;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.util.Font;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +63,17 @@ public class Login extends AppCompatActivity {
 
     private KufedDialogProgress pDialog;
 
+    private CallbackManager callbackManager;
+    private AccessTokenTracker accessTokenTracker;
+    private AccessToken accessToken;
+    private LoginResult loginResult;
+    String access_token = "";
+
+    @OnClick(R.id.btn_login_fb) public void login_FB(){
+        LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("public_profile", "email"));
+
+    }
+
     @OnClick(R.id.btn_back)
     public void back() {
         finish();
@@ -57,6 +85,7 @@ public class Login extends AppCompatActivity {
 
             //        getAccessTokenWithLogin("ibnuaaa","vvIH9kssl72Cvjo2Jf9EzA==");
 
+            pDialog = new KufedDialogProgress();
             pDialog.show(getSupportFragmentManager(),"");
 
             getAccessTokenWithLogin(ed_username.getText().toString(), ed_password.getText().toString());
@@ -82,7 +111,7 @@ public class Login extends AppCompatActivity {
                 Schedulers.newThread()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<PojoAccessToken>() {
-                    String access_token = "";
+
                     String message = "";
                     boolean isSukses = false;
 
@@ -126,6 +155,63 @@ public class Login extends AppCompatActivity {
 
     }
 
+    private void getAccessTokenWithFacebookLogin(String facebook_id) {
+        adapter = Public_Functions.initRetrofit();
+        Observable<PojoLoginFB> observable =
+                adapter.access_token_with_facebook_login(access_token, facebook_id);
+
+        observable.subscribeOn(
+                Schedulers.newThread()).
+                observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new Observer<PojoLoginFB>() {
+                    String access_token_new = "";
+                    String message = "";
+                    boolean isSukses = false;
+
+
+                    @Override
+                    public void onCompleted() {
+                        Log.e("OnComplete", "");
+                        if(isSukses){
+                            spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token_new).commit();
+                            getProfile(access_token_new);
+
+                        }else{
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                        }
+
+//                        getPostFresh(access_token);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("OnError", "");
+
+                    }
+
+                    @Override
+                    public void onNext(PojoLoginFB pojoAccessToken) {
+                        Log.e("OnNext", pojoAccessToken.toString());
+                        String code_status = pojoAccessToken.getStatus().getCode().toString();
+                        if(code_status.equals("200")){
+                            access_token_new = pojoAccessToken.getData().getAccessToken();
+                            isSukses = true;
+                        }else if(code_status.equals("422")){
+//                            message = pojoAccessToken.getStatus().getError_messages().toString();
+                            message = "Something Wrong";
+                        }else{
+//                            message = pojoAccessToken.getStatus().getError_messages().toString();
+                            message = "Something Wrong";
+                        }
+
+
+                    }
+                });
+
+    }
+
+
+
     private void getProfile(String access_token) {
         Observable<PojoGETProfile> observable = adapter.get_profile(access_token);
         observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
@@ -163,8 +249,28 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         getSupportActionBar().hide();
         initView();
+        initFBLogin();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void initView() {
@@ -179,6 +285,75 @@ public class Login extends AppCompatActivity {
         });
         video_view.setDrawingCacheEnabled(true);
 
+    }
 
+    private void initFBLogin(){
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                accessToken = AccessToken.getCurrentAccessToken();
+            }
+        };
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            private LoginResult jsonResult;
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.e("login fb sukses", loginResult.toString());
+
+                jsonResult = loginResult;
+
+                GraphRequest graphRequest = GraphRequest.newMeRequest(jsonResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+//                        user_id = user.optString("id");
+//                        user_fullname = user.optString("name");
+//                        user_email = user.optString("email");
+//                        user_gender = user.optString("gender");
+
+                        try{
+                            JSONObject obj_pic = object.getJSONObject("picture");
+                            JSONObject obj_data = object.getJSONObject("data");
+                            String user_photo = obj_data.optString("url");
+                        }catch (JSONException e){
+
+                        }
+
+//                        spf.edit().putString(ParameterCollections.SPF_USER_PHOTO_URL,"").commit();
+//                        Log.e("fb response = ", user_fullname + " , " + user_email + ", " + user_foto);
+//
+//                        if(bool_fb_login){
+//                            // API cek ke DB apa sdh terdaftar email by facebooknya
+//
+//                        }else{
+//                            Intent intent = new Intent(getApplicationContext(), RegisterForm.class);
+//                            intent.putExtra("register_fb", true);
+//                            intent.putExtra("name", user_fullname);
+//                            intent.putExtra("email", user_email);
+//                            intent.putExtra("url_foto", user_foto);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+                    }
+                });
+
+                final Bundle b = new Bundle();
+                b.putString("fields", "name,email,gender,picture.type(large)");
+                graphRequest.setParameters(b);
+                graphRequest.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+                Log.e("canceled", "");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.e("error", error.getMessage().toString());
+            }
+        });
     }
 }

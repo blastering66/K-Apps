@@ -78,6 +78,14 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
 //            }
 //        });
 
+        holder.tv_likes_counter.setText(item.getLikesCount().toString());
+        holder.tv_likes_counter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click_like(item.getPostId().toString(), holder.img_like);
+            }
+        });
+
         holder.img_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +96,13 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         holder.img_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click_share();
+                click_share(item.getProduct().getProductTitle(), item.getPostContent(), item.getPostUrl().toString());
+            }
+        });
+        holder.tv_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click_share(item.getProduct().getProductTitle(), item.getPostContent(), item.getPostUrl().toString());
             }
         });
     }
@@ -108,18 +122,30 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("","");
+                        img.setImageResource(R.drawable.img_like_icon_after);
                     }
 
                     @Override
                     public void onNext(PojoResponseRegister pojoResponseRegister) {
+                        Log.e("","");
 
                     }
                 });
 
     }
 
-    private void click_share(){
+    private void click_share(String title,String extra_text, String post_url){
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, title);
+        share.putExtra(Intent.EXTRA_TEXT, post_url);
+
+        context.startActivity(Intent.createChooser(share, "Share link!"));
 
     }
 
@@ -141,9 +167,10 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         @Bind(R.id.tv_price)KufedTextView tv_price;
         @Bind(R.id.tv_user)KufedTextView tv_user;
         @Bind(R.id.wrapper)View wrapper;
-        @Bind(R.id.tv_likes)KufedTextView tv_likes;
+        @Bind(R.id.tv_likes_counter)KufedTextView tv_likes_counter;
         @Bind(R.id.img_like)ImageView img_like;
         @Bind(R.id.img_share)ImageView img_share;
+        @Bind(R.id.tv_share)KufedTextView tv_share;
 
         public ViewHolder(View itemView) {
             super(itemView);

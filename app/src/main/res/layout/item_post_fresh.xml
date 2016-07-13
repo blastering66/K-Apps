@@ -89,6 +89,7 @@
             android:layout_height="20dp" />
 
         <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_share"
             android:padding="10dp"
             android:text="Share"
             android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
             android:layout_height="20dp" />
 
         <com.kufed.id.customview.KufedTextView
-            android:id="@+id/tv_likes"
+            android:id="@+id/tv_likes_counter"
             android:padding="10dp"
             android:text="999"
             android:layout_width="wrap_content"
