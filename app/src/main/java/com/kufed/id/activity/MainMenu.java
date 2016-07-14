@@ -119,7 +119,7 @@ public class MainMenu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         layoutManager = new GridLayoutManager(getApplicationContext(), 1);
-        layoutAdapter = new RVAdapter_Slider(MainMenu.this);
+        layoutAdapter = new RVAdapter_Slider(MainMenu.this, spf);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(layoutAdapter);
 
@@ -210,6 +210,8 @@ public class MainMenu extends AppCompatActivity
 
     @Override
     public void onChangeFragmentContentPosition(int position) {
+        spf.edit().putInt(Param_Collection.SPF_SELECTED_SLIDER_MENU, position).commit();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         FragmentManager fm = getSupportFragmentManager();
 
@@ -218,6 +220,7 @@ public class MainMenu extends AppCompatActivity
                 Fragment fragment_fresh = new Fragment_Home();
                 fm.beginTransaction().replace(R.id.frame_container,fragment_fresh).commit();
                 drawer.closeDrawer(GravityCompat.START);
+
                 break;
             case 1:
 //                Fragment fragment_cam = new Fragment_Camera();
@@ -230,6 +233,11 @@ public class MainMenu extends AppCompatActivity
                 fm.beginTransaction().replace(R.id.frame_container,fragment_shop).commit();
                 drawer.closeDrawer(GravityCompat.START);
                 break;
+            case 3:
+                startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+
             case 7:
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
                 builder.setTitle("Logout");

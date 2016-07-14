@@ -1,7 +1,9 @@
 package com.kufed.id.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +20,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,6 +37,7 @@ import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.fragment.Fragment_VP_Image;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
+import com.kufed.id.pojo.PojoResponseRegister;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.rowdata.Rowdata_Detail_Likes;
 import com.kufed.id.rowdata.Rowdata_Detail_RelatedItem;
@@ -42,12 +47,14 @@ import com.kufed.id.util.Public_Functions;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 import com.pkmmte.view.CircularImageView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,6 +64,7 @@ import rx.schedulers.Schedulers;
  * Created by macbook on 6/22/16.
  */
 public class Detail_Product extends AppCompatActivity {
+    Rest_Adapter adapter;
     @Bind(R.id.vp)
     ViewPager vp;
     @Bind(R.id.indicator)
@@ -78,19 +86,52 @@ public class Detail_Product extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager_RelatedItem;
 
     SharedPreferences spf;
-    String access_token, post_id;
+    String access_token, post_id, post_url, post_title;
 
     @Bind(R.id.tv_name)KufedTextView tv_name;
     @Bind(R.id.tv_brand)KufedTextView tv_brand;
     @Bind(R.id.tv_user)KufedTextView tv_user;
-    @Bind(R.id.tv_price)KufedTextView tv_price;
+    @Bind(R.id.tv_selling_price)KufedTextView tv_selling_price;
     @Bind(R.id.tv_desc)KufedTextView tv_desc;
+    @Bind(R.id.img_like)ImageView img_like;
+    @OnClick(R.id.img_share) public void sharePost(){
+        if(post_title != null && post_url != null){
+            click_share(post_title, post_url);
+        }
+
+    }
+
+    @OnClick(R.id.img_like)public void likePost(){
+        click_like(post_id, img_like);
+
+    }
+
+    @Bind(R.id.btn_readmore)Button btn_readmore;
+    @OnClick(R.id.btn_readmore)public void clickReadMore(){
+        if(tv_desc.getMaxLines() == 100){
+            btn_readmore.setText("Read More");
+            tv_desc.setMaxLines(3);
+        }else{
+            btn_readmore.setText("Read Less");
+            tv_desc.setMaxLines(100);
+        }
+
+    }
+
     Toolbar toolbar;
     KufedTextView tv_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }else{
+            View decodView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            decodView.setSystemUiVisibility(uiOptions);
+        }
         setContentView(R.layout.activity_detail_product);
         ButterKnife.bind(this);
 //        setContentView(R.layout.activity_main_menu);
@@ -117,7 +158,7 @@ public class Detail_Product extends AppCompatActivity {
     }
 
     private void getPostInfo(final String post_id) {
-        final Rest_Adapter adapter = Public_Functions.initRetrofit();
+        adapter = Public_Functions.initRetrofit();
 
         Observable<PojoPostInfo> observable = adapter.get_post_info(post_id, access_token);
         observable.subscribeOn(Schedulers.newThread())
@@ -156,8 +197,16 @@ public class Detail_Product extends AppCompatActivity {
                 tv_name.setText(pojoPostInfo.getData().getProduct().getProductTitle());
                 tv_brand.setText(pojoPostInfo.getData().getBrandName());
                 tv_user.setText(pojoPostInfo.getData().getMember().getMemberUsername());
-//                tv_price.setText(pojoPostInfo.getData().getProduct().getSellingPrice());
+
+                NumberFormat numberFormat = NumberFormat.getNumberInstance();
+                String selling_price = numberFormat.format(pojoPostInfo.getData().getProduct().getSellingPrice());
+
+                tv_selling_price.setText("IDR " + selling_price);
                 tv_desc.setText(Html.fromHtml(pojoPostInfo.getData().getProduct().getProductDescription()));
+
+
+                post_title = pojoPostInfo.getData().getPostTitle();
+                post_url = pojoPostInfo.getData().getPostUrl();
 
                 //Get Image Post untuk Viewpager
                 if (pojoPostInfo.getData().getImages().size() > 0) {
@@ -168,7 +217,6 @@ public class Detail_Product extends AppCompatActivity {
 //
 //                    }
                     for (PojoPostInfo.Image element : pojoPostInfo.getData().getImages()) {
-                        data_image_vp.add(element.getNormalImagePath());
                         data_image_vp.add(element.getNormalImagePath());
                     }
 
@@ -222,7 +270,7 @@ public class Detail_Product extends AppCompatActivity {
                 if (pojoPostInfo.getData().getRelated().size() > 0) {
                     data_relateditem = new ArrayList<>();
 
-                    for(PojoPostInfo.Related element :  pojoPostInfo.getData().getRelated()){
+                    for (PojoPostInfo.Related element : pojoPostInfo.getData().getRelated()) {
                         data_relateditem.add(new Rowdata_Detail_RelatedItem(element.getPostId(),
                                 element.getSmallImagePath()));
 
@@ -304,6 +352,46 @@ public class Detail_Product extends AppCompatActivity {
 //
 //        rv_soldby_store.setAdapter(layoutAdapter_SoldBy);
 //        rv_soldby_store.setLayoutManager(layoutManager_SoldBy);
+    }
+
+    private void click_like(String id, final ImageView img){
+        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PojoResponseRegister>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("", "");
+                        img.setImageResource(R.drawable.img_like_icon_after);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("", "");
+                        img.setImageResource(R.drawable.img_like_icon_after);
+                    }
+
+                    @Override
+                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+                        Log.e("", "");
+
+                    }
+                });
+
+    }
+
+    private void click_share(String title, String post_url){
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, title);
+        share.putExtra(Intent.EXTRA_TEXT, post_url);
+
+        startActivity(Intent.createChooser(share, "Share link!"));
+
     }
 
     private class Image_Product_Adapter extends FragmentStatePagerAdapter {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.kufed.id.activity.Detail_Product;
+import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.pojo.PojoPostFresh;
@@ -70,19 +71,14 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
             }
         });
 
-//        holder.tv_likes.setText(item.getLikesCount());
-//        holder.tv_likes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                click_like(item.getPostId().toString(), holder.img_like);
-//            }
-//        });
-
         holder.tv_likes_counter.setText(item.getLikesCount().toString());
         holder.tv_likes_counter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click_like(item.getPostId().toString(), holder.img_like);
+                Intent intent_listliked = new Intent(context, ListLikedPost.class);
+                intent_listliked.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent_listliked.putExtra(Param_Collection.EXTRA_POST_ID, item.getPostId());
+                context.startActivity(intent_listliked);
             }
         });
 

@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/cat_featured"
+        android:id="@+id/wrapper_cat_featured"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,7 +36,7 @@
         android:layout_height="1dp"/>
 
     <RelativeLayout
-        android:id="@+id/cat_trending"
+        android:id="@+id/wrapper_cat_trending"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -66,7 +66,7 @@
         android:layout_height="1dp"/>
 
     <RelativeLayout
-        android:id="@+id/cat_recomendation"
+        android:id="@+id/wrapper_cat_recomendation"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -96,7 +96,7 @@
         android:layout_height="1dp"/>
 
     <RelativeLayout
-        android:id="@+id/cat_following"
+        android:id="@+id/wrapper_cat_following"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

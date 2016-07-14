@@ -31,6 +31,8 @@ import java.util.List;
 public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.ViewHolder>{
     private Context context;
     private onSliderItemSelectedListener listener;
+    private SharedPreferences spf;
+    private int posisi_selected_menu;
 
     public interface onSliderItemSelectedListener{
         public void onChangeFragmentContentPosition(int position);
@@ -41,8 +43,9 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
 
     }
 
-    public RVAdapter_Slider(Context context) {
+    public RVAdapter_Slider(Context context, SharedPreferences spf) {
         this.context = context;
+        this.spf = spf;
     }
 
     @Override
@@ -52,15 +55,35 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
         return viewHolder;
     }
 
+
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         try{
             listener = (onSliderItemSelectedListener)context;
+            posisi_selected_menu = spf.getInt(Param_Collection.SPF_SELECTED_SLIDER_MENU, 0);
 
             switch (position){
                 case 0:
                     holder.img.setImageResource(R.drawable.img_home);
                     holder.tv.setText("Home");
+//                    holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                    holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onChangeFragmentContentPosition(position);
+
+                            if(posisi_selected_menu == position){
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_non_active));
+                                holder.img.setImageResource(R.drawable.img_home);
+                            }else{
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                                holder.img.setImageResource(R.drawable.img_home_after);
+
+                            }
+
+                        }
+                    });
                     break;
                 case 1:
                     holder.img.setImageResource(R.drawable.img_camera);
@@ -71,8 +94,13 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
                         public void onClick(View v) {
                             listener.onChangeFragmentContentPosition(position);
 
-                            holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
-                            holder.img.setImageResource(R.drawable.img_camera_after);
+                            if(posisi_selected_menu == position){
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_non_active));
+                                holder.img.setImageResource(R.drawable.img_camera);
+                            }else{
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                                holder.img.setImageResource(R.drawable.img_camera_after);
+                            }
                         }
                     });
 
@@ -85,14 +113,33 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
                         public void onClick(View v) {
                             listener.onChangeFragmentContentPosition(position);
 
-                            holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
-                            holder.img.setImageResource(R.drawable.img_shop_after);
+                            if(posisi_selected_menu == position){
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_non_active));
+                                holder.img.setImageResource(R.drawable.img_shop);
+                            }else{
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                                holder.img.setImageResource(R.drawable.img_shop_after);
+                            }
                         }
                     });
                     break;
                 case 3:
                     holder.img.setImageResource(R.drawable.img_notif);
                     holder.tv.setText("Notifications");
+                    holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onChangeFragmentContentPosition(position);
+
+                            if (posisi_selected_menu == position) {
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_non_active));
+                                holder.img.setImageResource(R.drawable.img_notif);
+                            } else {
+                                holder.tv.setTextColor(ContextCompat.getColor(context, R.color.tv_color_active));
+                                holder.img.setImageResource(R.drawable.img_notif_after);
+                            }
+                        }
+                    });
                     break;
                 case 4:
                     holder.img.setVisibility(View.GONE);
@@ -130,6 +177,7 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
     public int getItemCount() {
         return 8;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View wrapper;

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -41,14 +42,16 @@ public class NotificationActivity extends AppCompatActivity implements MaterialT
         ButterKnife.bind(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
-        toolbar.setBackgroundColor(ContextCompat.getColor(NotificationActivity.this, android.R.color.black));
-        toolbar.setTitle("Notification");
+//        toolbar.setBackgroundColor(ContextCompat.getColor(NotificationActivity.this, android.R.color.black));
         setSupportActionBar(toolbar);
+
 
         LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
         View view = mInflater.inflate(R.layout.layout_custom_toolbar_title, null);
         toolbar.removeAllViews();
         toolbar.addView(view);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewpager.setAdapter(adapter);
@@ -125,4 +128,15 @@ public class NotificationActivity extends AppCompatActivity implements MaterialT
 
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

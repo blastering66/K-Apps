@@ -8,6 +8,9 @@ public class Param_Collection {
     public static String SPF_LOGGED=  "kufed_android_logged";
     public static String SPF_USER_FULLNAME =  "kufed_android_fullname";
     public static String SPF_USER_IMG_PROFILE =  "kufed_android_img_profile";
+
+    public static String SPF_SELECTED_SLIDER_MENU=  "slider_selected";
+
     public static String SPF_TOKEN=  "kufed_android_token";
 
     public static int REQ_CODE_FROM_LOGIN =10;

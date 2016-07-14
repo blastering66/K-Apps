@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:popupTheme="@style/AppTheme_TransparentActionbar"
@@ -16,7 +17,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme_TransparentActionbar"
             app:theme="@style/AppTheme_TransparentActionbar" />
@@ -24,16 +24,29 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <it.neokree.materialtabs.MaterialTabHost
-        android:id="@+id/tabhost"
+    <LinearLayout
+        android:layout_below="@id/appbar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
-    >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <it.neokree.materialtabs.MaterialTabHost
+            android:id="@+id/tabhost"
+            android:background="@color/color_white"
+            app:textColor="@color/color_black"
+            app:primaryColor="@color/color_white"
+            app:accentColor="@color/color_black"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

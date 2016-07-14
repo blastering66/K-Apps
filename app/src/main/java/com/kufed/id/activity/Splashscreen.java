@@ -80,7 +80,7 @@ public class Splashscreen extends AppCompatActivity {
 
     private void initView(){
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         showHashKey();
 

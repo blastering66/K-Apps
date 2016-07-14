@@ -167,7 +167,7 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         initView();
 

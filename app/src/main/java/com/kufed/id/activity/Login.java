@@ -250,7 +250,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         initView();
         initFBLogin();
     }

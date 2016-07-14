@@ -45,7 +45,7 @@
 
         <com.kufed.id.customview.KufedTextView
             android:id="@+id/tv_price"
-            android:text="RP 99.999.000"
+            android:text="RP 000.000.000"
             android:textSize="@dimen/size_title"
             android:textStyle="bold"
             android:layout_width="wrap_content"

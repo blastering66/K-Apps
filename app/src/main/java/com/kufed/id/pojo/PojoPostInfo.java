@@ -862,6 +862,18 @@ public class PojoPostInfo {
         @Expose
         private List<Related> related = new ArrayList<Related>();
 
+        @SerializedName("post_url")
+        @Expose
+        private String postUrl;
+
+        public String getPostUrl() {
+            return postUrl;
+        }
+
+        public void setPostUrl(String postUrl) {
+            this.postUrl = postUrl;
+        }
+
         /**
          *
          * @return

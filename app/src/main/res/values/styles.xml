@@ -55,6 +55,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.NoActionBar_Statusbar_Black">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
