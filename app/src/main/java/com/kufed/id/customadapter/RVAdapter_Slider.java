@@ -6,6 +6,7 @@ package com.kufed.id.customadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kufed.id.activity.R;
+import com.kufed.id.util.Param_Collection;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -104,6 +106,17 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
                     holder.img.setVisibility(View.GONE);
                     holder.tv.setText("TERMS AND CONDITION");
                     break;
+
+                case 7:
+                    holder.img.setVisibility(View.GONE);
+                    holder.tv.setText("LOGOUT");
+                    holder.tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onChangeFragmentContentPosition(position);
+                        }
+                    });
+                    break;
             }
         }catch (ClassCastException e){
 
@@ -115,7 +128,7 @@ public class RVAdapter_Slider extends RecyclerView.Adapter<RVAdapter_Slider.View
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 8;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -4,6 +4,11 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+    <string name="label_featured">FEATURED</string>
+    <string name="label_trending">TRENDING</string>
+    <string name="label_recomendation">RECOMENDATION</string>
+    <string name="label_following">FOLLOWING</string>
+
     <string-array name="date_of_birth">
         <item>Date of Birthday</item>
         </string-array>

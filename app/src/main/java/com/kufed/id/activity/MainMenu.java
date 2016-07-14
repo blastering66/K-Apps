@@ -3,8 +3,12 @@ package com.kufed.id.activity;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -28,10 +33,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.kufed.id.customadapter.RVAdapter_Slider;
+import com.kufed.id.customview.KufedDialogCategoryHome;
+import com.kufed.id.customview.KufedDialogCategoryHome_Test;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.fragment.Fragment_Home;
 import com.kufed.id.fragment.Fragment_Shop_Categories;
+import com.kufed.id.util.Param_Collection;
+import com.pkmmte.view.CircularImageView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +58,9 @@ public class MainMenu extends AppCompatActivity
     Toolbar toolbar;
     KufedTextView tv_title;
     SearchView searchView;
+    SharedPreferences spf;
+    @Bind(R.id.img_profile_user)CircularImageView img_profile_user;
+    @Bind(R.id.tv_fullname_user)KufedTextView tv_fullname_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +70,35 @@ public class MainMenu extends AppCompatActivity
         toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
 //        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.black));
-        toolbar.setTitle("FEATURED");
         setSupportActionBar(toolbar);
 
         LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
         View view = mInflater.inflate(R.layout.layout_custom_toolbar, null);
         tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
         tv_title.setText("FEATURED");
-        toolbar.removeAllViews();;
+
+        tv_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(), KufedDialogCategoryHome.class));
+                KufedDialogCategoryHome_Test dialog = new KufedDialogCategoryHome_Test(MainMenu.this);
+                dialog.show();
+            }
+        });
+        toolbar.removeAllViews();
         toolbar.addView(view);
+
+        spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
+
+        Target<Bitmap> target = new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                img_profile_user.setImageBitmap(resource);
+            }
+        };
+
+        Glide.with(getApplicationContext()).load(spf.getString(Param_Collection.SPF_USER_IMG_PROFILE, "")).asBitmap().into(target);
+        tv_fullname_user.setText(spf.getString(Param_Collection.SPF_USER_FULLNAME, "User Name"));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -193,6 +229,27 @@ public class MainMenu extends AppCompatActivity
                 Fragment fragment_shop = new Fragment_Shop_Categories();
                 fm.beginTransaction().replace(R.id.frame_container,fragment_shop).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                break;
+            case 7:
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
+                builder.setTitle("Logout");
+                builder.setMessage("Are you sure want to Logout ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
+                        spf.edit().clear().commit();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+
                 break;
         }
     }

@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/img_profile_user"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="75dp"
@@ -17,7 +18,7 @@
         android:src="@drawable/img_user_empty" />
 
     <com.kufed.id.customview.KufedTextView
-        android:id="@+id/tv_fullname"
+        android:id="@+id/tv_fullname_user"
         android:padding="20dp"
         android:layout_gravity="center"
         android:gravity="center"

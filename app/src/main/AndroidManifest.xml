@@ -64,6 +64,11 @@
             android:theme="@style/AppTheme_TransparentActionbar"></activity>
 
         <activity
+            android:name="com.kufed.id.customview.KufedDialogCategoryHome"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Translucent"></activity>
+
+        <activity
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification"
             android:screenOrientation="portrait"
