@@ -86,6 +86,7 @@ public class Login extends AppCompatActivity {
             //        getAccessTokenWithLogin("ibnuaaa","vvIH9kssl72Cvjo2Jf9EzA==");
 
             pDialog = new KufedDialogProgress();
+            pDialog.setMessage("Login");
             pDialog.show(getSupportFragmentManager(),"");
 
             getAccessTokenWithLogin(ed_username.getText().toString(), ed_password.getText().toString());
@@ -239,6 +240,7 @@ public class Login extends AppCompatActivity {
                                 .getMemberCompleteName().toString()).commit();
                         spf.edit().putString(Param_Collection.SPF_USER_IMG_PROFILE, pojoPostFresh.getData().getInfo()
                                 .getPictureThumbPath()).commit();
+                        spf.edit().putString(Param_Collection.SPF_USER_ID, pojoPostFresh.getData().getInfo().getMemberId().toString());
                     }
                 });
 

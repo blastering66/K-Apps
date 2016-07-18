@@ -3,13 +3,26 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <!--   <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--   <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowFullscreen">true</item>
+<item name="android:statusBarColor">@android:color/transparent</item>
+        -->
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar_Statusbar_Black">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--   <item name="android:windowDrawsSystemBarBackgrounds">true</item> -->
+        <item name="android:statusBarColor">@color/color_black</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar_Statusbar_Black_Register" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!--   <item name="android:windowDrawsSystemBarBackgrounds">true</item> -->
@@ -22,6 +35,7 @@
     <style name="AppTheme_TransparentActionbar" parent="AppTheme.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/transparent</item>
+        <!-- <item name="colorPrimaryDark">@android:color/transparent</item> -->
         <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@android:color/transparent</item>
         <item name="windowActionBarOverlay">false</item>

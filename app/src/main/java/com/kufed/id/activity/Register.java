@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.kufed.id.customview.KufedDialogProgress;
 import com.wdullaer.materialdatetimepicker.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -46,9 +47,13 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
     @Bind(R.id.video_kufed)VideoView video_view;
     @Bind(R.id.tv_birthday)
     KufedTextView tv_birthday;
+    @Bind(R.id.wrapper_birthday)
+    View wrapper_birthday;
+
     @OnClick(R.id.btn_back) public void back(){
         finish();
     }
+
     @OnClick(R.id.btn_signup) public void signup(){
         _ed_username = ed_username.getText().toString();
         _ed_fullname = ed_fullname.getText().toString();
@@ -60,25 +65,42 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
             if(!_ed_username.equals("") && !_ed_fullname.equals("") && !_ed_email.equals("")
                     && !_ed_password.equals("")){
                 Rest_Adapter adapter = Public_Functions.initRetrofit();
+
+                final KufedDialogProgress pDialog = new KufedDialogProgress();
+                pDialog.setMessage("Registering...");
+                pDialog.show(getSupportFragmentManager(), "");
+
                 Observable<PojoResponseRegister> observable = adapter.register(access_token,
                         _ed_email, _ed_password,_ed_fullname, _birthday, _ed_username);
 
                 observable.subscribeOn(Schedulers.newThread()).
                         observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<PojoResponseRegister>() {
+                            boolean isSukses = false;
                             @Override
                             public void onCompleted() {
                                 Log.e("Test", "test");
+                                if(isSukses){
+                                    pDialog.dismiss();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), "Registed Failed", Toast.LENGTH_LONG).show();
+                                }
                             }
 
                             @Override
                             public void onError(Throwable e) {
                                 Log.e("Test", "test");
+                                pDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Registed Failed, Reason = "+
+                                        e.getMessage().toString(), Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onNext(PojoResponseRegister pojoResponseRegister) {
                                 Log.e("Test", "test");
+                                if(pojoResponseRegister.getStatus().getCode().equals("200")){
+                                    isSukses=true;
+                                }
 
                             }
                         });
@@ -126,7 +148,7 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
         video_view.setDrawingCacheEnabled(true);
 
 
-        tv_birthday.setOnClickListener(new View.OnClickListener() {
+        wrapper_birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar c_now = Calendar.getInstance();
@@ -167,8 +189,6 @@ public class Register extends AppCompatActivity implements DatePickerDialog.OnDa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-//        getSupportActionBar().hide();
-
         initView();
 
     }

@@ -33,6 +33,7 @@ import com.kufed.id.customadapter.RVAdapter_Detail_Comments;
 import com.kufed.id.customadapter.RVAdapter_Detail_Like;
 import com.kufed.id.customadapter.RVAdapter_Detail_RelatedItem;
 import com.kufed.id.customadapter.RVAdapter_Detail_SoldByStore;
+import com.kufed.id.customview.KufedLikeImageView;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.fragment.Fragment_VP_Image;
 import com.kufed.id.pojo.PojoPostInfo;
@@ -93,7 +94,7 @@ public class Detail_Product extends AppCompatActivity {
     @Bind(R.id.tv_user)KufedTextView tv_user;
     @Bind(R.id.tv_selling_price)KufedTextView tv_selling_price;
     @Bind(R.id.tv_desc)KufedTextView tv_desc;
-    @Bind(R.id.img_like)ImageView img_like;
+    @Bind(R.id.img_like)KufedLikeImageView img_like;
     @OnClick(R.id.img_share) public void sharePost(){
         if(post_title != null && post_url != null){
             click_share(post_title, post_url);
@@ -120,6 +121,8 @@ public class Detail_Product extends AppCompatActivity {
 
     Toolbar toolbar;
     KufedTextView tv_title;
+    @Bind(R.id.wrapper_likes)View wrapper_likes;
+    @Bind(R.id.line_likes)View line_likes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +145,8 @@ public class Detail_Product extends AppCompatActivity {
 
         //Statis
         iniView();
-        getPostInfo("910");
-//        getPostInfo(post_id);
+//        getPostInfo("910");
+        getPostInfo(post_id);
 
     }
 
@@ -263,6 +266,8 @@ public class Detail_Product extends AppCompatActivity {
                     });
 
                 } else {
+                    wrapper_likes.setVisibility(View.GONE);
+                    line_likes.setVisibility(View.GONE);
 
                 }
 

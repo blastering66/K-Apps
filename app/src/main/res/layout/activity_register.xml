@@ -210,17 +210,42 @@
                 android:padding="10dp" />
 
             <com.kufed.id.customview.KufedTextView
-                android:id="@+id/tv_birthday"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/bg_white_stroke"
-                android:gravity="center_horizontal"
-                android:text="Date of Birth"
+                android:layout_gravity="right"
+                android:text="(optional)"
+                android:paddingRight="15dp"
                 android:textSize="@dimen/edittext_size"
                 android:textColor="@android:color/white"
                 android:textColorHint="#FFFFFF"/>
+
+            <RelativeLayout
+                android:id="@+id/wrapper_birthday"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="@drawable/bg_white_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Date of Birth"
+                    android:textSize="@dimen/edittext_size"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="#FFFFFF"/>
+
+                <ImageView
+                    android:src="@drawable/img_dropdown_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </RelativeLayout>
+
+
 
             <RadioGroup
                 android:visibility="gone"

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.kufed.id.activity.Detail_Product;
 import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.R;
+import com.kufed.id.customview.KufedLikeImageView;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoResponseRegister;
@@ -82,10 +83,19 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
             }
         });
 
-        holder.img_like.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.img_like_imageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click_like(item.getPostId().toString(), holder.img_like);
+                if(holder.img_like_imageview.isSelected()){
+                    holder.img_like_imageview.setImageResource(R.drawable.img_like_icon);
+                    holder.img_like_imageview.setIsSelected(false);
+                }else{
+                    holder.img_like_imageview.setImageResource(R.drawable.img_like_icon_after);
+                    holder.img_like_imageview.setIsSelected(true);
+                }
+                click_like(item.getPostId().toString());
             }
         });
 
@@ -103,6 +113,29 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         });
     }
 
+    private void click_like(String id){
+        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PojoResponseRegister>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("", "");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("", "");
+                    }
+
+                    @Override
+                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+                        Log.e("","");
+
+                    }
+                });
+
+    }
 
 
     private void click_like(String id, final ImageView img){
@@ -164,7 +197,7 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         @Bind(R.id.tv_user)KufedTextView tv_user;
         @Bind(R.id.wrapper)View wrapper;
         @Bind(R.id.tv_likes_counter)KufedTextView tv_likes_counter;
-        @Bind(R.id.img_like)ImageView img_like;
+        @Bind(R.id.img_like_imageview)KufedLikeImageView img_like_imageview;
         @Bind(R.id.img_share)ImageView img_share;
         @Bind(R.id.tv_share)KufedTextView tv_share;
 

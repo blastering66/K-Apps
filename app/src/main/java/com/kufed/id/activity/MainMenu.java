@@ -21,6 +21,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -41,8 +43,11 @@ import com.kufed.id.customadapter.RVAdapter_Slider;
 import com.kufed.id.customview.KufedDialogCategoryHome;
 import com.kufed.id.customview.KufedDialogCategoryHome_Test;
 import com.kufed.id.customview.KufedTextView;
+import com.kufed.id.fragment.Fragment_Following;
 import com.kufed.id.fragment.Fragment_Home;
+import com.kufed.id.fragment.Fragment_Recomendation;
 import com.kufed.id.fragment.Fragment_Shop_Categories;
+import com.kufed.id.fragment.Fragment_Trending;
 import com.kufed.id.util.Param_Collection;
 import com.pkmmte.view.CircularImageView;
 
@@ -81,7 +86,38 @@ public class MainMenu extends AppCompatActivity
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(getApplicationContext(), KufedDialogCategoryHome.class));
-                KufedDialogCategoryHome_Test dialog = new KufedDialogCategoryHome_Test(MainMenu.this);
+                KufedDialogCategoryHome_Test dialog = new KufedDialogCategoryHome_Test(MainMenu.this, MainMenu.this);
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        int selected_category = spf.getInt(Param_Collection.SPF_SELECTED_CATEGORY_MENU, 0);
+                        FragmentManager fm = getSupportFragmentManager();
+                        switch (selected_category) {
+                            case 0:
+                                Fragment fragment_fresh = new Fragment_Home();
+                                fm.beginTransaction().replace(R.id.frame_container, fragment_fresh).commit();
+                                tv_title.setText("FEATURED");
+                                break;
+                            case 1:
+                                Fragment fragment_trending = new Fragment_Trending();
+                                fm.beginTransaction().replace(R.id.frame_container, fragment_trending).commit();
+                                tv_title.setText("TRENDING");
+                                break;
+                            case 2:
+                                Fragment fragment_recom = new Fragment_Recomendation();
+                                fm.beginTransaction().replace(R.id.frame_container, fragment_recom).commit();
+                                tv_title.setText("RECOMMENDATION");
+                                break;
+                            case 3:
+                                Fragment fragment_following = new Fragment_Following();
+                                fm.beginTransaction().replace(R.id.frame_container, fragment_following).commit();
+                                tv_title.setText("FOLLOWING");
+                                break;
+                            case 9:
+                                break;
+                        }
+                    }
+                });
                 dialog.show();
             }
         });
@@ -89,6 +125,7 @@ public class MainMenu extends AppCompatActivity
         toolbar.addView(view);
 
         spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
+        spf.edit().putInt(Param_Collection.SPF_SELECTED_CATEGORY_MENU, 0).commit();
 
         Target<Bitmap> target = new SimpleTarget<Bitmap>() {
             @Override
@@ -126,6 +163,17 @@ public class MainMenu extends AppCompatActivity
         if(savedInstanceState == null){
             Fragment fragment_fresh = new Fragment_Home();
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,fragment_fresh).commit();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RESULT_OK ){
+            data.getExtras().getInt("cat");
+            Log.e("","");
+
+        }else{
+            Log.e("",data.toString());
         }
     }
 

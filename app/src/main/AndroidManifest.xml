@@ -38,7 +38,7 @@
             android:name=".Register"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black_Register" />
         <activity
             android:name=".ForgotPassword"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -68,7 +68,10 @@
             android:name=".NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
-
+        <activity
+            android:name=".ListLikedPost"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
 
         <activity
             android:name=".SearchResultsActivity"

@@ -11,6 +11,7 @@ public class Font {
 	public static final Hashtable<String, Typeface> cache = new Hashtable<String, Typeface>();
 	private static final String url_font = "fonts/alte_haas_grotesk_bold.ttf";
 	private static final String url_font_regular = "fonts/arial.ttf";
+	private static final String url_font_bold = "fonts/arial_bold.ttf";
 	private static final String url_font_italic = "fonts/arial_italic.ttf";
 	
 	public static Typeface setFontGaramond(Context c) {

@@ -8,9 +8,11 @@ import rx.Observable;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
 import com.kufed.id.pojo.PojoLoginFB;
+import com.kufed.id.pojo.PojoNotifFollowing;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
+import com.kufed.id.pojo.PojoPostTrending;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
 
@@ -69,6 +71,21 @@ public interface Rest_Adapter {
             @Query("access_token") String access_token
     );
 
+    @GET("posts/trending?")
+    Observable<PojoPostTrending> get_post_trending(
+            @Query("access_token") String access_token
+    );
+
+    @GET("posts/recommed?")
+    Observable<PojoPostFresh> get_post_recommed(
+            @Query("access_token") String access_token
+    );
+
+    @GET("posts/following?")
+    Observable<PojoPostFresh> get_post_following(
+            @Query("access_token") String access_token
+    );
+
     @GET("posts/{id}/info?")
     Observable<PojoPostInfo> get_post_info(
             @Path("id") String id,
@@ -123,6 +140,13 @@ public interface Rest_Adapter {
     @FormUrlEncoded
     @POST("/profile/{id}/follow")
     Observable<PojoResponseRegister> unfollow_profile(
+            @Path("id") String id,
+            @Field("access_token") String access_token
+    );
+
+    @FormUrlEncoded
+    @POST("/profile/{id}/public_activities")
+    Observable<PojoNotifFollowing> notif_following(
             @Path("id") String id,
             @Field("access_token") String access_token
     );

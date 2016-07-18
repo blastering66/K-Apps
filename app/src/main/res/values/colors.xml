@@ -8,7 +8,15 @@
     <color name="color_actionbar">#ffffff</color>
 
     <color name="color_white">#ffffff</color>
-    <color name="color_black">#000000</color>
+    <color name="color_white_transparent">#90ffffff</color>
+    <color name="color_black">#202020</color>
+    <color name="color_gray_dark">#424142</color>
+    <color name="color_gray_dark_middle">#4c4c4d</color>
+    <color name="color_gray_dark_light">#a1a3a6</color>
+
+    <color name="color_green">#55C3be</color>
+    <color name="color_red">#e23442</color>
+
     <color name="black_overlay">#66000000</color>
     <color name="black_transparent_20">#E0E0E0</color>
 

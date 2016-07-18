@@ -59,18 +59,21 @@ public class ListLikedPost extends AppCompatActivity {
 
             @Override
             public void onNext(PojoPostLikes pojoPostLikes) {
-                data_likes = new ArrayList<>();
-                for (PojoPostLikes.Like element : pojoPostLikes.getData().getLikes()) {
-                    data_likes.add(new Rowdata_Detail_Likes(element.getMember().getMemberId(),
-                            element.getMember().getPictureThumbPath()));
+                if(pojoPostLikes.getData().getLikes().size() > 0){
+                    data_likes = new ArrayList<>();
+                    for (PojoPostLikes.Like element : pojoPostLikes.getData().getLikes()) {
+                        data_likes.add(new Rowdata_Detail_Likes(element.getMember().getMemberId(),
+                                element.getMember().getPictureThumbPath()));
 
+                    }
+
+                    layoutAdapter_Likes = new RVAdapter_Detail_Like(ListLikedPost.this, data_likes);
+                    layoutManager_Likes = new LinearLayoutManager(ListLikedPost.this, LinearLayoutManager.HORIZONTAL, false);
+                    layoutAdapter_Likes.notifyDataSetChanged();
+                    rv_likes.setAdapter(layoutAdapter_Likes);
+                    rv_likes.setLayoutManager(layoutManager_Likes);
                 }
 
-                layoutAdapter_Likes = new RVAdapter_Detail_Like(ListLikedPost.this, data_likes);
-                layoutManager_Likes = new LinearLayoutManager(ListLikedPost.this, LinearLayoutManager.HORIZONTAL, false);
-                layoutAdapter_Likes.notifyDataSetChanged();
-                rv_likes.setAdapter(layoutAdapter_Likes);
-                rv_likes.setLayoutManager(layoutManager_Likes);
 
             }
         });
