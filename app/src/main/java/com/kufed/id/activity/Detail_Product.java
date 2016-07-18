@@ -178,13 +178,12 @@ public class Detail_Product extends AppCompatActivity {
 //                toolbar.removeAllViews();;
 //                toolbar.addView(view);
                 Log.e("", "");
-                Toast.makeText(getApplicationContext(), "TEST INFO SUCCESS", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(Throwable e) {
                 Log.e("", "");
-                Toast.makeText(getApplicationContext(), "TEST INFO ERROR", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Get Info Error", Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -18,6 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/size_title" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,23 +50,13 @@
                 android:text="Lorem Ipsum Dolor"
                 android:layout_toLeftOf="@id/tv_price"
                 android:layout_centerVertical="true"
+                android:singleLine="true"
                 android:textSize="@dimen/size_subtitle"
                 android:textColor="@color/color_gray_dark_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-
-        <com.kufed.id.customview.KufedTextView
-            android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:singleLine="true"
-            android:textStyle="bold"
-            android:textSize="@dimen/size_title" />
 
 
         <LinearLayout

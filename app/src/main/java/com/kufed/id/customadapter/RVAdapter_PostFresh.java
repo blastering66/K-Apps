@@ -91,9 +91,13 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
                 if(holder.img_like_imageview.isSelected()){
                     holder.img_like_imageview.setImageResource(R.drawable.img_like_icon);
                     holder.img_like_imageview.setIsSelected(false);
+                    int counterLiked = item.getLikesCount() - 1;
+                    holder.tv_likes_counter.setText(String.valueOf(counterLiked));
                 }else{
                     holder.img_like_imageview.setImageResource(R.drawable.img_like_icon_after);
                     holder.img_like_imageview.setIsSelected(true);
+                    int counterLiked = item.getLikesCount() + 1;
+                    holder.tv_likes_counter.setText(String.valueOf(counterLiked));
                 }
                 click_like(item.getPostId().toString());
             }
