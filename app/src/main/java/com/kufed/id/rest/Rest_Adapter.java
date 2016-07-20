@@ -7,6 +7,7 @@ import rx.Observable;
 
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
+import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoLoginFB;
 import com.kufed.id.pojo.PojoNotifFollowing;
 import com.kufed.id.pojo.PojoPostFresh;
@@ -15,6 +16,8 @@ import com.kufed.id.pojo.PojoPostLikes;
 import com.kufed.id.pojo.PojoPostTrending;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
+import com.kufed.id.pojo.PojoResultSearch;
+import com.kufed.id.pojo.PojoWishlistPost;
 
 import retrofit.Call;
 import retrofit.http.Field;
@@ -38,6 +41,15 @@ public interface Rest_Adapter {
     @FormUrlEncoded
     @POST("access_token")
     Observable<PojoAccessToken> refresh_access_token(
+            @Field("grant_type") String grant_type,
+            @Field("client_id") String client_id,
+            @Field("client_secret") String client_secret,
+            @Field("refresh_token") String refresh_token
+    );
+
+    @FormUrlEncoded
+    @POST("access_token")
+    Call<PojoAccessToken> call_refresh_access_token(
             @Field("grant_type") String grant_type,
             @Field("client_id") String client_id,
             @Field("client_secret") String client_secret,
@@ -121,7 +133,16 @@ public interface Rest_Adapter {
     //Pojo Blum dibuat
     @FormUrlEncoded
     @POST("/posts/{id}/like")
-    Observable<PojoResponseRegister> like_post(
+    Observable<PojoLikedPost> like_post(
+            @Path("id") String id,
+            @Field("access_token") String access_token
+    );
+
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/posts/{id}/add_wishlist")
+    Observable<PojoWishlistPost> wishlist_post(
             @Path("id") String id,
             @Field("access_token") String access_token
     );
@@ -144,11 +165,14 @@ public interface Rest_Adapter {
             @Field("access_token") String access_token
     );
 
-    @FormUrlEncoded
-    @POST("/profile/{id}/public_activities")
+    @GET("/profile/{id}/public_activities")
     Observable<PojoNotifFollowing> notif_following(
-            @Path("id") String id,
-            @Field("access_token") String access_token
+            @Path("id") int id,
+            @Query("access_token") String access_token
+    );
+    @GET("/notification/get")
+    Observable<PojoNotifFollowing> notif_you(
+            @Query("access_token") String access_token
     );
 
     //NOTE
@@ -159,5 +183,11 @@ public interface Rest_Adapter {
             @Path("id") String id,
             @Field("comment") String comment,
             @Field("access_token") String access_token
+    );
+
+    @GET("/product/search")
+    Observable<PojoResultSearch> search_product(
+            @Query("q") String query,
+            @Query("access_token") String access_token
     );
 }

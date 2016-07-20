@@ -93,7 +93,6 @@ public class PojoNotifFollowing {
     public void setData(List<Datum> data) {
         this.data = data;
     }
-
     public class Status {
 
         @SerializedName("code")
@@ -137,6 +136,53 @@ public class PojoNotifFollowing {
          */
         public void setDescription(String description) {
             this.description = description;
+        }
+
+    }
+
+    public class Post {
+
+        @SerializedName("post_id")
+        @Expose
+        private String postId;
+        @SerializedName("image")
+        @Expose
+        private String image;
+
+        /**
+         *
+         * @return
+         * The postId
+         */
+        public String getPostId() {
+            return postId;
+        }
+
+        /**
+         *
+         * @param postId
+         * The post_id
+         */
+        public void setPostId(String postId) {
+            this.postId = postId;
+        }
+
+        /**
+         *
+         * @return
+         * The image
+         */
+        public String getImage() {
+            return image;
+        }
+
+        /**
+         *
+         * @param image
+         * The image
+         */
+        public void setImage(String image) {
+            this.image = image;
         }
 
     }
@@ -320,54 +366,89 @@ public class PojoNotifFollowing {
     }
 
     public class Content {
-
         @SerializedName("receiver_id")
         @Expose
-        private String receiverId;
+        private String receiver_id;
+
+        public String getReceiver_id() {
+            return receiver_id;
+        }
+
+        public void setReceiver_id(String receiver_id) {
+            this.receiver_id = receiver_id;
+        }
+
+        public String getReceiver_username() {
+            return receiver_username;
+        }
+
+        public void setReceiver_username(String receiver_username) {
+            this.receiver_username = receiver_username;
+        }
+
+        public String getReceiver_image() {
+            return receiver_image;
+        }
+
+        public void setReceiver_image(String receiver_image) {
+            this.receiver_image = receiver_image;
+        }
+
         @SerializedName("receiver_username")
         @Expose
-        private String receiverUsername;
+
+        private String receiver_username;
+        @SerializedName("receiver_image")
+        @Expose
+        private String receiver_image;
+
+        @SerializedName("post_id")
+        @Expose
+        private String postId;
+        @SerializedName("like_id")
+        @Expose
+        private String likeId;
         @SerializedName("member")
         @Expose
         private Member member;
-        @SerializedName("receiver_image")
+        @SerializedName("post")
         @Expose
-        private String receiverImage;
+        private Post post;
 
         /**
          *
          * @return
-         * The receiverId
+         * The postId
          */
-        public String getReceiverId() {
-            return receiverId;
+        public String getPostId() {
+            return postId;
         }
 
         /**
          *
-         * @param receiverId
-         * The receiver_id
+         * @param postId
+         * The post_id
          */
-        public void setReceiverId(String receiverId) {
-            this.receiverId = receiverId;
+        public void setPostId(String postId) {
+            this.postId = postId;
         }
 
         /**
          *
          * @return
-         * The receiverUsername
+         * The likeId
          */
-        public String getReceiverUsername() {
-            return receiverUsername;
+        public String getLikeId() {
+            return likeId;
         }
 
         /**
          *
-         * @param receiverUsername
-         * The receiver_username
+         * @param likeId
+         * The like_id
          */
-        public void setReceiverUsername(String receiverUsername) {
-            this.receiverUsername = receiverUsername;
+        public void setLikeId(String likeId) {
+            this.likeId = likeId;
         }
 
         /**
@@ -391,20 +472,22 @@ public class PojoNotifFollowing {
         /**
          *
          * @return
-         * The receiverImage
+         * The post
          */
-        public String getReceiverImage() {
-            return receiverImage;
+        public Post getPost() {
+            return post;
         }
 
         /**
          *
-         * @param receiverImage
-         * The receiver_image
+         * @param post
+         * The post
          */
-        public void setReceiverImage(String receiverImage) {
-            this.receiverImage = receiverImage;
+        public void setPost(Post post) {
+            this.post = post;
         }
 
     }
+
+
 }

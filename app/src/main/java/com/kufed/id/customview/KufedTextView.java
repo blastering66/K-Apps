@@ -1,7 +1,10 @@
 package com.kufed.id.customview;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.kufed.id.util.Font;
@@ -32,8 +35,15 @@ public class KufedTextView extends TextView{
 
     private void init() {
         if (!isInEditMode()) {
-//            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
-//            setTypeface(Font.setTypeface_Regular(context));
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
+            setTypeface(Font.setTypeface_Regular(context));
+
+            if (Build.VERSION.SDK_INT >= 21) {
+
+            }else{
+
+            }
+//            setLetterSpacing(0.2f);
         }
     }
 }

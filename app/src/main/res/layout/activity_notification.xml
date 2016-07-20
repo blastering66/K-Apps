@@ -9,17 +9,14 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:popupTheme="@style/AppTheme_TransparentActionbar"
-        app:theme="@style/AppTheme_TransparentActionbar">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+        <include layout="@layout/layout_custom_toolbar_back"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme_TransparentActionbar"
-            app:theme="@style/AppTheme_TransparentActionbar" />
+            />
+
 
     </android.support.design.widget.AppBarLayout>
 

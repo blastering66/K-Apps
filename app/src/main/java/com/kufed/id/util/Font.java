@@ -11,6 +11,7 @@ public class Font {
 	public static final Hashtable<String, Typeface> cache = new Hashtable<String, Typeface>();
 	private static final String url_font = "fonts/alte_haas_grotesk_bold.ttf";
 	private static final String url_font_regular = "fonts/arial.ttf";
+	private static final String url_font_oswald_bold = "fonts/oswald_bold.ttf";
 	private static final String url_font_bold = "fonts/arial_bold.ttf";
 	private static final String url_font_italic = "fonts/arial_italic.ttf";
 	
@@ -41,6 +42,21 @@ public class Font {
 				}
 			}
 			return cache.get(url_font_regular);
+		}
+	}
+
+	public static Typeface setTypeface_Oswald_Bold(Context c) {
+		synchronized (cache) {
+			if (!cache.containsKey(url_font_oswald_bold)) {
+				try {
+					Typeface t = Typeface.createFromAsset(c.getAssets(),
+							url_font_oswald_bold);
+					cache.put(url_font_oswald_bold, t);
+				} catch (Exception e) {
+					return null;
+				}
+			}
+			return cache.get(url_font_oswald_bold);
 		}
 	}
 

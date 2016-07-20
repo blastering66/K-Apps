@@ -42,7 +42,8 @@ public class Fragment_Following extends Fragment {
     Rest_Adapter adapter;
     List<PojoNotifFollowing.Datum> data;
     SharedPreferences spf;
-    String access_token, member_id;
+    String access_token;
+    int member_id;
 
     @Nullable
     @Override
@@ -60,14 +61,14 @@ public class Fragment_Following extends Fragment {
         adapter = Public_Functions.initRetrofit();
         spf = getActivity().getSharedPreferences(Param_Collection.SPF_NAME, Context.MODE_PRIVATE);
         access_token = spf.getString(Param_Collection.ACCESS_TOKEN, "");
-        member_id = spf.getString(Param_Collection.SPF_USER_ID, "");
+        member_id = spf.getInt(Param_Collection.SPF_USER_ID, 0);
         get_fresh_post( v);
 
     }
 
     private void get_fresh_post(final View v){
 //        Observable<PojoNotifFollowing> observable = adapter.notif_following(member_id, access_token);
-        Observable<PojoNotifFollowing> observable = adapter.notif_following("335288", access_token);
+        Observable<PojoNotifFollowing> observable = adapter.notif_following(member_id, access_token);
 
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,7 +76,7 @@ public class Fragment_Following extends Fragment {
                     @Override
                     public void onCompleted() {
 //                        layoutAdapter = new RVAdapter_PostFresh(getActivity(), data, adapter, access_token);
-                        layoutAdapter = new RVAdapter_NotifFollowing(getActivity(), adapter, access_token);
+                        layoutAdapter = new RVAdapter_NotifFollowing(getActivity(), data);
                         layoutManager = new GridLayoutManager(getActivity(), 1);
                         rv.setLayoutManager(layoutManager);
                         rv.setAdapter(layoutAdapter);

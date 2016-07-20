@@ -78,7 +78,7 @@
             android:label="@string/title_activity_result"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_TransparentActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

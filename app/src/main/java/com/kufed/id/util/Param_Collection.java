@@ -9,6 +9,8 @@ public class Param_Collection {
     public static String SPF_USER_FULLNAME =  "kufed_android_fullname";
     public static String SPF_USER_IMG_PROFILE =  "kufed_android_img_profile";
     public static String SPF_USER_ID =  "kufed_android_id";
+    public static String SPF_USERNAME =  "kufed_android_username";
+    public static String SPF_USER_PASSWORD =  "kufed_android_password";
 
     public static String SPF_SELECTED_SLIDER_MENU=  "slider_selected";
     public static String SPF_SELECTED_CATEGORY_MENU=  "category_selected";
@@ -23,13 +25,16 @@ public class Param_Collection {
     public static String URL_FOLDER_IMG = "/Kufed/temp/";
 
     //Internal
-    public static String BASE_URL=  "http://192.168.4.168:7070/";
+//    public static String BASE_URL=  "http://192.168.4.168:7070/";
 //    public static String BASE_URL=  "http://capricorn.kliktoday.com/";
 //    public static String BASE_URL=  "http://gemini.kliktoday.com/";
+    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com/";
 
-    public static String ACCESS_TOKEN=  "Mgu7BzyPLiz6pyEywYkVGZejMeSvUa2gn5aeL4zs";
+    public static String ACCESS_TOKEN=  "kufed_token";
+    public static String ACCESS_TOKEN_REFRESH=  "kufed_token_refresh";
 
     public static String GRANT_TYPE_TOKENONLY =  "client_credentials";
+    public static String GRANT_TYPE_TOKEN_REFRESH =  "refresh_token";
     public static String GRANT_TYPE_WITH_PASSWORD =  "password";
 //    public static String CLIENT_ID =  "ios";
     public static String CLIENT_ID =  "android";

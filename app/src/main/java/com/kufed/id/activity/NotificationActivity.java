@@ -14,12 +14,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.kufed.id.customview.KufedTextView;
+import com.kufed.id.customview.KufedTextViewTitle;
 import com.kufed.id.fragment.Fragment_Notification_Following;
 import com.kufed.id.fragment.Fragment_Notification_You;
 
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -34,24 +36,18 @@ public class NotificationActivity extends AppCompatActivity implements MaterialT
     @Bind(R.id.viewpager)
     ViewPager viewpager;
     ViewPagerAdapter adapter;
+    @OnClick(R.id.img_back) public void click_back(){
+        finish();
+    }
+    @Bind(R.id.tv_title_custom)KufedTextViewTitle tv_title_custom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
-//        toolbar.setBackgroundColor(ContextCompat.getColor(NotificationActivity.this, android.R.color.black));
-        setSupportActionBar(toolbar);
 
-
-        LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
-        View view = mInflater.inflate(R.layout.layout_custom_toolbar_title, null);
-        toolbar.removeAllViews();
-        toolbar.addView(view);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        tv_title_custom.setText("ACTIVITY");
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewpager.setAdapter(adapter);

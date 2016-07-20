@@ -128,13 +128,15 @@ public class Splashscreen extends AppCompatActivity {
                 Schedulers.newThread()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<PojoAccessToken>() {
-                    String access_token = "";
+                    String access_token, token_refresh = "";
 
                     @Override
                     public void onCompleted() {
-                        Log.e("OnComplete, Token = ", access_token);
+                        Log.e("Token = ", access_token);
+                        Log.e("Token Refresh = ", token_refresh);
 //                        getPostFresh(access_token);
                         spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token).commit();
+                        spf.edit().putString(Param_Collection.ACCESS_TOKEN_REFRESH, token_refresh).commit();
                     }
 
                     @Override
@@ -150,6 +152,7 @@ public class Splashscreen extends AppCompatActivity {
                         Log.e("OnNext", "Berhasil");
                         if (!pojoAccessToken.getData().getAccessToken().isEmpty()) {
                             access_token = pojoAccessToken.getData().getAccessToken();
+                            token_refresh = pojoAccessToken.getData().getRefreshToken();
                         }
 
                     }
@@ -160,22 +163,26 @@ public class Splashscreen extends AppCompatActivity {
     private void refreshAccessToken(){
         adapter = Public_Functions.initRetrofit();
 
-        String access_token_before = spf.getString(Param_Collection.ACCESS_TOKEN, "");
+        String access_token_refresh = spf.getString(Param_Collection.ACCESS_TOKEN_REFRESH, "");
+        Log.e("Token Refresh = ", access_token_refresh);
+
         Observable<PojoAccessToken> observable =
-                adapter.refresh_access_token(Param_Collection.GRANT_TYPE_TOKENONLY, Param_Collection.CLIENT_ID,
-                        Param_Collection.CLIENT_SECRET, access_token_before);
+                adapter.refresh_access_token(Param_Collection.GRANT_TYPE_TOKEN_REFRESH, Param_Collection.CLIENT_ID,
+                        Param_Collection.CLIENT_SECRET, access_token_refresh);
 
         observable.subscribeOn(
                 Schedulers.newThread()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<PojoAccessToken>() {
-                    String access_token = "";
+                    String access_token, token_refresh = "";
 
                     @Override
                     public void onCompleted() {
-                        Log.e("OnComplete, Token = ", access_token);
+                        Log.e("Token NEW = ", access_token);
+                        Log.e("Token Refresh NEW= ", token_refresh);
 //                        getPostFresh(access_token);
                         spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token).commit();
+                        spf.edit().putString(Param_Collection.ACCESS_TOKEN_REFRESH, token_refresh).commit();
                         startActivity(new Intent(getApplicationContext(), MainMenu.class));
                         finish();
                     }
@@ -183,8 +190,8 @@ public class Splashscreen extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("OnError", "");
-                        if(!e.getMessage().isEmpty()){
-                            Toast.makeText(getApplicationContext(),e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        if (!e.getMessage().isEmpty()) {
+                            Toast.makeText(getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -193,35 +200,13 @@ public class Splashscreen extends AppCompatActivity {
                         Log.e("OnNext", "Berhasil");
                         if (!pojoAccessToken.getData().getAccessToken().isEmpty()) {
                             access_token = pojoAccessToken.getData().getAccessToken();
+                            token_refresh = pojoAccessToken.getData().getRefreshToken();
                         }
 
                     }
                 });
 
     }
-
-    private void getPostFresh(String access_token){
-        Observable<PojoPostFresh> observable = adapter.get_post_fresh(access_token);
-        observable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PojoPostFresh>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.e("OnComplete", "");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("OnError", "");
-                    }
-
-                    @Override
-                    public void onNext(PojoPostFresh pojoPostFresh) {
-                        Log.e("OnNext", "");
-                    }
-                });
-
-    }
-
 
     private void showHashKey()
     {

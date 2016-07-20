@@ -66,6 +66,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedscrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar"
@@ -75,17 +76,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
             android:orientation="vertical">
 
-            <com.kufed.id.customview.KufedTextView
+            <com.kufed.id.customview.KufedTextViewProductTitle
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="10dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:paddingTop="15dp"
                 android:text=""
                 android:textSize="@dimen/size_title"
+                android:textColor="@color/color_black"
                 android:textStyle="bold" />
 
             <com.kufed.id.customview.KufedTextView
@@ -96,6 +100,7 @@
                 android:padding="5dp"
                 android:paddingLeft="10dp"
                 android:text=""
+                android:textColor="@color/color_gray_dark"
                 android:textSize="@dimen/size_subtitle" />
 
             <com.kufed.id.customview.KufedTextView
@@ -106,7 +111,9 @@
                 android:padding="5dp"
                 android:paddingLeft="10dp"
                 android:text=""
-                android:textSize="@dimen/size_standard" />
+                android:textSize="@dimen/size_standard"
+                android:textColor="@color/color_gray_dark_middle"
+                />
 
             <com.kufed.id.customview.KufedTextView
                 android:id="@+id/tv_selling_price"
@@ -118,47 +125,48 @@
                 android:textSize="@dimen/size_title"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
+
                 android:orientation="horizontal"
                 android:padding="10dp">
 
+                <ImageView
+                    android:id="@+id/img_share"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/img_share_icon" />
 
                 <com.kufed.id.customview.KufedLikeImageView
                     android:id="@+id/img_like"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/img_share"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/img_like_icon" />
 
-                <ImageView
-                    android:id="@+id/img_share"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="50dp"
-                    android:src="@drawable/img_share_icon" />
 
                 <ImageView
                     android:id="@+id/img_wishlist"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_toRightOf="@id/img_like"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_toRightOf="@id/img_share"
                     android:src="@drawable/img_share_icon"
-                    android:visibility="gone" />
+                    />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <com.kufed.id.customview.KufedButton
                 android:id="@+id/btn_add_to_chart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_height="@dimen/button_size"
                 android:layout_weight="1"
                 android:background="@drawable/selector_btn_black"
-                android:padding="20dp"
+
+                android:layout_margin="15dp"
                 android:text="Add to Cart"
                 android:textColor="@android:color/white" />
 

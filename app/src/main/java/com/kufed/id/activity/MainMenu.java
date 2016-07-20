@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,7 @@ import com.kufed.id.customadapter.RVAdapter_Slider;
 import com.kufed.id.customview.KufedDialogCategoryHome;
 import com.kufed.id.customview.KufedDialogCategoryHome_Test;
 import com.kufed.id.customview.KufedTextView;
+import com.kufed.id.customview.KufedTextViewTitle;
 import com.kufed.id.fragment.Fragment_Following;
 import com.kufed.id.fragment.Fragment_Home;
 import com.kufed.id.fragment.Fragment_Recomendation;
@@ -61,7 +63,7 @@ public class MainMenu extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter layoutAdapter;
     Toolbar toolbar;
-    KufedTextView tv_title;
+    KufedTextViewTitle tv_title;
     SearchView searchView;
     SharedPreferences spf;
     @Bind(R.id.img_profile_user)CircularImageView img_profile_user;
@@ -79,7 +81,7 @@ public class MainMenu extends AppCompatActivity
 
         LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
         View view = mInflater.inflate(R.layout.layout_custom_toolbar, null);
-        tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
+        tv_title = (KufedTextViewTitle)view.findViewById(R.id.tv_title_custom);
         tv_title.setText("FEATURED");
 
         tv_title.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +138,9 @@ public class MainMenu extends AppCompatActivity
 
         Glide.with(getApplicationContext()).load(spf.getString(Param_Collection.SPF_USER_IMG_PROFILE, "")).asBitmap().into(target);
         tv_fullname_user.setText(spf.getString(Param_Collection.SPF_USER_FULLNAME, "User Name"));
+
+        //test
+        int id_user =spf.getInt(Param_Collection.SPF_USER_ID, 0);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

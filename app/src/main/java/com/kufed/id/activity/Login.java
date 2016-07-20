@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
     private LoginResult loginResult;
-    String access_token = "";
+    String access_token, token_refresh = "";
 
     @OnClick(R.id.btn_login_fb) public void login_FB(){
         LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("public_profile", "email"));
@@ -119,9 +119,13 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-                        Log.e("OnComplete", "");
+
                         if(isSukses){
+                            Log.e("LOGIN ", "Token NEW= " + access_token);
+                            Log.e("LOGIN ", "Token Refresh NEW= " + token_refresh);
                             spf.edit().putString(Param_Collection.ACCESS_TOKEN, access_token).commit();
+                            spf.edit().putString(Param_Collection.ACCESS_TOKEN_REFRESH, token_refresh).commit();
+
                             getProfile(access_token);
 
                         }else{
@@ -143,6 +147,7 @@ public class Login extends AppCompatActivity {
                         String code_status = pojoAccessToken.getStatus().getCode().toString();
                         if(code_status.equals("200")){
                             access_token = pojoAccessToken.getData().getAccessToken();
+                            token_refresh= pojoAccessToken.getData().getRefreshToken();
                             isSukses = true;
                         }else if(code_status.equals("422")){
                             message = pojoAccessToken.getStatus().getError_messages().toString();
@@ -230,6 +235,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("OnError", "");
+
                     }
 
                     @Override
@@ -240,7 +246,7 @@ public class Login extends AppCompatActivity {
                                 .getMemberCompleteName().toString()).commit();
                         spf.edit().putString(Param_Collection.SPF_USER_IMG_PROFILE, pojoPostFresh.getData().getInfo()
                                 .getPictureThumbPath()).commit();
-                        spf.edit().putString(Param_Collection.SPF_USER_ID, pojoPostFresh.getData().getInfo().getMemberId().toString());
+                        spf.edit().putInt(Param_Collection.SPF_USER_ID, pojoPostFresh.getData().getInfo().getMemberId()).commit();
                     }
                 });
 

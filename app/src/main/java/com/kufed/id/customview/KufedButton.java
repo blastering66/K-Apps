@@ -1,6 +1,7 @@
 package com.kufed.id.customview;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.Button;
 
@@ -34,6 +35,11 @@ public class KufedButton extends Button{
         if (!isInEditMode()) {
 //            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/alte_haas_grotesk_bold.ttf");
             setTypeface(Font.setTypeface_Regular(context));
+            if (Build.VERSION.SDK_INT >= 21) {
+                setLetterSpacing(0.1f);
+            }else{
+
+            }
         }
     }
 }

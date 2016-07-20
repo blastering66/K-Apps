@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.kufed.id.customview.KufedTextView
+        <com.kufed.id.customview.KufedTextViewProductTitle
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:layout_toLeftOf="@id/tv_price"
                 android:layout_centerVertical="true"
                 android:singleLine="true"
-                android:textSize="@dimen/size_subtitle"
+                android:textSize="@dimen/size_standard"
                 android:textColor="@color/color_gray_dark_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -69,9 +69,9 @@
             <com.kufed.id.customview.KufedButton
                 android:id="@+id/btn_wishlist"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/button_size"
                 android:padding="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_btn_transparent_invert"
                 android:text="WISHLIST"
@@ -80,8 +80,8 @@
             <com.kufed.id.customview.KufedButton
                 android:id="@+id/btn_add_to_chart"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="3dp"
                 android:padding="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_btn_black"
@@ -102,13 +102,14 @@
             <ImageView
                 android:id="@+id/img_share"
                 android:src="@drawable/img_share_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
 
             <com.kufed.id.customview.KufedTextView
                 android:id="@+id/tv_share"
                 android:padding="10dp"
                 android:text="Share"
+                android:textSize="@dimen/size_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -116,8 +117,8 @@
             <com.kufed.id.customview.KufedLikeImageView
                 android:id="@+id/img_like_imageview"
                 android:src="@drawable/img_like_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
 
             <ImageView
                 android:id="@+id/img_like"
@@ -130,6 +131,7 @@
                 android:id="@+id/tv_likes_counter"
                 android:padding="10dp"
                 android:text="999"
+                android:textSize="@dimen/size_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

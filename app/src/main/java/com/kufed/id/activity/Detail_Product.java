@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,10 +37,13 @@ import com.kufed.id.customadapter.RVAdapter_Detail_RelatedItem;
 import com.kufed.id.customadapter.RVAdapter_Detail_SoldByStore;
 import com.kufed.id.customview.KufedLikeImageView;
 import com.kufed.id.customview.KufedTextView;
+import com.kufed.id.customview.KufedTextViewProductTitle;
 import com.kufed.id.fragment.Fragment_VP_Image;
+import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
 import com.kufed.id.pojo.PojoResponseRegister;
+import com.kufed.id.pojo.PojoWishlistPost;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.rowdata.Rowdata_Detail_Likes;
 import com.kufed.id.rowdata.Rowdata_Detail_RelatedItem;
@@ -64,7 +69,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by macbook on 6/22/16.
  */
-public class Detail_Product extends AppCompatActivity {
+public class Detail_Product extends AppCompatActivity implements NestedScrollView.OnScrollChangeListener{
     Rest_Adapter adapter;
     @Bind(R.id.vp)
     ViewPager vp;
@@ -89,12 +94,14 @@ public class Detail_Product extends AppCompatActivity {
     SharedPreferences spf;
     String access_token, post_id, post_url, post_title;
 
-    @Bind(R.id.tv_name)KufedTextView tv_name;
+    @Bind(R.id.tv_name)KufedTextViewProductTitle tv_name;
     @Bind(R.id.tv_brand)KufedTextView tv_brand;
     @Bind(R.id.tv_user)KufedTextView tv_user;
     @Bind(R.id.tv_selling_price)KufedTextView tv_selling_price;
     @Bind(R.id.tv_desc)KufedTextView tv_desc;
     @Bind(R.id.img_like)KufedLikeImageView img_like;
+    @Bind(R.id.img_wishlist)ImageView img_wishlist;
+
     @OnClick(R.id.img_share) public void sharePost(){
         if(post_title != null && post_url != null){
             click_share(post_title, post_url);
@@ -104,6 +111,10 @@ public class Detail_Product extends AppCompatActivity {
 
     @OnClick(R.id.img_like)public void likePost(){
         click_like(post_id, img_like);
+    }
+
+    @OnClick(R.id.img_wishlist) public void addWishlist(){
+        click_wishlist(post_id, img_wishlist);
 
     }
 
@@ -123,6 +134,7 @@ public class Detail_Product extends AppCompatActivity {
     KufedTextView tv_title;
     @Bind(R.id.wrapper_likes)View wrapper_likes;
     @Bind(R.id.line_likes)View line_likes;
+    @Bind(R.id.nestedscrollview)NestedScrollView nestedscrollview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +149,7 @@ public class Detail_Product extends AppCompatActivity {
         }
         setContentView(R.layout.activity_detail_product);
         ButterKnife.bind(this);
+        nestedscrollview.setOnScrollChangeListener(this);
 //        setContentView(R.layout.activity_main_menu);
 //        get_Likes();
 //        get_SoldByStore();
@@ -358,15 +371,18 @@ public class Detail_Product extends AppCompatActivity {
 //        rv_soldby_store.setLayoutManager(layoutManager_SoldBy);
     }
 
-    private void click_like(String id, final ImageView img){
-        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+    private void click_wishlist(String id, final ImageView img){
+        Observable<PojoWishlistPost> observable = adapter.wishlist_post(id, access_token);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PojoResponseRegister>() {
+                .subscribe(new Observer<PojoWishlistPost>() {
+                    private boolean isSukses=false;
                     @Override
                     public void onCompleted() {
                         Log.e("", "");
-                        img.setImageResource(R.drawable.img_like_icon_after);
+                        if(isSukses) {
+                            img.setImageResource(R.drawable.img_like_icon_after);
+                        }
                     }
 
                     @Override
@@ -376,8 +392,45 @@ public class Detail_Product extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+                    public void onNext(PojoWishlistPost pojoWishlistPost) {
                         Log.e("", "");
+                        if(pojoWishlistPost.getStatus().getCode() == 200){
+                            isSukses = true;
+                        }
+
+                    }
+                });
+
+    }
+
+
+
+    private void click_like(String id, final ImageView img){
+        Observable<PojoLikedPost> observable = adapter.like_post(id, access_token);
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PojoLikedPost>() {
+                    private boolean isSukses=false;
+                    @Override
+                    public void onCompleted() {
+                        Log.e("", "");
+                        if(isSukses) {
+                            img.setImageResource(R.drawable.img_like_icon_after);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("", "");
+                        img.setImageResource(R.drawable.img_like_icon_after);
+                    }
+
+                    @Override
+                    public void onNext(PojoLikedPost pojoLikedPost) {
+                        Log.e("", "");
+                        if(pojoLikedPost.getStatus().getCode() == 200){
+                            isSukses = true;
+                        }
 
                     }
                 });
@@ -415,5 +468,14 @@ public class Detail_Product extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
+        Log.e("Scrolview scrolled", String.valueOf(scrollY));
+
+        if(scrollY > 63){
+
+        }
+
+    }
 }

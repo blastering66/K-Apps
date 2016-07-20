@@ -15,6 +15,7 @@ import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedLikeImageView;
 import com.kufed.id.customview.KufedTextView;
+import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoPostTrending;
 import com.kufed.id.pojo.PojoResponseRegister;
@@ -115,10 +116,10 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
     }
 
     private void click_like(String id){
-        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+        Observable<PojoLikedPost> observable = adapter.like_post(id, access_token);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PojoResponseRegister>() {
+                .subscribe(new Observer<PojoLikedPost>() {
                     @Override
                     public void onCompleted() {
                         Log.e("", "");
@@ -130,7 +131,7 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
                     }
 
                     @Override
-                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+                    public void onNext(PojoLikedPost pojoLikedPost) {
                         Log.e("","");
 
                     }
@@ -139,10 +140,10 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
     }
 
     private void click_like(String id, final ImageView img){
-        Observable<PojoResponseRegister> observable = adapter.like_post(id, access_token);
+        Observable<PojoLikedPost> observable = adapter.like_post(id, access_token);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PojoResponseRegister>() {
+                .subscribe(new Observer<PojoLikedPost>() {
                     @Override
                     public void onCompleted() {
                         Log.e("","");
@@ -156,7 +157,7 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
                     }
 
                     @Override
-                    public void onNext(PojoResponseRegister pojoResponseRegister) {
+                    public void onNext(PojoLikedPost pojoLikedPost) {
                         Log.e("","");
 
                     }
