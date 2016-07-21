@@ -17,11 +17,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.kufed.id.activity.Detail_Product;
 import com.kufed.id.activity.NotificationActivity_AddMember;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.fragment.Fragment_Trending;
 import com.kufed.id.pojo.PojoNotifYou;
+import com.kufed.id.util.Param_Collection;
 import com.pkmmte.view.CircularImageView;
 
 import java.util.List;
@@ -113,6 +115,16 @@ public class RVAdapter_NotifYou extends RecyclerView.Adapter<RVAdapter_NotifYou.
                 };
                 Glide.with(context).load(item.getContent().getThumbImagePath()).asBitmap().into(target_likedpost_target);
                 holder.tv.setText(item.getText().get(0).toString());
+
+                holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, Detail_Product.class);
+                        intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getContent().getPostId().toString());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
                 break;
 
             case NOTIF_TYPE_FOLLOW_MEMBER:

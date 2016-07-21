@@ -183,7 +183,14 @@ public class Login extends AppCompatActivity {
                             getProfile(access_token_new);
 
                         }else{
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                            pDialog.dismiss();
+                            if(message.contains("Password")){
+                                ed_password.setError(message);
+                            }else{
+                                ed_username.setError(message);
+                            }
+
                         }
 
 //                        getPostFresh(access_token);

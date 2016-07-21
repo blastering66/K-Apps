@@ -6,6 +6,8 @@ import retrofit.http.Query;
 import rx.Observable;
 
 import com.kufed.id.pojo.PojoAccessToken;
+import com.kufed.id.pojo.PojoFriendAdded;
+import com.kufed.id.pojo.PojoFriendRequests;
 import com.kufed.id.pojo.PojoGETProfile;
 import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoLoginFB;
@@ -170,7 +172,8 @@ public interface Rest_Adapter {
     //Pojo Blum dibuat
     @FormUrlEncoded
     @POST("/member/{id}/approve")
-    Observable<PojoResponseRegister> approve_friend(
+    Observable<PojoFriendAdded> approve_friend(
+            @Path("id") String id,
             @Field("access_token") String access_token
     );
 
@@ -197,6 +200,12 @@ public interface Rest_Adapter {
     @GET("/product/search")
     Observable<PojoResultSearch> search_product(
             @Query("q") String query,
+            @Query("access_token") String access_token
+    );
+
+    @GET("/member/{id}/friendreq")
+    Observable<PojoFriendRequests> notif_get_friend_requests(
+            @Path("id") int id,
             @Query("access_token") String access_token
     );
 }

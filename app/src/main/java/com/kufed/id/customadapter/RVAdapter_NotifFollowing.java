@@ -56,7 +56,7 @@ public class RVAdapter_NotifFollowing extends RecyclerView.Adapter<RVAdapter_Not
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        PojoNotifFollowing.Datum item = data.get(position);
+        final PojoNotifFollowing.Datum item = data.get(position);
         switch (getItemViewType(position)) {
             case NOTIF_TYPE_LIKEDPOST:
                 Target<Bitmap> target_member = new SimpleTarget<Bitmap>() {
@@ -78,6 +78,16 @@ public class RVAdapter_NotifFollowing extends RecyclerView.Adapter<RVAdapter_Not
                 String text_ = item.getText().toString().replace("[", "");
                 text_ = text_.replace("]","");
                 holder.tv.setText(text_);
+
+                holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, Detail_Product.class);
+                        intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getContent().getPostId().toString());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
 
                 break;
 
@@ -101,6 +111,12 @@ public class RVAdapter_NotifFollowing extends RecyclerView.Adapter<RVAdapter_Not
                 String text__ = item.getText().toString().replace("[", "");
                 text__ = text__.replace("]","");
                 holder.tv.setText(text__);
+                holder.wrapper.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
                 break;
 
         }
@@ -145,6 +161,7 @@ public class RVAdapter_NotifFollowing extends RecyclerView.Adapter<RVAdapter_Not
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        @Bind(R.id.wrapper)View wrapper;
         @Nullable
         @Bind(R.id.img_target_member)CircularImageView img_target_member;
         @Nullable
