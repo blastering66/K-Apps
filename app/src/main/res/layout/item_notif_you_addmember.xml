@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/wrapper"
+    >
+
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/img_member"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:src="@drawable/img_arrow_right"
+        android:layout_margin="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_toLeftOf="@id/img_back"
+        android:layout_toRightOf="@id/img_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv"
+            android:textColor="@color/color_black"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedTextView
+            android:text="Approve or ignore request"
+            android:textColor="@color/color_gray_dark_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

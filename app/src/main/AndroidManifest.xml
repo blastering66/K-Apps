@@ -68,6 +68,11 @@
             android:name=".NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
+
+        <activity
+            android:name=".NotificationActivity_AddMember"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
         <activity
             android:name=".ListLikedPost"
             android:screenOrientation="portrait"

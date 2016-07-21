@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 
 import com.kufed.id.activity.R;
 import com.kufed.id.customadapter.RVAdapter_NotifFollowing;
+import com.kufed.id.customadapter.RVAdapter_NotifYou;
 import com.kufed.id.customview.SimpleDividerItemDecoration;
 import com.kufed.id.pojo.PojoNotifFollowing;
+import com.kufed.id.pojo.PojoNotifYou;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
@@ -45,7 +47,7 @@ public class Fragment_Notification_You extends Fragment implements SwipeRefreshL
     RecyclerView.ItemDecoration layoutDecoration;
     SharedPreferences spf;
     Context context;
-    List<PojoNotifFollowing.Datum> data;
+    List<PojoNotifYou.Datum> data;
     String access_token;
     int id;
 
@@ -76,13 +78,13 @@ public class Fragment_Notification_You extends Fragment implements SwipeRefreshL
     private void getProfileActivity(){
         final Rest_Adapter adapter = Public_Functions.initRetrofit();
 
-        Observable<PojoNotifFollowing> observable = adapter.notif_following(id, access_token);
+        Observable<PojoNotifYou> observable = adapter.notif_you(access_token);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<PojoNotifFollowing>() {
+                .subscribe(new Observer<PojoNotifYou>() {
                     @Override
                     public void onCompleted() {
-                        layoutAdapter = new RVAdapter_NotifFollowing(getContext(), data);
+                        layoutAdapter = new RVAdapter_NotifYou(getContext(), data, getFragmentManager());
                         layoutManager = new GridLayoutManager(getContext(), 1);
 //                        Drawable drawableDecoration = ContextCompat.getDrawable(context, R.drawable.line_divider);
                         layoutDecoration = new SimpleDividerItemDecoration(drawableDecoration);
@@ -100,10 +102,10 @@ public class Fragment_Notification_You extends Fragment implements SwipeRefreshL
                     }
 
                     @Override
-                    public void onNext(PojoNotifFollowing pojoNotifFollowing) {
-                        if (pojoNotifFollowing.getStatus().getCode() == 200) {
-                            if (pojoNotifFollowing.getData().size() > 0) {
-                                data = pojoNotifFollowing.getData();
+                    public void onNext(PojoNotifYou pojoNotifYou) {
+                        if (pojoNotifYou.getStatus().getCode() == 200) {
+                            if (pojoNotifYou.getData().size() > 0) {
+                                data = pojoNotifYou.getData();
                             }
                         }
 

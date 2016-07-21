@@ -10,6 +10,7 @@ import com.kufed.id.pojo.PojoGETProfile;
 import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoLoginFB;
 import com.kufed.id.pojo.PojoNotifFollowing;
+import com.kufed.id.pojo.PojoNotifYou;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
@@ -165,13 +166,21 @@ public interface Rest_Adapter {
             @Field("access_token") String access_token
     );
 
+    //NOTE
+    //Pojo Blum dibuat
+    @FormUrlEncoded
+    @POST("/member/{id}/approve")
+    Observable<PojoResponseRegister> approve_friend(
+            @Field("access_token") String access_token
+    );
+
     @GET("/profile/{id}/public_activities")
     Observable<PojoNotifFollowing> notif_following(
             @Path("id") int id,
             @Query("access_token") String access_token
     );
     @GET("/notification/get")
-    Observable<PojoNotifFollowing> notif_you(
+    Observable<PojoNotifYou> notif_you(
             @Query("access_token") String access_token
     );
 

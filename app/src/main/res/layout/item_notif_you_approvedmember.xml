@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="?attr/selectableItemBackground"
+    android:id="@+id/wrapper"
+    >
+
+    <com.pkmmte.view.CircularImageView
+        android:id="@+id/img"
+        android:scaleType="centerCrop"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <com.kufed.id.customview.KufedTextView
+        android:id="@+id/tv"
+        android:textColor="@color/color_black"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/img"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</RelativeLayout>

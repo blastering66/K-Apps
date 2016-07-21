@@ -73,7 +73,7 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         try{
             holder.tv_user.setText(item.getBrandName());
         }catch (NullPointerException e){
-            holder.tv_user.setText(null);
+            holder.tv_user.setText("Null");
         }
 
         try{
