@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.kufed.id.activity.Detail_Product;
+import com.kufed.id.activity.Detail_Product_Normal;
 import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.MainMenu;
 import com.kufed.id.activity.R;
@@ -62,7 +63,7 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final PojoPostFresh.Post item = data.get(position);
 
-        Glide.with(context).load(item.getNormalImagePath()).asBitmap().into(holder.img);
+        Glide.with(context).load(item.getFullImagePath()).asBitmap().into(holder.img);
 //        Glide.with(context).load("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/2010-1465207439-full.jpg").asBitmap().into(holder.img);
 //        holder.tv_name.setText(item.getPostTitle());
         try{
@@ -89,8 +90,10 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
             @Override
             public void onClick(View v) {
                 try{
-                    Intent intent = new Intent(context, Detail_Product.class);
+//                    Intent intent = new Intent(context, Detail_Product.class);
+                    Intent intent = new Intent(context, Detail_Product_Normal.class);
                     intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getPostId().toString());
+                    intent.putExtra(Param_Collection.EXTRA_POST_PRODUCT_TITLE, item.getProduct().getProductTitle());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
 

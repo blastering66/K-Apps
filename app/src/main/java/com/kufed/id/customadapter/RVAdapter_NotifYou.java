@@ -18,6 +18,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.kufed.id.activity.Detail_Product;
+import com.kufed.id.activity.Detail_Product_Normal;
 import com.kufed.id.activity.NotificationActivity_AddMember;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedTextView;
@@ -119,8 +120,10 @@ public class RVAdapter_NotifYou extends RecyclerView.Adapter<RVAdapter_NotifYou.
                 holder.wrapper.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, Detail_Product.class);
+                        //                    Intent intent = new Intent(context, Detail_Product.class);
+                        Intent intent = new Intent(context, Detail_Product_Normal.class);
                         intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getContent().getPostId().toString());
+                        intent.putExtra(Param_Collection.EXTRA_POST_PRODUCT_TITLE, item.getActivity());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }

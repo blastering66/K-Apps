@@ -353,22 +353,6 @@ public class Detail_Product extends AppCompatActivity implements NestedScrollVie
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        layoutAdapter_Likes = new RVAdapter_Detail_Like(Detail_Product.this, data_likes);
-//        layoutAdapter_SoldBy = new RVAdapter_Detail_SoldByStore(getApplicationContext(), data_soldbystore);
-//        layoutAdapter_RelatedItem = new RVAdapter_Detail_RelatedItem(getApplicationContext(), data_relateditem);
-//
-//        layoutManager_Likes = new LinearLayoutManager(Detail_Product.this, LinearLayoutManager.HORIZONTAL, false);
-//        layoutManager_SoldBy = new LinearLayoutManager(Detail_Product.this, LinearLayoutManager.HORIZONTAL, false);
-//        layoutManager_RelatedItem = new LinearLayoutManager(Detail_Product.this, LinearLayoutManager.HORIZONTAL, false);
-//
-//        rv_likes.setAdapter(layoutAdapter_Likes);
-//        rv_likes.setLayoutManager(layoutManager_Likes);
-//
-//        rv_related_item.setAdapter(layoutAdapter_RelatedItem);
-//        rv_related_item.setLayoutManager(layoutManager_RelatedItem);
-//
-//        rv_soldby_store.setAdapter(layoutAdapter_SoldBy);
-//        rv_soldby_store.setLayoutManager(layoutManager_SoldBy);
     }
 
     private void click_wishlist(String id, final ImageView img){

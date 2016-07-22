@@ -48,7 +48,7 @@
 
             <com.kufed.id.customview.KufedTextView
                 android:id="@+id/tv_user"
-                android:text="Lorem Ipsum Dolor"
+                android:text=""
                 android:layout_toLeftOf="@id/tv_price"
                 android:layout_centerVertical="true"
                 android:singleLine="true"

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.kufed.id.activity.Detail_Product;
+import com.kufed.id.activity.Detail_Product_Normal;
 import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.R;
 import com.kufed.id.customview.KufedLikeImageView;
@@ -55,7 +56,7 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final PojoPostTrending.Post item = data.get(position);
 
-        Glide.with(context).load(item.getNormalImagePath()).asBitmap().into(holder.img);
+        Glide.with(context).load(item.getFullImagePath()).asBitmap().into(holder.img);
 //        Glide.with(context).load("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/2010-1465207439-full.jpg").asBitmap().into(holder.img);
 //        holder.tv_name.setText(item.getPostTitle());
         try {
@@ -82,8 +83,10 @@ public class RVAdapter_PostTrending extends RecyclerView.Adapter<RVAdapter_PostT
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(context, Detail_Product.class);
+                    //                    Intent intent = new Intent(context, Detail_Product.class);
+                    Intent intent = new Intent(context, Detail_Product_Normal.class);
                     intent.putExtra(Param_Collection.EXTRA_POST_ID, item.getPostId().toString());
+                    intent.putExtra(Param_Collection.EXTRA_POST_PRODUCT_TITLE, item.getProduct().getProductTitle());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 } catch (NullPointerException e) {

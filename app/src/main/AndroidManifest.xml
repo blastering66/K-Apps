@@ -60,6 +60,12 @@
             android:name=".Detail_Product"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_TransparentActionbar" />
+
+        <activity
+            android:name=".Detail_Product_Normal"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_DetailProduct" />
+
         <activity
             android:name="com.kufed.id.customview.KufedDialogCategoryHome"
             android:screenOrientation="portrait"

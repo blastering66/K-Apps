@@ -88,6 +88,8 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:text=""
                 android:textAllCaps="true"
                 android:textColor="@color/color_black"
@@ -163,9 +165,11 @@
                 android:id="@+id/btn_add_to_chart"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_size"
-                android:layout_margin="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_weight="1"
-
                 android:background="@drawable/selector_btn_black"
                 android:text="Add to Cart"
                 android:textColor="@android:color/white" />
@@ -179,15 +183,21 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_black" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_gray_dark_light" />
 
             <com.kufed.id.customview.KufedTextView
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="5dp"
+                android:textColor="@color/color_gray_dark_light"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:padding="10dp" />
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp" />
 
             <Button
                 android:id="@+id/btn_readmore"
@@ -202,7 +212,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_black" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_gray_dark_light" />
 
             <LinearLayout
                 android:id="@+id/wrapper_likes"
@@ -227,7 +239,9 @@
                 android:id="@+id/line_likes"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_black" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_gray_dark_light" />
 
 
             <com.kufed.id.customview.KufedTextView

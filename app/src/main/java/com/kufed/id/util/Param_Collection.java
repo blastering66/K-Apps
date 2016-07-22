@@ -22,6 +22,7 @@ public class Param_Collection {
     public static int REQ_CODE_FROM_REGISTER_FORGOT =12;
 
     public static String EXTRA_POST_ID=  "post_id";
+    public static String EXTRA_POST_PRODUCT_TITLE=  "product_title";
     public static String URL_FOLDER_IMG = "/Kufed/temp/";
 
     //Internal
