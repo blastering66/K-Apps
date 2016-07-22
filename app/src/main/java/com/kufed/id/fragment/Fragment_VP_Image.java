@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.kufed.id.activity.R;
 
 /**
  * Created by macbook on 6/23/16.
@@ -35,12 +36,10 @@ public class Fragment_VP_Image extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ImageView img = new ImageView(getActivity());
-        img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_img_with_gradient, null);
 
-        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        ImageView img = (ImageView)view.findViewById(R.id.img);
         Glide.with(getActivity()).load(cUrl).asBitmap().into(img);
-        return img;
+        return view;
     }
 }

@@ -62,7 +62,6 @@
                 app:layout_collapseMode="pin"
                  />
 
-
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -187,6 +186,15 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/color_gray_dark_light" />
 
+            <com.kufed.id.customview.KufedTextViewTitle
+                android:text="Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_black"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp" />
+
             <com.kufed.id.customview.KufedTextView
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
@@ -195,7 +203,7 @@
                 android:textColor="@color/color_gray_dark_light"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp" />
 

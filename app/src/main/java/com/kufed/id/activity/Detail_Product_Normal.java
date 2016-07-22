@@ -156,9 +156,17 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
                 }
                 if (scrollRangge + verticalOffset == 0) {
                     collapsingtoolbar.setTitle(title_);
+                    tv_name.setVisibility(View.INVISIBLE);
+                    tv_name.setAlpha(1.0f);
+                    tv_name.animate().setDuration(500)
+                            .alpha(0.0f);
                     isShow = true;
                 } else if (isShow) {
                     collapsingtoolbar.setTitle("");
+                    tv_name.setVisibility(View.VISIBLE);
+                    tv_name.setAlpha(0.0f);
+                    tv_name.animate().setDuration(500)
+                            .alpha(1.0f);
                     isShow = false;
                 }
 
@@ -364,7 +372,7 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
         post_id = getIntent().getStringExtra(Param_Collection.EXTRA_POST_ID);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setPadding(0,toolbar.getHeight(), 0,0);
-        toolbar.setTitle("Product");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
