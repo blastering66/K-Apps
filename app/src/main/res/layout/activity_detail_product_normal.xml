@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
+    android:focusableInTouchMode="true"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -69,7 +70,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedscrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -80,6 +81,7 @@
 
             <com.kufed.id.customview.KufedTextViewProductTitle
                 android:id="@+id/tv_name"
+                android:focusable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

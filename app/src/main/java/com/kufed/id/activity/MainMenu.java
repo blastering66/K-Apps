@@ -1,27 +1,18 @@
 package com.kufed.id.activity;
 
 import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -34,7 +25,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -42,7 +32,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.kufed.id.customadapter.RVAdapter_Slider;
 import com.kufed.id.customview.KufedDialogCategoryHome;
-import com.kufed.id.customview.KufedDialogCategoryHome_Test;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.customview.KufedTextViewTitle;
 import com.kufed.id.fragment.Fragment_Following;
@@ -81,6 +70,15 @@ public class MainMenu extends AppCompatActivity
 
         LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
         View view = mInflater.inflate(R.layout.layout_custom_toolbar, null);
+
+        View view_wrapper = (View)view.findViewById(R.id.wrapper);
+        view_wrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCategory();
+            }
+        });
+
         tv_title = (KufedTextViewTitle)view.findViewById(R.id.tv_title_custom);
         tv_title.setText("FEATURED");
 
@@ -88,39 +86,7 @@ public class MainMenu extends AppCompatActivity
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(getApplicationContext(), KufedDialogCategoryHome.class));
-                KufedDialogCategoryHome_Test dialog = new KufedDialogCategoryHome_Test(MainMenu.this, MainMenu.this);
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        int selected_category = spf.getInt(Param_Collection.SPF_SELECTED_CATEGORY_MENU, 0);
-                        FragmentManager fm = getSupportFragmentManager();
-                        switch (selected_category) {
-                            case 0:
-                                Fragment fragment_fresh = new Fragment_Home();
-                                fm.beginTransaction().replace(R.id.frame_container, fragment_fresh).commit();
-                                tv_title.setText("FEATURED");
-                                break;
-                            case 1:
-                                Fragment fragment_trending = new Fragment_Trending();
-                                fm.beginTransaction().replace(R.id.frame_container, fragment_trending).commit();
-                                tv_title.setText("TRENDING");
-                                break;
-                            case 2:
-                                Fragment fragment_recom = new Fragment_Recomendation();
-                                fm.beginTransaction().replace(R.id.frame_container, fragment_recom).commit();
-                                tv_title.setText("RECOMMENDATION");
-                                break;
-                            case 3:
-                                Fragment fragment_following = new Fragment_Following();
-                                fm.beginTransaction().replace(R.id.frame_container, fragment_following).commit();
-                                tv_title.setText("FOLLOWING");
-                                break;
-                            case 9:
-                                break;
-                        }
-                    }
-                });
-                dialog.show();
+                showCategory();
             }
         });
         toolbar.removeAllViews();
@@ -138,18 +104,6 @@ public class MainMenu extends AppCompatActivity
 
         Glide.with(getApplicationContext()).load(spf.getString(Param_Collection.SPF_USER_IMG_PROFILE, "")).asBitmap().into(target);
         tv_fullname_user.setText(spf.getString(Param_Collection.SPF_USER_FULLNAME, "User Name"));
-
-        //test
-        int id_user =spf.getInt(Param_Collection.SPF_USER_ID, 0);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -169,6 +123,43 @@ public class MainMenu extends AppCompatActivity
             Fragment fragment_fresh = new Fragment_Home();
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,fragment_fresh).commit();
         }
+    }
+
+    private void showCategory(){
+        KufedDialogCategoryHome dialog = new KufedDialogCategoryHome(MainMenu.this, MainMenu.this);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                int selected_category = spf.getInt(Param_Collection.SPF_SELECTED_CATEGORY_MENU, 0);
+                FragmentManager fm = getSupportFragmentManager();
+                switch (selected_category) {
+                    case 0:
+                        Fragment fragment_fresh = new Fragment_Home();
+                        fm.beginTransaction().replace(R.id.frame_container, fragment_fresh).commit();
+                        tv_title.setText("FEATURED");
+                        break;
+                    case 1:
+                        Fragment fragment_trending = new Fragment_Trending();
+                        fm.beginTransaction().replace(R.id.frame_container, fragment_trending).commit();
+                        tv_title.setText("TRENDING");
+                        break;
+                    case 2:
+                        Fragment fragment_recom = new Fragment_Recomendation();
+                        fm.beginTransaction().replace(R.id.frame_container, fragment_recom).commit();
+                        tv_title.setText("RECOMMENDATION");
+                        break;
+                    case 3:
+                        Fragment fragment_following = new Fragment_Following();
+                        fm.beginTransaction().replace(R.id.frame_container, fragment_following).commit();
+                        tv_title.setText("FOLLOWING");
+                        break;
+                    case 9:
+                        break;
+                }
+            }
+        });
+        dialog.show();
+
     }
 
     @Override
@@ -245,19 +236,13 @@ public class MainMenu extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        int id = item.getItemId();
+//        if (id == R.id.nav_camera) {
+//        } else if (id == R.id.nav_share) {
+//        } else if (id == R.id.nav_send) {
+//        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

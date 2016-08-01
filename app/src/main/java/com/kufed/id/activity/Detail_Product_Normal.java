@@ -173,15 +173,7 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
             }
         });
 
-//        setContentView(R.layout.activity_main_menu);
-//        get_Likes();
-//        get_SoldByStore();
-//        get_RelatedItems();
-//        get_Top3Comments();
-
-        //Statis
         iniView();
-//        getPostInfo("910");
         getPostInfo(post_id);
 
     }
@@ -207,32 +199,20 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
 
             @Override
             public void onCompleted() {
-//                LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
-//                View view = mInflater.inflate(R.layout.layout_custom_toolbar_title_detail, null);
-//                tv_title = (KufedTextView)view.findViewById(R.id.tv_title_custom);
-//                tv_title.setText(title_product_name);
-//                toolbar.removeAllViews();;
-//                toolbar.addView(view);
-                Log.e("", "");
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("", "");
                 Toast.makeText(getApplicationContext(), "Get Info Error", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onNext(PojoPostInfo pojoPostInfo) {
 
-//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//                toolbar.setTitle(pojoPostInfo.getData().getProduct().getProductTitle());
-//                setSupportActionBar(toolbar);
-
                 title_product_name = pojoPostInfo.getData().getProduct().getProductTitle();
-
                 tv_name.setText(pojoPostInfo.getData().getProduct().getProductTitle());
+                tv_name.setFocusable(true);
+                tv_name.requestFocus();
                 tv_brand.setText(pojoPostInfo.getData().getBrandName());
                 tv_user.setText(pojoPostInfo.getData().getMember().getMemberUsername());
 

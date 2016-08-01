@@ -2,12 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Splashscreen">
+
+    >
 
     <VideoView
         android:id="@+id/video_kufed"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progress_bar"
+        android:paddingBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:text="K"
@@ -20,7 +30,8 @@
     <ImageView
         android:id="@+id/btn_exit"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
         android:padding="10dp"
         android:src="@drawable/img_close"
         android:layout_width="50dp"

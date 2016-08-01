@@ -1,6 +1,7 @@
 package com.kufed.id.customadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.kufed.id.activity.Detail_Product_Normal;
 import com.kufed.id.activity.R;
 import com.kufed.id.rowdata.Rowdata_Detail_RelatedItem;
-import com.kufed.id.rowdata.Rowdata_Detail_SolybyStore;
-import com.pkmmte.view.CircularImageView;
+import com.kufed.id.util.Param_Collection;
 
 import java.util.List;
 
@@ -38,9 +39,20 @@ public class RVAdapter_Detail_RelatedItem extends RecyclerView.Adapter<RVAdapter
     }
 
     @Override
-    public void onBindViewHolder(Viewholder holder, int position) {
+    public void onBindViewHolder(Viewholder holder, final int position) {
         final Rowdata_Detail_RelatedItem item = data.get(position);
         Glide.with(context).load(item.getUrl_photo()).asBitmap().into(holder.img);
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Detail_Product_Normal.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(Param_Collection.EXTRA_POST_ID, data.get(position).getId_userpost());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

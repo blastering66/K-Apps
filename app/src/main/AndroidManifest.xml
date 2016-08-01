@@ -14,7 +14,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -60,21 +60,14 @@
             android:name=".Detail_Product"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_TransparentActionbar" />
-
         <activity
             android:name=".Detail_Product_Normal"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_DetailProduct" />
-
-        <activity
-            android:name="com.kufed.id.customview.KufedDialogCategoryHome"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
-
         <activity
             android:name=".NotificationActivity_AddMember"
             android:screenOrientation="portrait"
@@ -83,7 +76,6 @@
             android:name=".ListLikedPost"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
-
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/title_activity_result"
@@ -114,7 +106,12 @@
         <activity
             android:name=".NotificationsActivity_Test"
             android:label="@string/title_activity_notifications_activity__test"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="48399ac40125bcf8098b9fb56f24b6077d1837ac" />
+
     </application>
 
 </manifest>

@@ -11,17 +11,15 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:theme="@style/AppTheme_TransparentActionbar"
-        app:popupTheme="@style/AppTheme_TransparentActionbar">
+        >
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/color_white"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:theme="@style/AppTheme_TransparentActionbar"
-            app:popupTheme="@style/AppTheme_TransparentActionbar" />
+            />
 
     </android.support.design.widget.AppBarLayout>
 

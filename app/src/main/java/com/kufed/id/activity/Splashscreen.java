@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.kufed.id.customview.KufedButton;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoGETProfile;
@@ -27,6 +30,7 @@ import com.kufed.id.util.Font;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 
+import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -45,7 +49,7 @@ import rx.schedulers.Schedulers;
 public class Splashscreen extends AppCompatActivity {
     SharedPreferences spf;
     Rest_Adapter adapter;
-
+    @Bind(R.id.progress_bar)ProgressBar progressBar;
     @Bind(R.id.wrapper)View wrapper;
 
     @Bind(R.id.video_kufed)
@@ -102,13 +106,13 @@ public class Splashscreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.activity_splashscreen);
-
         initView();
-
         boolean logged = spf.getBoolean(Param_Collection.SPF_LOGGED, false);
         if(logged){
             wrapper.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
             refreshAccessToken();
         }else{
             getAccessToken();
