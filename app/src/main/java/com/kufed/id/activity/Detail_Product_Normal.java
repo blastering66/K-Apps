@@ -120,6 +120,12 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
 
     }
 
+    @OnClick(R.id.btn_add_to_chart)public void addToChart(){
+        Intent intent_cart = new Intent(getApplicationContext(), Detail_Cart.class);
+
+        startActivity(intent_cart);
+    }
+
     Toolbar toolbar;
     KufedTextView tv_title;
     @Bind(R.id.wrapper_likes)View wrapper_likes;

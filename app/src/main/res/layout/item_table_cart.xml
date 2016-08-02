@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_brand_name"
+                    android:textSize="@dimen/size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_post_title"
+                    android:textSize="@dimen/size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_variation"
+                    android:textSize="@dimen/size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_selling_price"
+                    android:textSize="@dimen/size_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:id="@+id/wrapper_qty"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="@drawable/bg_white_stroke"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/spinne_qty"
+                    android:entries="@array/qty"
+                    android:background="@android:color/transparent"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:src="@drawable/img_dropdown_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </RelativeLayout>
+
+            <com.kufed.id.customview.KufedTextView
+                android:layout_weight="1"
+                android:id="@+id/tv_subtotal"
+                android:textSize="@dimen/size_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/btn_delete"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:src="@drawable/img_close"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

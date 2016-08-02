@@ -76,6 +76,12 @@
             android:name=".ListLikedPost"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
+
+        <activity
+            android:name=".Detail_Cart"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_TransparentActionbar" />
+
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/title_activity_result"
