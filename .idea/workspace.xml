@@ -25,19 +25,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fb0817a-eed4-440c-8a5b-43891193d3d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Cart.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/customadapter/RVAdapter_CartList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/pojo/PojoResponseCheckout.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_cart.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_table_cart.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_table_cart_footer.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_table_cart_header.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_detail_cart.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Product_Normal.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Product_Normal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/util/Param_Collection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/kufed/id/util/Param_Collection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
     </list>
     <ignored path="K-Apps.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,7 +60,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3628#3629#0" expanded="false" />
+                <element signature="e#3673#3674#0" expanded="false" />
+                <element signature="e#17132#17133#0" expanded="false" />
+                <element signature="e#17165#17166#0" expanded="false" />
+                <element signature="e#17367#17368#0" expanded="false" />
+                <element signature="e#17418#17419#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,7 +78,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1148#1149#0" expanded="false" />
+                <element signature="e#1172#1173#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,8 +90,8 @@
       <file leaf-file-name="RVAdapter_CartList.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/customadapter/RVAdapter_CartList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35044247">
-              <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.29734513">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,11 +105,9 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.6981134">
+            <state vertical-scroll-proportion="0.0">
               <caret line="87" column="43" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="43" />
-              <folding>
-                <element signature="e#1645#1664#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +118,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.3962264">
+            <state vertical-scroll-proportion="0.0">
               <caret line="12" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="31" selection-end-column="50" />
               <folding />
             </state>
@@ -2167,9 +2167,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2379,6 +2376,9 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2698,16 +2698,21 @@
       <option name="project" value="LOCAL" />
       <updated>1470055530372</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Cart awal">
+      <created>1470142730580</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1470142730581</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2732,6 +2737,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2751,7 +2757,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New Bug Fix di UI Slider dLL" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Bug Fix di UI Slider dLL" />
+    <MESSAGE value="Cart awal" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cart awal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3069,7 +3076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38603696">
           <caret line="107" column="4665" selection-start-line="107" selection-start-column="4665" selection-end-line="107" selection-end-column="4665" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3099,7 +3105,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43893805">
           <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3197,7 +3202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3309,13 +3313,13 @@
         <state vertical-scroll-proportion="-8.875">
           <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
           <folding>
-            <element signature="e#949#967#0" expanded="true" />
-            <element signature="e#1129#1147#0" expanded="true" />
-            <element signature="e#2630#2664#0" expanded="true" />
-            <element signature="e#3992#4023#0" expanded="true" />
-            <element signature="e#4693#4709#0" expanded="true" />
-            <element signature="e#4911#4929#0" expanded="true" />
-            <element signature="e#5104#5157#0" expanded="true" />
+            <element signature="e#949#967#0" expanded="false" />
+            <element signature="e#1129#1147#0" expanded="false" />
+            <element signature="e#2630#2664#0" expanded="false" />
+            <element signature="e#3992#4023#0" expanded="false" />
+            <element signature="e#4693#4709#0" expanded="false" />
+            <element signature="e#4911#4929#0" expanded="false" />
+            <element signature="e#5104#5157#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3652,17 +3656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3962264">
-          <caret line="12" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="31" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_detail_cart.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -3678,14 +3671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28318584">
           <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Product_Normal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3709,19 +3694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_table_cart.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6981134">
-          <caret line="87" column="43" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="43" />
-          <folding>
-            <element signature="e#1645#1664#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/customadapter/RVAdapter_PostFresh.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2920354">
@@ -3730,21 +3702,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Product_Normal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3628#3629#0" expanded="false" />
+            <element signature="e#3673#3674#0" expanded="false" />
+            <element signature="e#17132#17133#0" expanded="false" />
+            <element signature="e#17165#17166#0" expanded="false" />
+            <element signature="e#17367#17368#0" expanded="false" />
+            <element signature="e#17418#17419#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/activity/Detail_Cart.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1148#1149#0" expanded="false" />
+            <element signature="e#1172#1173#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/kufed/id/customadapter/RVAdapter_CartList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35044247">
-          <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.29734513">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_table_cart.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="43" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_search_result.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="31" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
