@@ -17,6 +17,8 @@ import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
 import com.kufed.id.pojo.PojoPostTrending;
+import com.kufed.id.pojo.PojoResponseAddCart;
+import com.kufed.id.pojo.PojoResponseCartList;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
 import com.kufed.id.pojo.PojoResultSearch;
@@ -141,6 +143,15 @@ public interface Rest_Adapter {
             @Field("access_token") String access_token
     );
 
+    @FormUrlEncoded
+    @POST("/cart/add")
+    Observable<PojoResponseAddCart> add_to_cart(
+            @Field("data") String data,
+            @Field("access_token") String access_token
+    );
+
+
+
     //NOTE
     //Pojo Blum dibuat
     @FormUrlEncoded
@@ -206,6 +217,11 @@ public interface Rest_Adapter {
     @GET("/member/{id}/friendreq")
     Observable<PojoFriendRequests> notif_get_friend_requests(
             @Path("id") int id,
+            @Query("access_token") String access_token
+    );
+
+    @GET("/cart/list")
+    Observable<PojoResponseCartList> get_cart_list(
             @Query("access_token") String access_token
     );
 }

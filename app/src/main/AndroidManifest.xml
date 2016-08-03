@@ -80,7 +80,12 @@
         <activity
             android:name=".Detail_Cart"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme_TransparentActionbar" />
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
+
+        <activity
+            android:name=".Checkout"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
 
         <activity
             android:name=".SearchResultsActivity"

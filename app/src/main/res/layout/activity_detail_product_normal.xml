@@ -162,6 +162,31 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/wrapper_variation"
+                android:layout_margin="20dp"
+                android:padding="5dp"
+                android:background="@drawable/bg_white_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.kufed.id.customview.KufedSpinner
+                    android:id="@+id/spinner_variations"
+                    android:background="@android:color/transparent"
+                    android:spinnerMode="dropdown"
+                    android:drawSelectorOnTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+                <ImageView
+                    android:src="@drawable/img_dropdown_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+            </RelativeLayout>
+
             <com.kufed.id.customview.KufedButton
                 android:id="@+id/btn_add_to_chart"
                 android:layout_width="match_parent"

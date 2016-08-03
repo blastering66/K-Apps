@@ -12,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.kufed.id.activity.Detail_Cart;
 import com.kufed.id.activity.Detail_Product;
 import com.kufed.id.activity.Detail_Product_Normal;
 import com.kufed.id.activity.ListLikedPost;
 import com.kufed.id.activity.MainMenu;
 import com.kufed.id.activity.R;
+import com.kufed.id.customview.KufedButton;
 import com.kufed.id.customview.KufedLikeImageView;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.customview.KufedTextViewProductTitle;
@@ -173,6 +175,22 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
                 }
             }
         });
+
+        if(item.getStockCurrent().equals("0")){
+            holder.btn_add_to_cart.setText("SOLD OUT");
+        }
+        holder.btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!item.getStockCurrent().equals("0")){
+                    Intent intent_cart = new Intent(context, Detail_Cart.class);
+                    intent_cart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent_cart);
+                }else{
+                    Toast.makeText(context, R.string.toast_soldout, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void click_like(final String id){
@@ -261,6 +279,7 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         @Bind(R.id.img_like_imageview)KufedLikeImageView img_like_imageview;
         @Bind(R.id.img_share)ImageView img_share;
         @Bind(R.id.tv_share)KufedTextView tv_share;
+        @Bind(R.id.btn_add_to_chart)KufedButton btn_add_to_cart;
 
         public ViewHolder(View itemView) {
             super(itemView);

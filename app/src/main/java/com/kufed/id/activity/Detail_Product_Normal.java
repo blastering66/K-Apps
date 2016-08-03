@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,20 +31,27 @@ import android.widget.Toast;
 import com.kufed.id.customadapter.RVAdapter_Detail_Like;
 import com.kufed.id.customadapter.RVAdapter_Detail_RelatedItem;
 import com.kufed.id.customview.KufedLikeImageView;
+import com.kufed.id.customview.KufedSpinner;
 import com.kufed.id.customview.KufedTextView;
 import com.kufed.id.customview.KufedTextViewProductTitle;
 import com.kufed.id.fragment.Fragment_VP_Image;
 import com.kufed.id.pojo.PojoLikedPost;
 import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
+import com.kufed.id.pojo.PojoResponseAddCart;
 import com.kufed.id.pojo.PojoWishlistPost;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.rowdata.Rowdata_Detail_Likes;
 import com.kufed.id.rowdata.Rowdata_Detail_RelatedItem;
 import com.kufed.id.rowdata.Rowdata_Detail_SolybyStore;
+import com.kufed.id.rowdata.Rowdata_Variations;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -69,6 +78,8 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
     List<Rowdata_Detail_Likes> data_likes;
     List<Rowdata_Detail_SolybyStore> data_soldbystore;
     List<Rowdata_Detail_RelatedItem> data_relateditem;
+
+    List<Rowdata_Variations> data_variations;
     PagerAdapter pagerAdapter;
 
     @Bind(R.id.rv_likes)
@@ -120,10 +131,59 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
 
     }
 
-    @OnClick(R.id.btn_add_to_chart)public void addToChart(){
-        Intent intent_cart = new Intent(getApplicationContext(), Detail_Cart.class);
+    @Bind(R.id.spinner_variations)KufedSpinner spinner_variations;
+    String variations_selected;
 
-        startActivity(intent_cart);
+    @OnClick(R.id.btn_add_to_chart)public void addToChart(){
+        try{
+            JSONObject obj_items = new JSONObject();
+            obj_items.put("variation_id", variations_selected);
+            obj_items.put("detail_quantity", 1);
+            obj_items.put("post_id", post_id);
+
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.put(obj_items);
+
+            JSONObject obj_items_parent = new JSONObject();
+            obj_items_parent.put("items", jsonArray);
+
+            Log.e("JSON CART", obj_items_parent.toString());
+
+            Observable<PojoResponseAddCart> observable = adapter.add_to_cart(obj_items_parent.toString(),access_token);
+
+            observable.subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<PojoResponseAddCart>() {
+                        private boolean isSukses = false;
+                        @Override
+                        public void onCompleted() {
+                            if(isSukses){
+                                Intent intent_cart = new Intent(getApplicationContext(), Detail_Cart.class);
+                                startActivity(intent_cart);
+                            }else{
+                                Toast.makeText(getApplicationContext(),
+                                        R.string.toast_something_wrong , Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e("Error addToCart", e.getMessage().toString());
+                        }
+
+                        @Override
+                        public void onNext(PojoResponseAddCart pojoResponseAddCart) {
+                            if(pojoResponseAddCart.getStatus().getCode() == 200){
+                                isSukses=true;
+                            }
+
+                        }
+                    });
+
+        }catch (JSONException e){
+
+        }
+
     }
 
     Toolbar toolbar;
@@ -228,6 +288,39 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
                 tv_selling_price.setText("IDR " + selling_price);
                 tv_desc.setText(Html.fromHtml(pojoPostInfo.getData().getProduct().getProductDescription()));
 
+                if(pojoPostInfo.getData().getVariation().getVariation().size() > 0){
+                    data_variations = new ArrayList<Rowdata_Variations>();
+
+                    for(PojoPostInfo.Variation_ element : pojoPostInfo.getData().getVariation().getVariation()){
+                        data_variations.add(new Rowdata_Variations(element.getVariationId(),
+                                element.getVariationName(), element.getStockCurrent(), element.getColorName(),
+                                element.getSize()));
+                    }
+
+                    String[] variations_label = new String[data_variations.size()];
+                    for(int i=0; i < data_variations.size(); i++){
+                        variations_label[i] = "Color " + data_variations.get(i).color_name
+                                + " | Size " + data_variations.get(i).size;
+                    }
+
+                    ArrayAdapter<String> adapter_Variations = new ArrayAdapter<String>(
+                            getApplicationContext(),R.layout.spinner_item_black,variations_label);
+                    adapter_Variations.setDropDownViewResource(R.layout.spinner_item_black);
+                    spinner_variations.setAdapter(adapter_Variations);
+                    spinner_variations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            variations_selected = data_variations.get(position).variation_id;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                            variations_selected = data_variations.get(0).variation_id;
+
+                        }
+                    });
+
+                }
 
                 post_title = pojoPostInfo.getData().getPostTitle();
                 post_url = pojoPostInfo.getData().getPostUrl();

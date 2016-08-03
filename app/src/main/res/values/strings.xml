@@ -51,4 +51,7 @@
     <string name="title_activity_notifications_activity__test">Notifications</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_example_dashboard">ExampleDashboard</string>
+
+    <string name="toast_something_wrong">Something Wrong</string>
+    <string name="toast_soldout">Item Sold Out</string>
 </resources>
