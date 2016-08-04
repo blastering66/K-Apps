@@ -13,6 +13,16 @@
         <item>Date of Birthday</item>
     </string-array>
 
+    <string-array name="address">
+        <item>New Address</item>
+        <item>Home</item>
+    </string-array>
+
+    <string-array name="shipping_method">
+        <item>Regular</item>
+        <item>Internasional</item>
+    </string-array>
+
     <string-array name="qty">
         <item>1</item>
         <item>2</item>
@@ -50,8 +60,33 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_notifications_activity__test">Notifications</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_example_dashboard">ExampleDashboard</string>
+
+    <string name="title_shippingaddress">Shipping address</string>
+    <string name="title_shipping_method">Shipping method</string>
+    <string name="title_order_summary">Order Summary</string>
+    <string name="title_shippingaddress_as_billing_address">Use shipping address as billing address</string>
+    <string name="title_edit_address">Edit Address</string>
+    <string name="title_receipt_phone">Phone</string>
+    <string name="title_address_label">Address Label</string>
+    <string name="title_address">Address</string>
+    <string name="title_subtotal">Subtotal</string>
+    <string name="title_discount">Discount</string>
+    <string name="title_shipping">Shipping</string>
+    <string name="title_total">Total</string>
+    <string name="title_total_amount">Total Amount</string>
+    <string name="title_bank_transfer">BANK TRANSFER</string>
+    <string name="title_cc">CREDIT CARD</string>
+
+    <string name="hint_address_label">Address Label</string>
+    <string name="hint_receipt_name">Recipients Name</string>
+    <string name="hint_address_detail">Address</string>
+    <string name="hint_address_postal_code">Postal Code</string>
+    <string name="hint_address_phone">Phone</string>
+    <string name="hint_enter_promo">Enter Promo Code Here</string>
 
     <string name="toast_something_wrong">Something Wrong</string>
     <string name="toast_soldout">Item Sold Out</string>
+
+    <string name="btn_save">SAVE</string>
+    <string name="btn_submit">SUBMIT</string>
 </resources>

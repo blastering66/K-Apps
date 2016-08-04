@@ -17,6 +17,12 @@ public class Param_Collection {
 
     public static String SPF_TOKEN=  "kufed_android_token";
 
+    public static String SPF_PAYMENT_METHOD_ID=  "payment_method_id";
+    public static String SPF_PAYMENT_BANK_ID=  "payment_bank_id";
+    public static String SPF_SHIPPING_ADDRESS_ID=  "shipping_address_id";
+    public static String SPF_PAYMENT_ADDRESS_ID=  "payment_address_id";
+    public static String SPF_SHIPPING_PROVIDER_METHOD_ID=  "shipping_provider_method_id";
+
     public static int REQ_CODE_FROM_LOGIN =10;
     public static int REQ_CODE_FROM_REGISTER =11;
     public static int REQ_CODE_FROM_REGISTER_FORGOT =12;

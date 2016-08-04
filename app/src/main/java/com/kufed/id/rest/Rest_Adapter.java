@@ -18,6 +18,7 @@ import com.kufed.id.pojo.PojoPostInfo;
 import com.kufed.id.pojo.PojoPostLikes;
 import com.kufed.id.pojo.PojoPostTrending;
 import com.kufed.id.pojo.PojoResponseAddCart;
+import com.kufed.id.pojo.PojoResponseAddressList;
 import com.kufed.id.pojo.PojoResponseCartList;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
@@ -222,6 +223,11 @@ public interface Rest_Adapter {
 
     @GET("/cart/list")
     Observable<PojoResponseCartList> get_cart_list(
+            @Query("access_token") String access_token
+    );
+
+    @GET("/account/address/list")
+    Observable<PojoResponseAddressList> get_address_list(
             @Query("access_token") String access_token
     );
 }

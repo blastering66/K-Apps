@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/wrapper_bank_transfer"
+        android:background="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        
+        <com.kufed.id.customview.KufedTextViewTitle
+            android:text="@string/title_bank_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/img_bank_mandiri_small"
+                android:scaleType="centerInside"
+                android:layout_width="80dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:src="@drawable/img_bank_bca_small"
+                android:scaleType="centerInside"
+                android:layout_width="80dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/img_arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:tint="@color/color_gray_dark_light"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+
+    <View
+        android:background="@color/color_gray_dark_light"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/wrapper_bank_cc"
+        android:background="?attr/selectableItemBackground"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <com.kufed.id.customview.KufedTextViewTitle
+            android:text="@string/title_cc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/img_visa"
+                android:scaleType="centerInside"
+                android:layout_width="80dp"
+                android:layout_height="40dp" />
+
+            <ImageView
+                android:src="@drawable/img_mastercard"
+                android:scaleType="centerInside"
+                android:layout_width="80dp"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/img_arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:tint="@color/color_gray_dark_light"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+
+    <View
+        android:background="@color/color_gray_dark_light"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

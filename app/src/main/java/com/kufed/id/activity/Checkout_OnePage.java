@@ -16,12 +16,9 @@ import com.kufed.id.customview.KufedTextViewTitle;
 import com.kufed.id.fragment.Fragment_Checkout_Payment;
 import com.kufed.id.fragment.Fragment_Checkout_Review;
 import com.kufed.id.fragment.Fragment_Checkout_Shipping;
-import com.kufed.id.fragment.Fragment_Notification_Following;
-import com.kufed.id.fragment.Fragment_Notification_You;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -29,7 +26,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 /**
  * Created by macbook on 8/3/16.
  */
-public class Checkout extends AppCompatActivity implements MaterialTabListener {
+public class Checkout_OnePage extends AppCompatActivity implements MaterialTabListener {
     @Bind(R.id.tabhost)
     MaterialTabHost tabHost;
     @Bind(R.id.viewpager)

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.kufed.id.customview.KufedTextViewTitle
+            android:text="@string/title_shippingaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/wrapper_address"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_address"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:entries="@array/address"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.kufed.id.customview.KufedTextViewTitle
+                    android:text="@string/hint_receipt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_address_complete_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextViewTitle
+                    android:text="@string/title_receipt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_address_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_edit_address"
+                    android:text="@string/title_edit_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.kufed.id.customview.KufedTextViewTitle
+                    android:text="@string/title_address_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_address_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextViewTitle
+                    android:text="@string/title_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.kufed.id.customview.KufedTextView
+                    android:id="@+id/tv_address_postalcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/color_gray_dark_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <com.kufed.id.customview.KufedTextView
+            android:text="@string/title_shipping_method"
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/wrapper_shipping_method"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_shipping_method"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"
+                android:entries="@array/shipping_method"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <com.kufed.id.customview.KufedTextView
+            android:id="@+id/tv_shipping_cost"
+            android:text="Shipping Cost : IDR "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedButton
+                android:id="@+id/btn_submit_voucher"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedEditText
+                android:id="@+id/ed_voucher"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btn_submit_voucher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+
+        <com.kufed.id.customview.KufedTextView
+            android:text="@string/title_order_summary"
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/color_gray_dark_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedTextView
+                android:text="@string/title_subtotal"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedTextView
+                android:id="@+id/tv_subtotal"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedTextView
+                android:text="SHIPPING"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedTextView
+                android:id="@+id/tv_shipping"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedTextView
+                android:text="@string/title_discount"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedTextView
+                android:id="@+id/tv_discount"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/color_gray_dark_light"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedTextView
+                android:text="@string/title_total"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedTextView
+                android:id="@+id/tv_total"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+        <com.kufed.id.customview.KufedButton
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_size"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_black"
+            android:text="@string/btn_submit"
+            android:textColor="@android:color/white"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

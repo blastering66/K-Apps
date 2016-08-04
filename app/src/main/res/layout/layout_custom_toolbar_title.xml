@@ -6,14 +6,26 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.kufed.id.customview.KufedTextViewTitle
-        android:id="@+id/tv_title_custom"
-        android:text="ACTIVITY"
-        android:textColor="@color/color_black"
-        android:textSize="@dimen/size_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/tabhostHeight"
+        android:layout_marginRight="@dimen/tabhostHeight"
+        android:gravity="center">
 
+        <com.kufed.id.customview.KufedTextViewTitle
+            android:id="@+id/tv_title_custom"
+            android:text="ACTIVITY"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/size_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 
 </LinearLayout>

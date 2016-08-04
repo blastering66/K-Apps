@@ -7,7 +7,10 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/layout_custom_toolbar_title" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
 
     <it.neokree.materialtabs.MaterialTabHost
         android:id="@+id/tabhost"

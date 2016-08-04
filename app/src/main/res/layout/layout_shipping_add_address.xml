@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.kufed.id.customview.KufedTextViewTitle
+            android:text="@string/title_shippingaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/wrapper_address"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_address"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <com.kufed.id.customview.KufedEditText
+            android:id="@+id/ed_address_label"
+            android:hint="@string/hint_address_label"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedEditText
+            android:id="@+id/ed_address_recipient_name"
+            android:hint="@string/hint_receipt_name"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedEditText
+            android:id="@+id/ed_address_detail"
+            android:gravity="center_horizontal"
+            android:hint="@string/hint_address_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/wrapper_province"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_province"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:entries="@array/qty"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrapper_area"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_area"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:entries="@array/qty"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrapper_district"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:background="@drawable/bg_white_stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kufed.id.customview.KufedSpinner
+                android:id="@+id/spinner_district"
+                android:background="@android:color/transparent"
+                android:entries="@array/qty"
+                android:spinnerMode="dropdown"
+                android:drawSelectorOnTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:src="@drawable/img_dropdown_white"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <com.kufed.id.customview.KufedEditText
+            android:id="@+id/ed_address_post_code"
+            android:gravity="center_horizontal"
+            android:hint="@string/hint_address_postal_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.kufed.id.customview.KufedEditText
+            android:id="@+id/ed_address_phone"
+            android:gravity="center_horizontal"
+            android:hint="@string/hint_address_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkbox_billing_address"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.kufed.id.customview.KufedTextView
+                android:text="@string/title_shippingaddress_as_billing_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <com.kufed.id.customview.KufedButton
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_size"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_black"
+            android:text="@string/btn_save"
+            android:textColor="@android:color/white"  />
+
+    </LinearLayout>
+
+</ScrollView>
