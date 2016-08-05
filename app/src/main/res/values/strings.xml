@@ -23,6 +23,11 @@
         <item>Internasional</item>
     </string-array>
 
+    <string-array name="payment_method">
+        <item>Bank Transfer</item>
+        <item>Veritrans</item>
+    </string-array>
+
     <string-array name="qty">
         <item>1</item>
         <item>2</item>
@@ -63,6 +68,7 @@
 
     <string name="title_shippingaddress">Shipping address</string>
     <string name="title_shipping_method">Shipping method</string>
+    <string name="title_payment_method">Payment method</string>
     <string name="title_order_summary">Order Summary</string>
     <string name="title_shippingaddress_as_billing_address">Use shipping address as billing address</string>
     <string name="title_edit_address">Edit Address</string>

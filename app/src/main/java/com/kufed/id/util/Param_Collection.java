@@ -34,10 +34,10 @@ public class Param_Collection {
     public static String URL_FOLDER_IMG = "/Kufed/temp/";
 
     //Internal
-//    public static String BASE_URL=  "http://192.168.4.168:3030/";
+    public static String BASE_URL=  "http://192.168.4.168:3030/";
 //    public static String BASE_URL=  "http://capricorn.kliktoday.com/";
 //    public static String BASE_URL=  "http://gemini.kliktoday.com/";
-    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com/";
+//    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com/";
 
     public static String ACCESS_TOKEN=  "kufed_token";
     public static String ACCESS_TOKEN_REFRESH=  "kufed_token_refresh";

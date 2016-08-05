@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:padding="20dp"
@@ -54,13 +64,13 @@
             android:layout_height="1dp"/>
 
         <com.kufed.id.customview.KufedTextView
-            android:text="@string/title_shipping_method"
+            android:text="@string/title_payment_method"
             android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <RelativeLayout
-            android:id="@+id/wrapper_shipping_method"
+            android:id="@+id/wrapper_payment_method"
             android:layout_margin="20dp"
             android:padding="5dp"
             android:background="@drawable/bg_white_stroke"
@@ -68,11 +78,11 @@
             android:layout_height="wrap_content">
 
             <com.kufed.id.customview.KufedSpinner
-                android:id="@+id/spinner_shipping_method"
+                android:id="@+id/spinner_payment_method"
                 android:background="@android:color/transparent"
                 android:spinnerMode="dropdown"
                 android:layout_centerVertical="true"
-                android:entries="@array/shipping_method"
+                android:entries="@array/payment_method"
                 android:drawSelectorOnTop="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -84,12 +94,6 @@
                 android:layout_height="30dp" />
 
         </RelativeLayout>
-
-        <com.kufed.id.customview.KufedTextView
-            android:id="@+id/tv_shipping_cost"
-            android:text="Shipping Cost : IDR "
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <RelativeLayout
             android:padding="10dp"
@@ -112,8 +116,6 @@
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-
-
 
         <com.kufed.id.customview.KufedTextView
             android:text="@string/title_order_summary"
@@ -229,4 +231,6 @@
 
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+</LinearLayout>

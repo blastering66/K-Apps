@@ -59,7 +59,7 @@ public class Fragment_Recomendation extends Fragment {
     }
 
     private void get_fresh_post(final View v){
-        Observable<PojoPostFresh> observable = adapter.get_post_fresh(access_token);
+        Observable<PojoPostFresh> observable = adapter.get_post_fresh(access_token, 0,30);
 
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

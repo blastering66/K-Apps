@@ -88,6 +88,12 @@
             android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
 
         <activity
+            android:name=".Checkout_OnePage"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar_Statusbar_Black" />
+
+        <activity
             android:name=".SearchResultsActivity"
             android:label="@string/title_activity_result"
             android:launchMode="singleTop"

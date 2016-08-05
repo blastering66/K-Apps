@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kufed.id.customadapter.RVAdapter_CartList;
 import com.kufed.id.customview.KufedButton;
@@ -48,7 +50,7 @@ public class Detail_Cart extends AppCompatActivity {
     List<PojoResponseCartList.Detail> data_cart;
     @Bind(R.id.tv_total)KufedTextViewTitle tv_total;
     @OnClick(R.id.btn_checkout)public void checkout(){
-        Intent intent = new Intent(getApplicationContext(), Checkout.class);
+        Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
         startActivity(intent);
     };
 
@@ -97,12 +99,18 @@ public class Detail_Cart extends AppCompatActivity {
                             rv.setAdapter(layoutAdapter);
                             rv.setLayoutManager(layoutManager);
 
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Failed get Cart List", Toast.LENGTH_LONG).show();
                         }
+
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e("Error CartList", e.getMessage().toString());
+                        Toast.makeText(getApplicationContext(), "Failed get Cart List, Reason = "+
+                        e.getMessage().toString(), Toast.LENGTH_LONG).show();
 
                     }
 

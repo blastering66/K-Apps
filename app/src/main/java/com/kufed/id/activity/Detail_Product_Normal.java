@@ -275,134 +275,136 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
             @Override
             public void onNext(PojoPostInfo pojoPostInfo) {
 
-                title_product_name = pojoPostInfo.getData().getProduct().getProductTitle();
-                tv_name.setText(pojoPostInfo.getData().getProduct().getProductTitle());
-                tv_name.setFocusable(true);
-                tv_name.requestFocus();
-                tv_brand.setText(pojoPostInfo.getData().getBrandName());
-                tv_user.setText(pojoPostInfo.getData().getMember().getMemberUsername());
+                if(pojoPostInfo.getStatus().getCode() == 200){
+                    title_product_name = pojoPostInfo.getData().getProduct().getProductTitle();
+                    tv_name.setText(pojoPostInfo.getData().getProduct().getProductTitle());
+                    tv_name.setFocusable(true);
+                    tv_name.requestFocus();
+                    tv_brand.setText(pojoPostInfo.getData().getBrandName());
+                    tv_user.setText(pojoPostInfo.getData().getMember().getMemberUsername());
 
-                NumberFormat numberFormat = NumberFormat.getNumberInstance();
-                String selling_price = numberFormat.format(pojoPostInfo.getData().getProduct().getSellingPrice());
+                    NumberFormat numberFormat = NumberFormat.getNumberInstance();
+                    String selling_price = numberFormat.format(pojoPostInfo.getData().getProduct().getSellingPrice());
 
-                tv_selling_price.setText("IDR " + selling_price);
-                tv_desc.setText(Html.fromHtml(pojoPostInfo.getData().getProduct().getProductDescription()));
+                    tv_selling_price.setText("IDR " + selling_price);
+                    tv_desc.setText(Html.fromHtml(pojoPostInfo.getData().getProduct().getProductDescription()));
 
-                if(pojoPostInfo.getData().getVariation().getVariation().size() > 0){
-                    data_variations = new ArrayList<Rowdata_Variations>();
+                    if(pojoPostInfo.getData().getVariation().getVariation().size() > 0){
+                        data_variations = new ArrayList<Rowdata_Variations>();
 
-                    for(PojoPostInfo.Variation_ element : pojoPostInfo.getData().getVariation().getVariation()){
-                        data_variations.add(new Rowdata_Variations(element.getVariationId(),
-                                element.getVariationName(), element.getStockCurrent(), element.getColorName(),
-                                element.getSize()));
-                    }
-
-                    String[] variations_label = new String[data_variations.size()];
-                    for(int i=0; i < data_variations.size(); i++){
-                        variations_label[i] = "Color " + data_variations.get(i).color_name
-                                + " | Size " + data_variations.get(i).size;
-                    }
-
-                    ArrayAdapter<String> adapter_Variations = new ArrayAdapter<String>(
-                            getApplicationContext(),R.layout.spinner_item_black,variations_label);
-                    adapter_Variations.setDropDownViewResource(R.layout.spinner_item_black);
-                    spinner_variations.setAdapter(adapter_Variations);
-                    spinner_variations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            variations_selected = data_variations.get(position).variation_id;
+                        for(PojoPostInfo.Variation_ element : pojoPostInfo.getData().getVariation().getVariation()){
+                            data_variations.add(new Rowdata_Variations(element.getVariationId(),
+                                    element.getVariationName(), element.getStockCurrent(), element.getColorName(),
+                                    element.getSize()));
                         }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-                            variations_selected = data_variations.get(0).variation_id;
-
+                        String[] variations_label = new String[data_variations.size()];
+                        for(int i=0; i < data_variations.size(); i++){
+                            variations_label[i] = "Color " + data_variations.get(i).color_name
+                                    + " | Size " + data_variations.get(i).size;
                         }
-                    });
 
-                }
+                        ArrayAdapter<String> adapter_Variations = new ArrayAdapter<String>(
+                                getApplicationContext(),R.layout.spinner_item_black,variations_label);
+                        adapter_Variations.setDropDownViewResource(R.layout.spinner_item_black);
+                        spinner_variations.setAdapter(adapter_Variations);
+                        spinner_variations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                variations_selected = data_variations.get(position).variation_id;
+                            }
 
-                post_title = pojoPostInfo.getData().getPostTitle();
-                post_url = pojoPostInfo.getData().getPostUrl();
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+                                variations_selected = data_variations.get(0).variation_id;
 
-                //Get Image Post untuk Viewpager
-                if (pojoPostInfo.getData().getImages().size() > 0) {
+                            }
+                        });
 
-                    data_image_vp = new ArrayList<>();
+                    }
+
+                    post_title = pojoPostInfo.getData().getPostTitle();
+                    post_url = pojoPostInfo.getData().getPostUrl();
+
+                    //Get Image Post untuk Viewpager
+                    if (pojoPostInfo.getData().getImages().size() > 0) {
+
+                        data_image_vp = new ArrayList<>();
 //                    Iterator it = pojoPostInfo.getData().getImages().iterator();
 //                    while (it.hasNext()){
 //
 //                    }
-                    for (PojoPostInfo.Image element : pojoPostInfo.getData().getImages()) {
-                        data_image_vp.add(element.getNormalImagePath());
-                    }
+                        for (PojoPostInfo.Image element : pojoPostInfo.getData().getImages()) {
+                            data_image_vp.add(element.getNormalImagePath());
+                        }
 
 //                    data_image_vp.add("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/724-1460013150-full.jpg");
 //                    data_image_vp.add("https://s3-ap-southeast-1.amazonaws.com/kufedcom/post/2713-1466595679-full.jpg");
-                    pagerAdapter = new Image_Product_Adapter(getSupportFragmentManager());
-                    vp.setAdapter(pagerAdapter);
-                    indicator.setViewPager(vp);
-                } else {
-
-                }
-
-                //Get Count Likes
-                if (pojoPostInfo.getData().getLikesCount() > 0) {
-                    Observable<PojoPostLikes> observable_Likes = adapter.get_post_likes(post_id, access_token);
-                    observable_Likes.subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<PojoPostLikes>() {
-                        @Override
-                        public void onCompleted() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onNext(PojoPostLikes pojoPostLikes) {
-                            data_likes = new ArrayList<>();
-                            for (PojoPostLikes.Like element : pojoPostLikes.getData().getLikes()) {
-                                data_likes.add(new Rowdata_Detail_Likes(element.getMember().getMemberId(),
-                                        element.getMember().getPictureThumbPath()));
-
-                            }
-
-                            layoutAdapter_Likes = new RVAdapter_Detail_Like(Detail_Product_Normal.this, data_likes);
-                            layoutManager_Likes = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
-                            layoutAdapter_Likes.notifyDataSetChanged();
-                            rv_likes.setAdapter(layoutAdapter_Likes);
-                            rv_likes.setLayoutManager(layoutManager_Likes);
-
-                        }
-                    });
-
-                } else {
-                    wrapper_likes.setVisibility(View.GONE);
-                    line_likes.setVisibility(View.GONE);
-
-                }
-
-                //GET Related Item
-                if (pojoPostInfo.getData().getRelated().size() > 0) {
-                    data_relateditem = new ArrayList<>();
-
-                    for (PojoPostInfo.Related element : pojoPostInfo.getData().getRelated()) {
-                        data_relateditem.add(new Rowdata_Detail_RelatedItem(element.getPostId(),
-                                element.getSmallImagePath()));
+                        pagerAdapter = new Image_Product_Adapter(getSupportFragmentManager());
+                        vp.setAdapter(pagerAdapter);
+                        indicator.setViewPager(vp);
+                    } else {
 
                     }
 
-                    layoutAdapter_RelatedItem = new RVAdapter_Detail_RelatedItem(getApplicationContext(), data_relateditem);
-                    layoutManager_RelatedItem = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
-                    rv_related_item.setAdapter(layoutAdapter_RelatedItem);
-                    rv_related_item.setLayoutManager(layoutManager_RelatedItem);
+                    //Get Count Likes
+                    if (pojoPostInfo.getData().getLikesCount() > 0) {
+                        Observable<PojoPostLikes> observable_Likes = adapter.get_post_likes(post_id, access_token);
+                        observable_Likes.subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<PojoPostLikes>() {
+                            @Override
+                            public void onCompleted() {
 
-                } else {
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(PojoPostLikes pojoPostLikes) {
+                                data_likes = new ArrayList<>();
+                                for (PojoPostLikes.Like element : pojoPostLikes.getData().getLikes()) {
+                                    data_likes.add(new Rowdata_Detail_Likes(element.getMember().getMemberId(),
+                                            element.getMember().getPictureThumbPath()));
+
+                                }
+
+                                layoutAdapter_Likes = new RVAdapter_Detail_Like(Detail_Product_Normal.this, data_likes);
+                                layoutManager_Likes = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
+                                layoutAdapter_Likes.notifyDataSetChanged();
+                                rv_likes.setAdapter(layoutAdapter_Likes);
+                                rv_likes.setLayoutManager(layoutManager_Likes);
+
+                            }
+                        });
+
+                    } else {
+                        wrapper_likes.setVisibility(View.GONE);
+                        line_likes.setVisibility(View.GONE);
+
+                    }
+
+                    //GET Related Item
+                    if (pojoPostInfo.getData().getRelated().size() > 0) {
+                        data_relateditem = new ArrayList<>();
+
+                        for (PojoPostInfo.Related element : pojoPostInfo.getData().getRelated()) {
+                            data_relateditem.add(new Rowdata_Detail_RelatedItem(element.getPostId(),
+                                    element.getSmallImagePath()));
+
+                        }
+
+                        layoutAdapter_RelatedItem = new RVAdapter_Detail_RelatedItem(getApplicationContext(), data_relateditem);
+                        layoutManager_RelatedItem = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
+                        rv_related_item.setAdapter(layoutAdapter_RelatedItem);
+                        rv_related_item.setLayoutManager(layoutManager_RelatedItem);
+
+                    } else {
 
 
+                    }
                 }
 
             }

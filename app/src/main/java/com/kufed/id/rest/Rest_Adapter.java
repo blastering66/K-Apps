@@ -6,6 +6,8 @@ import retrofit.http.Query;
 import rx.Observable;
 
 import com.kufed.id.pojo.PojoAccessToken;
+import com.kufed.id.pojo.PojoCheckoutFee;
+import com.kufed.id.pojo.PojoCheckoutGet;
 import com.kufed.id.pojo.PojoFriendAdded;
 import com.kufed.id.pojo.PojoFriendRequests;
 import com.kufed.id.pojo.PojoGETProfile;
@@ -86,7 +88,9 @@ public interface Rest_Adapter {
 
     @GET("posts/fresh?")
     Observable<PojoPostFresh> get_post_fresh(
-            @Query("access_token") String access_token
+            @Query("access_token") String access_token,
+            @Query("start") int start,
+            @Query("limit") int limit
     );
 
     @GET("posts/trending?")
@@ -228,6 +232,16 @@ public interface Rest_Adapter {
 
     @GET("/account/address/list")
     Observable<PojoResponseAddressList> get_address_list(
+            @Query("access_token") String access_token
+    );
+
+    @GET("/checkout/fee")
+    Observable<PojoCheckoutFee> get_checkoutfee(
+            @Query("access_token") String access_token
+    );
+
+    @GET("/checkout/get")
+    Observable<PojoCheckoutGet> get_checkout_allinfo(
             @Query("access_token") String access_token
     );
 }
