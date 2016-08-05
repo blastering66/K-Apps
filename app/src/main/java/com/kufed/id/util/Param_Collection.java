@@ -1,9 +1,27 @@
 package com.kufed.id.util;
 
+import com.kufed.id.api.VTUtil.VTConfig;
+
 /**
  * Created by macbook on 6/1/16.
  */
 public class Param_Collection {
+    	public final static String PAYMENT_API_SANDBOX = "https://api.sandbox.veritrans.co.id/v2/token";
+//    public final static String PAYMENT_API_SANDBOX = "https://api.veritrans.co.id/v2/token";
+
+    public static String getPaymentApiUrl(){
+        if(VTConfig.VT_IsProduction){
+            return PAYMENT_API_SANDBOX;
+        }
+        return PAYMENT_API_SANDBOX;
+    }
+
+    //VT client coba
+//	public static final String VT_CLIENT = "VT-client-ioHS3qhTIndG-Nkk";
+
+    //VT LIVE
+    public static final String VT_CLIENT = "VT-client-Um5pn09FUP_cexxH";
+
     public static String SPF_NAME=  "kufed_android";
     public static String SPF_LOGGED=  "kufed_android_logged";
     public static String SPF_USER_FULLNAME =  "kufed_android_fullname";
