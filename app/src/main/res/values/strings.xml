@@ -95,4 +95,6 @@
 
     <string name="btn_save">SAVE</string>
     <string name="btn_submit">SUBMIT</string>
+
+    <string name="card_click_normal">Normal</string>
 </resources>

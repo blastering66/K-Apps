@@ -119,7 +119,7 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void onCompleted() {
-
+                        pDialog.dismiss();
                         if(isSukses){
                             Log.e("LOGIN ", "Token NEW= " + access_token);
                             Log.e("LOGIN ", "Token Refresh NEW= " + token_refresh);
@@ -139,6 +139,7 @@ public class Login extends AppCompatActivity {
                     public void onError(Throwable e) {
                         Log.e("OnError", "");
 
+                        pDialog.dismiss();
                     }
 
                     @Override

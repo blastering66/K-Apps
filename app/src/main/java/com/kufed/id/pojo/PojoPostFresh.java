@@ -3,6 +3,8 @@ package com.kufed.id.pojo;
 /**
  * Created by macbook on 6/1/16.
  */
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;

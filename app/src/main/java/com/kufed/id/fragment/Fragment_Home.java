@@ -2,6 +2,7 @@ package com.kufed.id.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.kufed.id.activity.R;
 import com.kufed.id.customadapter.RVAdapter_PostFresh;
+import com.kufed.id.customview.KufedDialogProgress;
+import com.kufed.id.pojo.PojoCheckoutGet;
 import com.kufed.id.pojo.PojoPostFresh;
 import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.rowdata.Rowdata_PostFresh;
@@ -75,7 +78,13 @@ public class Fragment_Home extends Fragment implements OnMoreListener, SwipeRefr
 
         get_fresh_post(v);
 
+        Rest_Adapter adapter_2 = Public_Functions.initRetrofit();
+
+        Observable<PojoPostFresh> observable = adapter.get_post_fresh(access_token,1,2);
+
+
     }
+
 
     @Override
     public void onMoreAsked(int overallItemsCount, int itemsBeforeMore, int maxLastVisiblePosition) {

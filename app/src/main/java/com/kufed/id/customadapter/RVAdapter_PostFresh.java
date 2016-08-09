@@ -281,6 +281,7 @@ public class RVAdapter_PostFresh extends RecyclerView.Adapter<RVAdapter_PostFres
         @Bind(R.id.tv_share)KufedTextView tv_share;
         @Bind(R.id.btn_add_to_chart)KufedButton btn_add_to_cart;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

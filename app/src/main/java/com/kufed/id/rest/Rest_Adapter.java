@@ -8,6 +8,7 @@ import rx.Observable;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.pojo.PojoCheckoutFee;
 import com.kufed.id.pojo.PojoCheckoutGet;
+import com.kufed.id.pojo.PojoCheckoutSubmit;
 import com.kufed.id.pojo.PojoFriendAdded;
 import com.kufed.id.pojo.PojoFriendRequests;
 import com.kufed.id.pojo.PojoGETProfile;
@@ -36,7 +37,6 @@ import retrofit.http.POST;
  * Created by macbook on 6/1/16.
  */
 public interface Rest_Adapter {
-
 
     @FormUrlEncoded
     @POST("access_token")
@@ -211,6 +211,20 @@ public interface Rest_Adapter {
             @Path("id") String id,
             @Field("comment") String comment,
             @Field("access_token") String access_token
+    );
+
+    @FormUrlEncoded
+    @POST("/checkout/submit")
+    Observable<PojoCheckoutSubmit> get_order_id(
+      @Field("access_token") String access_token,
+      @Field("shipping_address_id") String shipping_address_id,
+      @Field("payment_address_id") String payment_address_id,
+      @Field("shipping_provider_method_id") String shipping_provider_method_id,
+      @Field("payment_method_id") String payment_method_id,
+      @Field("payment_bank_id") String payment_bank_id,
+      @Field("cart") String cart,
+      @Field("is_gift") String is_gift,
+      @Field("gift_message") String gift_message
     );
 
     @GET("/product/search")

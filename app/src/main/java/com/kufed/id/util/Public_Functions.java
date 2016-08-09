@@ -1,11 +1,13 @@
 package com.kufed.id.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.kufed.id.activity.BuildConfig;
 import com.kufed.id.activity.MainMenu;
 import com.kufed.id.pojo.PojoAccessToken;
 import com.kufed.id.rest.Rest_Adapter;
@@ -14,6 +16,8 @@ import com.squareup.okhttp.OkHttpClient;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
+import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
@@ -28,6 +32,7 @@ import rx.schedulers.Schedulers;
  * Created by macbook on 6/1/16.
  */
 public class Public_Functions {
+
 
     public static Rest_Adapter initRetrofit(){
         final OkHttpClient okHttpClient = new OkHttpClient();
