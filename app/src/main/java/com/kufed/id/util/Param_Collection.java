@@ -7,12 +7,12 @@ package com.kufed.id.util;
 public class Param_Collection {
 
     // productions
-    public final static String PAYMENT_API_SANDBOX = "https://api.sandbox.veritrans.co.id/v2/token";
-    public static final String VT_CLIENT = "VT-client-rwC9mBTVVO8sihBb";
+//    public final static String PAYMENT_API_SANDBOX = "https://api.veritrans.co.id/";
+//    public static final String VT_CLIENT = "VT-client-rwC9mBTVVO8sihBb";
 
     //SANBOX
-//    public final static String PAYMENT_API_SANDBOX = "https://api.sandbox.veritrans.co.id/v2/token";
-//    public static final String VT_CLIENT = "VT-client-Um5pn09FUP_cexxH";
+    public final static String PAYMENT_API_SANDBOX = "https://my.sandbox.veritrans.co.id";
+    public static final String VT_CLIENT = "VT-client-Um5pn09FUP_cexxH";
 
     public static String SPF_NAME=  "kufed_android";
     public static String SPF_LOGGED=  "kufed_android_logged";
@@ -48,8 +48,8 @@ public class Param_Collection {
 //    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com/";
 
     //URL for RETROFIT 1.9
-    public static String BASE_URL=  "http://192.168.4.168:3030";
-//    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com";
+//    public static String BASE_URL=  "http://192.168.4.168:3030";
+    public static String BASE_URL=  "http://kufed-load-balancer-api-2-351688991.ap-southeast-1.elb.amazonaws.com";
 
     public static String ACCESS_TOKEN=  "kufed_token";
     public static String ACCESS_TOKEN_REFRESH=  "kufed_token_refresh";

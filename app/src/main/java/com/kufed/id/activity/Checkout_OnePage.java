@@ -124,7 +124,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
                 "4811111111111114","123","01","20", VeritransSDK.getVeritransSDK().getClientKey()
         );
         cardTokenRequest.setIsSaved(false);
-        cardTokenRequest.setGrossAmount(gross_amount);
+        cardTokenRequest.setGrossAmount(12345);
         VeritransSDK.getVeritransSDK().getToken(cardTokenRequest);
 
 //        Observable<PojoCheckoutSubmit> observable = adapter.get_order_id(
@@ -197,9 +197,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
         spf = getSharedPreferences(Param_Collection.SPF_NAME, MODE_PRIVATE);
         access_token = spf.getString(Param_Collection.ACCESS_TOKEN, "");
 
-//        getAddressInfo();
-//        getCheckoutFee();
-        getCheckoutAllData();
+//        getCheckoutAllData();
     }
 
     public void getCheckoutAllData(){

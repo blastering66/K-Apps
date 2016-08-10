@@ -40,6 +40,7 @@ import id.co.veritrans.sdk.coreflow.eventbus.callback.GetAuthenticationBusCallba
 import id.co.veritrans.sdk.coreflow.eventbus.events.AuthenticationEvent;
 import id.co.veritrans.sdk.coreflow.eventbus.events.GeneralErrorEvent;
 import id.co.veritrans.sdk.coreflow.eventbus.events.NetworkUnavailableEvent;
+import id.co.veritrans.sdk.uiflow.PaymentMethods;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,7 +50,8 @@ import rx.schedulers.Schedulers;
  * Created by macbook on 8/2/16.
  */
 public class Detail_Cart extends AppCompatActivity implements GetAuthenticationBusCallback {
-    @Bind(R.id.rv)RecyclerView rv;
+    @Bind(R.id.rv)
+    RecyclerView rv;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter layoutAdapter;
     @Bind(R.id.btn_checkout)
@@ -60,8 +62,11 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
     SharedPreferences spf;
     Rest_Adapter adapter;
     List<PojoResponseCartList.Detail> data_cart;
-    @Bind(R.id.tv_total)KufedTextViewTitle tv_total;
-    @OnClick(R.id.btn_checkout)public void checkout(){
+    @Bind(R.id.tv_total)
+    KufedTextViewTitle tv_total;
+
+    @OnClick(R.id.btn_checkout)
+    public void checkout() {
 //        VeritransSDK.getVeritransSDK().getAuthenticationToken();
 //        if(authTokenIsAvaillable) {
 //            Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
@@ -69,14 +74,16 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
 //        }else{
 //            Toast.makeText(getApplicationContext(), "Token not availlable", Toast.LENGTH_LONG).show();
 //        }
-    };
+    }
 
-    public void getToken(View view){
+    ;
+
+    public void getToken(View view) {
         VeritransSDK.getVeritransSDK().getAuthenticationToken();
-        if(authTokenIsAvaillable) {
+        if (authTokenIsAvaillable) {
             Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
             startActivity(intent);
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Token not availlable", Toast.LENGTH_LONG).show();
         }
     }
@@ -89,12 +96,13 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
 
     private String authTokenVeritrans;
     private boolean authTokenIsAvaillable;
+
     private void refreshAuthenticationContainer() {
-        if(VeritransSDK.getVeritransSDK().readAuthenticationToken()!=null
+        if (VeritransSDK.getVeritransSDK().readAuthenticationToken() != null
                 && !VeritransSDK.getVeritransSDK().readAuthenticationToken().equals("")) {
             authTokenVeritrans = VeritransSDK.getVeritransSDK().readAuthenticationToken();
             authTokenIsAvaillable = true;
-        }else{
+        } else {
             authTokenIsAvaillable = false;
         }
     }
@@ -106,12 +114,14 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
         LocalDataHandler.saveString(Constants.AUTH_TOKEN, auth);
         refreshAuthenticationContainer();
     }
+
     @Subscribe
     @Override
     public void onEvent(NetworkUnavailableEvent networkUnavailableEvent) {
         Toast.makeText(getApplicationContext(), networkUnavailableEvent.toString(), Toast.LENGTH_LONG).show();
 
     }
+
     @Subscribe
     @Override
     public void onEvent(GeneralErrorEvent generalErrorEvent) {
@@ -126,17 +136,29 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
         setContentView(R.layout.activity_detail_cart);
         ButterKnife.bind(this);
 
-        KufedButton btn_test = (KufedButton)findViewById(R.id.btn_checkout);
+        //Initial VeritransSDK
+        VeritransSDK veritransSDK = new SdkCoreFlowBuilder(this, Param_Collection.VT_CLIENT,
+                Param_Collection.PAYMENT_API_SANDBOX)
+                .enableLog(true)
+                .setDefaultText("open_sans_regular.ttf")
+                .setSemiBoldText("open_sans_regular.ttf")
+                .setBoldText("open_sans_regular.ttf")
+                .setMerchantName("Kufed")
+                .buildSDK();
+        veritransSDK.setSelectedPaymentMethods(PaymentMethods.getAllPaymentMethods(this));
+
+        KufedButton btn_test = (KufedButton) findViewById(R.id.btn_checkout);
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 VeritransSDK.getVeritransSDK().getAuthenticationToken();
+//                Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
+//                startActivity(intent);
             }
         });
 
-        //Initial VeritransSDK
-        initSDK(this);
-        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+//        initSDK(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
 //        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.black));
         setSupportActionBar(toolbar);
@@ -144,7 +166,7 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
         LayoutInflater mInflater = LayoutInflater.from(getApplicationContext());
         View view = mInflater.inflate(R.layout.layout_custom_toolbar_title, null);
 
-        KufedTextViewTitle tv_title = (KufedTextViewTitle)view.findViewById(R.id.tv_title_custom);
+        KufedTextViewTitle tv_title = (KufedTextViewTitle) view.findViewById(R.id.tv_title_custom);
         tv_title.setText("CART");
         toolbar.removeAllViews();
         toolbar.setTitle("");
@@ -160,7 +182,7 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
         refreshAuthenticationContainer();
     }
 
-    private void getCartList(){
+    private void getCartList() {
         adapter = Public_Functions.initRetrofit();
         Observable<PojoResponseCartList> observable = adapter.get_cart_list(access_token);
 
@@ -168,16 +190,17 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<PojoResponseCartList>() {
                     private boolean isSukses = false;
+
                     @Override
                     public void onCompleted() {
-                        if(isSukses){
+                        if (isSukses) {
                             layoutManager = new LinearLayoutManager(getApplicationContext());
-                            layoutAdapter = new RVAdapter_CartList(getApplicationContext(),data_cart, adapter, access_token);
+                            layoutAdapter = new RVAdapter_CartList(getApplicationContext(), data_cart, adapter, access_token);
 
                             rv.setAdapter(layoutAdapter);
                             rv.setLayoutManager(layoutManager);
 
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "Failed get Cart List", Toast.LENGTH_LONG).show();
                         }
 
@@ -187,24 +210,24 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
                     @Override
                     public void onError(Throwable e) {
                         Log.e("Error CartList", e.getMessage().toString());
-                        Toast.makeText(getApplicationContext(), "Failed get Cart List, Reason = "+
-                        e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Failed get Cart List, Reason = " +
+                                e.getMessage().toString(), Toast.LENGTH_LONG).show();
 
                     }
 
                     @Override
                     public void onNext(PojoResponseCartList pojoResponseCartList) {
-                        if(pojoResponseCartList.getStatus().getCode() == 200){
-                            if(pojoResponseCartList.getData().getCart().getDetail().size() > 0){
+                        if (pojoResponseCartList.getStatus().getCode() == 200) {
+                            if (pojoResponseCartList.getData().getCart().getDetail().size() > 0) {
                                 data_cart = pojoResponseCartList.getData().getCart().getDetail();
                                 isSukses = true;
 
-                                try{
+                                try {
                                     NumberFormat nf = NumberFormat.getNumberInstance();
                                     String cPrice = nf.format(pojoResponseCartList.getData().getCart().getTotalPrice());
                                     tv_total.setText("IDR " + cPrice);
 
-                                }catch (NullPointerException e){
+                                } catch (NullPointerException e) {
                                     tv_total.setText("IDR ");
                                 }
 
@@ -215,14 +238,4 @@ public class Detail_Cart extends AppCompatActivity implements GetAuthenticationB
 
     }
 
-    public static void initSDK(Activity activity){
-        VeritransSDK veritransSDK = new SdkCoreFlowBuilder(activity, BuildConfig.CLIENT_KEY,
-                BuildConfig.BASE_URL)
-                .enableLog(true)
-//                .setDefaultText("open_sans_regular.ttf")
-//                .setSemiBoldText("open_sans_regular.ttf")
-//                .setBoldText("open_sans_regular.ttf")
-                .setMerchantName("Kufed")
-                .buildSDK();
-    }
 }

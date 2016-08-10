@@ -30,18 +30,7 @@ android {
         multiDexEnabled true
     }
 
-    productFlavors {
-        development {
-            applicationId "com.kufed.id.activity"
-            buildConfigField "String", "BASE_URL", "\"https://api.sandbox.veritrans.co.id/v2/\""
-            buildConfigField "String", "CLIENT_KEY", "\"VT-client-Um5pn09FUP_cexxH\""
-        }
-        production {
-            applicationId "com.kufed.id.activity"
-            buildConfigField "String", "BASE_URL", "\"https://api.sandbox.veritrans.co.id/v2/\""
-            buildConfigField "String", "CLIENT_KEY", "\"VT-client-Um5pn09FUP_cexxH\""
-        }
-    }
+
 
     buildTypes {
         release {
@@ -84,6 +73,9 @@ dependencies {
     }
     compile 'id.co.veritrans:coreflow:0.11.2-SANDBOX'
     compile 'id.co.veritrans:coreflow:0.11.2'
+    compile 'id.co.veritrans:uiflow:0.11.2-SANDBOX'
+    // For using the Veritrans Production
+    compile 'id.co.veritrans:uiflow:0.11.2'
 
 }
 

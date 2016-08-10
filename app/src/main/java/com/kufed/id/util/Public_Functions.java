@@ -28,6 +28,7 @@ import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
 import retrofit.RestAdapter;
 //import retrofit.RxJavaCallAdapterFactory;
 import retrofit.android.AndroidLog;
+import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 import rx.Observable;
 import rx.Observer;
@@ -49,13 +50,13 @@ public class Public_Functions {
 //                .baseUrl(Param_Collection.BASE_URL).build();
 //        Rest_Adapter adapter = retrofit_test.create(Rest_Adapter.class);
 
-        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
                 .registerTypeAdapter(Date.class, new DateTypeAdapter()).create();
 
         RestAdapter adapter_ = new RestAdapter.Builder()
-//                .setClient(okHttpClient)
                 .setEndpoint(Param_Collection.BASE_URL).setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("=NETWORK="))
+                .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("-KUFED-"))
+                .setClient(new OkClient(okHttpClient))
                 .build();
         Rest_Adapter adapter = adapter_.create(Rest_Adapter.class);
         return adapter;
