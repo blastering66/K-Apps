@@ -30,7 +30,6 @@ import com.kufed.id.util.Font;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 
-import id.co.veritrans.sdk.coreflow.eventbus.bus.VeritransBusProvider;
 import io.fabric.sdk.android.Fabric;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

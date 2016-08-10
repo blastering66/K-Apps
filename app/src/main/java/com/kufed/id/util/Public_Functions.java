@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
-import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
 //import retrofit.GsonConverterFactory;
 //import retrofit.Response;
 import retrofit.RestAdapter;

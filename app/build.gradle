@@ -42,6 +42,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile (name : 'VTAndroidAPI', ext: 'aar')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -71,11 +72,11 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.3@aar') {
         transitive = true;
     }
-    compile 'id.co.veritrans:coreflow:0.11.2-SANDBOX'
-    compile 'id.co.veritrans:coreflow:0.11.2'
-    compile 'id.co.veritrans:uiflow:0.11.2-SANDBOX'
+//    compile 'id.co.veritrans:coreflow:0.11.2-SANDBOX'
+//    compile 'id.co.veritrans:coreflow:0.11.2'
+//    compile 'id.co.veritrans:uiflow:0.11.2-SANDBOX'
     // For using the Veritrans Production
-    compile 'id.co.veritrans:uiflow:0.11.2'
+//    compile 'id.co.veritrans:uiflow:0.11.2'
 
 }
 

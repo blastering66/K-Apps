@@ -22,6 +22,7 @@ import com.kufed.id.pojo.PojoResponseCheckout;
 import com.kufed.id.rest.Rest_Adapter;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -36,17 +37,11 @@ public class RVAdapter_CartList extends RecyclerView.Adapter<RVAdapter_CartList.
     private Rest_Adapter adapter;
     private String access_token;
 
-    public RVAdapter_CartList(Context context, List<PojoResponseCartList.Detail> data, Rest_Adapter adapter, String access_token) {
-        this.context = context;
-        this.data = data;
-        this.adapter = adapter;
-        this.access_token = access_token;
-    }
-
     public RVAdapter_CartList(Context context, Rest_Adapter adapter, String access_token) {
         this.context = context;
         this.adapter = adapter;
         this.access_token = access_token;
+        this.data = new ArrayList<>();
     }
 
     @Override
@@ -103,5 +98,10 @@ public class RVAdapter_CartList extends RecyclerView.Adapter<RVAdapter_CartList.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public void addAll(List<PojoResponseCartList.Detail> newData) {
+        data.addAll(newData);
+        notifyDataSetChanged();
     }
 }

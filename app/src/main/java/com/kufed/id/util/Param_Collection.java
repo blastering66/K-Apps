@@ -11,7 +11,7 @@ public class Param_Collection {
 //    public static final String VT_CLIENT = "VT-client-rwC9mBTVVO8sihBb";
 
     //SANBOX
-    public final static String PAYMENT_API_SANDBOX = "https://my.sandbox.veritrans.co.id";
+    public final static String PAYMENT_API_SANDBOX = "https://api.veritrans.co.id/v2/token";
     public static final String VT_CLIENT = "VT-client-Um5pn09FUP_cexxH";
 
     public static String SPF_NAME=  "kufed_android";
