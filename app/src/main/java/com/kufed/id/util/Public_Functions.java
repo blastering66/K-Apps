@@ -7,6 +7,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.bind.DateTypeAdapter;
 import com.kufed.id.activity.BuildConfig;
 import com.kufed.id.activity.MainMenu;
 import com.kufed.id.pojo.PojoAccessToken;
@@ -14,15 +18,17 @@ import com.kufed.id.rest.Rest_Adapter;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
 import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
-import retrofit.Call;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+//import retrofit.GsonConverterFactory;
+//import retrofit.Response;
+import retrofit.RestAdapter;
+//import retrofit.RxJavaCallAdapterFactory;
+import retrofit.android.AndroidLog;
+import retrofit.converter.GsonConverter;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -33,42 +39,27 @@ import rx.schedulers.Schedulers;
  */
 public class Public_Functions {
 
-
     public static Rest_Adapter initRetrofit(){
         final OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setReadTimeout(270, TimeUnit.SECONDS);
         okHttpClient.setConnectTimeout(270, TimeUnit.SECONDS);
 
-        Retrofit retrofit_test = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
-                .baseUrl(Param_Collection.BASE_URL).build();
-        Rest_Adapter adapter = retrofit_test.create(Rest_Adapter.class);
+//        RestAdapter retrofit_test = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
+//                .baseUrl(Param_Collection.BASE_URL).build();
+//        Rest_Adapter adapter = retrofit_test.create(Rest_Adapter.class);
+
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(Date.class, new DateTypeAdapter()).create();
+
+        RestAdapter adapter_ = new RestAdapter.Builder()
+//                .setClient(okHttpClient)
+                .setEndpoint(Param_Collection.BASE_URL).setConverter(new GsonConverter(gson))
+                .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("=NETWORK="))
+                .build();
+        Rest_Adapter adapter = adapter_.create(Rest_Adapter.class);
         return adapter;
     }
 
-    public static String refreshAccessToken(Rest_Adapter adapter,Context ctx,String access_token_before){
 
-        Call<PojoAccessToken> call = adapter.call_refresh_access_token(Param_Collection.GRANT_TYPE_TOKENONLY, Param_Collection.CLIENT_ID,
-                Param_Collection.CLIENT_SECRET, access_token_before);
-
-        try{
-            Response<PojoAccessToken> response_token =  call.execute();
-            if(response_token.isSuccess()){
-                if(response_token.body() != null){
-                    SharedPreferences spf = ctx.getSharedPreferences(Param_Collection.SPF_NAME, Context.MODE_PRIVATE);
-                    spf.edit().putString(Param_Collection.ACCESS_TOKEN, response_token.body().getData().getAccessToken())
-                            .commit();
-                    return response_token.body().getData().getAccessToken();
-                }else{
-                    return "";
-                }
-            }else{
-                return "";
-            }
-        }catch (IOException e){
-            return "";
-
-        }
-
-    }
 }

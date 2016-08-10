@@ -1,5 +1,6 @@
 package com.kufed.id.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,12 +23,23 @@ import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.text.NumberFormat;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import id.co.veritrans.sdk.coreflow.core.Constants;
+import id.co.veritrans.sdk.coreflow.core.LocalDataHandler;
+import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
+import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
+import id.co.veritrans.sdk.coreflow.eventbus.bus.VeritransBusProvider;
+import id.co.veritrans.sdk.coreflow.eventbus.callback.GetAuthenticationBusCallback;
+import id.co.veritrans.sdk.coreflow.eventbus.events.AuthenticationEvent;
+import id.co.veritrans.sdk.coreflow.eventbus.events.GeneralErrorEvent;
+import id.co.veritrans.sdk.coreflow.eventbus.events.NetworkUnavailableEvent;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -36,7 +48,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by macbook on 8/2/16.
  */
-public class Detail_Cart extends AppCompatActivity {
+public class Detail_Cart extends AppCompatActivity implements GetAuthenticationBusCallback {
     @Bind(R.id.rv)RecyclerView rv;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter layoutAdapter;
@@ -50,15 +62,80 @@ public class Detail_Cart extends AppCompatActivity {
     List<PojoResponseCartList.Detail> data_cart;
     @Bind(R.id.tv_total)KufedTextViewTitle tv_total;
     @OnClick(R.id.btn_checkout)public void checkout(){
-        Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
-        startActivity(intent);
+//        VeritransSDK.getVeritransSDK().getAuthenticationToken();
+//        if(authTokenIsAvaillable) {
+//            Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
+//            startActivity(intent);
+//        }else{
+//            Toast.makeText(getApplicationContext(), "Token not availlable", Toast.LENGTH_LONG).show();
+//        }
     };
+
+    public void getToken(View view){
+        VeritransSDK.getVeritransSDK().getAuthenticationToken();
+        if(authTokenIsAvaillable) {
+            Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(), "Token not availlable", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        VeritransBusProvider.getInstance().unregister(this);
+        super.onDestroy();
+    }
+
+    private String authTokenVeritrans;
+    private boolean authTokenIsAvaillable;
+    private void refreshAuthenticationContainer() {
+        if(VeritransSDK.getVeritransSDK().readAuthenticationToken()!=null
+                && !VeritransSDK.getVeritransSDK().readAuthenticationToken().equals("")) {
+            authTokenVeritrans = VeritransSDK.getVeritransSDK().readAuthenticationToken();
+            authTokenIsAvaillable = true;
+        }else{
+            authTokenIsAvaillable = false;
+        }
+    }
+
+    @Subscribe
+    @Override
+    public void onEvent(AuthenticationEvent authenticationEvent) {
+        String auth = authenticationEvent.getResponse().getxAuth();
+        LocalDataHandler.saveString(Constants.AUTH_TOKEN, auth);
+        refreshAuthenticationContainer();
+    }
+    @Subscribe
+    @Override
+    public void onEvent(NetworkUnavailableEvent networkUnavailableEvent) {
+        Toast.makeText(getApplicationContext(), networkUnavailableEvent.toString(), Toast.LENGTH_LONG).show();
+
+    }
+    @Subscribe
+    @Override
+    public void onEvent(GeneralErrorEvent generalErrorEvent) {
+        Toast.makeText(getApplicationContext(), generalErrorEvent.getMessage().toString(), Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Register Veritrans Instance
+        VeritransBusProvider.getInstance().register(this);
         setContentView(R.layout.activity_detail_cart);
         ButterKnife.bind(this);
+
+        KufedButton btn_test = (KufedButton)findViewById(R.id.btn_checkout);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VeritransSDK.getVeritransSDK().getAuthenticationToken();
+            }
+        });
+
+        //Initial VeritransSDK
+        initSDK(this);
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
 //        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.black));
@@ -80,6 +157,7 @@ public class Detail_Cart extends AppCompatActivity {
         access_token = spf.getString(Param_Collection.ACCESS_TOKEN, "");
 
         getCartList();
+        refreshAuthenticationContainer();
     }
 
     private void getCartList(){
@@ -135,5 +213,16 @@ public class Detail_Cart extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public static void initSDK(Activity activity){
+        VeritransSDK veritransSDK = new SdkCoreFlowBuilder(activity, BuildConfig.CLIENT_KEY,
+                BuildConfig.BASE_URL)
+                .enableLog(true)
+//                .setDefaultText("open_sans_regular.ttf")
+//                .setSemiBoldText("open_sans_regular.ttf")
+//                .setBoldText("open_sans_regular.ttf")
+                .setMerchantName("Kufed")
+                .buildSDK();
     }
 }

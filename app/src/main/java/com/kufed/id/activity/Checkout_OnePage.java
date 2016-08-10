@@ -36,6 +36,8 @@ import com.kufed.id.rowdata.Rowdata_PaymentMethod;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +106,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
     KufedTextView tv_discount;
     @Bind(R.id.tv_total)
     KufedTextView tv_total;
-    AlertDialog dialog = new AlertDialog.Builder(this).setMessage("Loading").create();
+    AlertDialog dialog ;
 //    @OnClick(R.id.img_back) public void click_back(){
 //        finish();
 //    }
@@ -115,6 +117,8 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
         Log.e("shipping_address_id",String.valueOf(shipping_address_id));
         Log.e("payment_address_id",String.valueOf(shipping_address_id));
         Log.e("shopping","_provider_method_id = 1");
+
+        dialog = new AlertDialog.Builder(this).setMessage("Loading").create();
 
         CardTokenRequest cardTokenRequest = new CardTokenRequest(
                 "4811111111111114","123","01","20", VeritransSDK.getVeritransSDK().getClientKey()
@@ -161,16 +165,17 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
     }
 
     @Override
+    protected void onDestroy() {
+        VeritransBusProvider.getInstance().unregister(this);
+        super.onDestroy();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_onepage);
+        VeritransBusProvider.getInstance().register(this);
         ButterKnife.bind(this);
-
-        if(!VeritransBusProvider.getInstance().isRegistered(this)){
-            VeritransBusProvider.getInstance().register(this);
-        }
-
-        initSDK(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
@@ -374,10 +379,11 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(GetTokenSuccessEvent getTokenSuccessEvent) {
         TransactionRequest request = new TransactionRequest(order_id, gross_amount );
-        request.setCardPaymentInfo(getString(R.string.card_click_normal), false);
+        request.setCardPaymentInfo(getString(R.string.card_click_normal), true);
         VeritransSDK.getVeritransSDK().setTransactionRequest(request);
 
         ItemDetails itemDetails = new ItemDetails(String.valueOf(order_id), gross_amount, 1, "Purchase Test");
@@ -394,6 +400,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(GetTokenFailedEvent getTokenFailedEvent) {
         dialog.dismiss();
@@ -404,6 +411,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(TransactionSuccessEvent transactionSuccessEvent) {
         dialog.dismiss();
@@ -414,6 +422,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(TransactionFailedEvent transactionFailedEvent) {
         dialog.dismiss();
@@ -424,6 +433,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(NetworkUnavailableEvent networkUnavailableEvent) {
         dialog.dismiss();
@@ -434,6 +444,7 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
 
     }
 
+    @Subscribe
     @Override
     public void onEvent(GeneralErrorEvent generalErrorEvent) {
         dialog.dismiss();
@@ -443,15 +454,6 @@ public class Checkout_OnePage extends AppCompatActivity implements TokenBusCallb
         dialog.show();
     }
 
-    public static void initSDK(Activity activity){
-        VeritransSDK veritransSDK = new SdkCoreFlowBuilder(activity, BuildConfig.CLIENT_KEY,
-                BuildConfig.BASE_URL)
-                .enableLog(true)
-                .setDefaultText("open_sans_regular.ttf")
-                .setSemiBoldText("open_sans_regular.ttf")
-                .setBoldText("open_sans_regular.ttf")
-                .setMerchantName("Kufed")
-                .buildSDK();
-    }
+
 
 }
