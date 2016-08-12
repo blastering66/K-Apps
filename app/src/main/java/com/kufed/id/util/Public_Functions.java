@@ -60,5 +60,49 @@ public class Public_Functions {
         return adapter;
     }
 
+    public static Rest_Adapter initRetrofit_Temp(){
+        final OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setReadTimeout(270, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(270, TimeUnit.SECONDS);
+
+//        RestAdapter retrofit_test = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
+//                .baseUrl(Param_Collection.BASE_URL).build();
+//        Rest_Adapter adapter = retrofit_test.create(Rest_Adapter.class);
+
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+                .registerTypeAdapter(Date.class, new DateTypeAdapter()).create();
+
+        RestAdapter adapter_ = new RestAdapter.Builder()
+                .setEndpoint("http://192.168.4.168:8080").setConverter(new GsonConverter(gson))
+                .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("-TEST-"))
+                .setClient(new OkClient(okHttpClient))
+                .build();
+        Rest_Adapter adapter = adapter_.create(Rest_Adapter.class);
+        return adapter;
+    }
+
+    public static Rest_Adapter initRetrofit_VeritransCallback(String url_callback_veritrans){
+        final OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setReadTimeout(270, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(270, TimeUnit.SECONDS);
+
+//        RestAdapter retrofit_test = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient)
+//                .baseUrl(Param_Collection.BASE_URL).build();
+//        Rest_Adapter adapter = retrofit_test.create(Rest_Adapter.class);
+
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+                .registerTypeAdapter(Date.class, new DateTypeAdapter()).create();
+
+        RestAdapter adapter_ = new RestAdapter.Builder()
+                .setEndpoint(url_callback_veritrans).setConverter(new GsonConverter(gson))
+                .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new AndroidLog("-VERITRANS-"))
+                .setClient(new OkClient(okHttpClient))
+                .build();
+        Rest_Adapter adapter = adapter_.create(Rest_Adapter.class);
+        return adapter;
+    }
+
 
 }

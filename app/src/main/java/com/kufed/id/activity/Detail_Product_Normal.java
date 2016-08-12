@@ -387,24 +387,21 @@ public class Detail_Product_Normal extends AppCompatActivity implements NestedSc
                     }
 
                     //GET Related Item
-                    if (pojoPostInfo.getData().getRelated().size() > 0) {
-                        data_relateditem = new ArrayList<>();
-
-                        for (PojoPostInfo.Related element : pojoPostInfo.getData().getRelated()) {
-                            data_relateditem.add(new Rowdata_Detail_RelatedItem(element.getPostId(),
-                                    element.getSmallImagePath()));
-
-                        }
-
-                        layoutAdapter_RelatedItem = new RVAdapter_Detail_RelatedItem(getApplicationContext(), data_relateditem);
-                        layoutManager_RelatedItem = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
-                        rv_related_item.setAdapter(layoutAdapter_RelatedItem);
-                        rv_related_item.setLayoutManager(layoutManager_RelatedItem);
-
-                    } else {
-
-
-                    }
+//                    if (pojoPostInfo.getData().getRelated().size() > 0) {
+//                        data_relateditem = new ArrayList<>();
+//
+//                        for (PojoPostInfo.Related element : pojoPostInfo.getData().getRelated()) {
+//                            data_relateditem.add(new Rowdata_Detail_RelatedItem(element.getPostId(),
+//                                    element.getSmallImagePath()));
+//
+//                        }
+//
+//                        layoutAdapter_RelatedItem = new RVAdapter_Detail_RelatedItem(getApplicationContext(), data_relateditem);
+//                        layoutManager_RelatedItem = new LinearLayoutManager(Detail_Product_Normal.this, LinearLayoutManager.HORIZONTAL, false);
+//                        rv_related_item.setAdapter(layoutAdapter_RelatedItem);
+//                        rv_related_item.setLayoutManager(layoutManager_RelatedItem);
+//
+//                    }
                 }
 
             }

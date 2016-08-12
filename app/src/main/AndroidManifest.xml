@@ -114,6 +114,9 @@
         <activity android:name=".Activity_Webview"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
+        <activity android:name=".Activity_Webview_Temp"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

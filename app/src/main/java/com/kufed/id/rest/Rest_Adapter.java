@@ -25,6 +25,7 @@ import com.kufed.id.pojo.PojoResponseAddressList;
 import com.kufed.id.pojo.PojoResponseCartList;
 import com.kufed.id.pojo.PojoResponseCategories;
 import com.kufed.id.pojo.PojoResponseRegister;
+import com.kufed.id.pojo.PojoResponseVeritrans;
 import com.kufed.id.pojo.PojoResultSearch;
 import com.kufed.id.pojo.PojoWishlistPost;
 
@@ -419,7 +420,7 @@ public interface Rest_Adapter {
 
     @FormUrlEncoded
     @POST("/checkout/submit")
-    Observable<PojoCheckoutSubmit> get_order_id(
+    Observable<PojoCheckoutSubmit> checkout_submit(
             @Field("access_token") String access_token,
             @Field("shipping_address_id") String shipping_address_id,
             @Field("payment_address_id") String payment_address_id,
@@ -461,5 +462,16 @@ public interface Rest_Adapter {
     @GET("/checkout/get")
     Observable<PojoCheckoutGet> get_checkout_allinfo(
             @Query("access_token") String access_token
+    );
+
+    @GET("/")
+    Observable<PojoResponseVeritrans> get_response_veritrans();
+
+
+    @GET("/order/payment-veritrans/vt")
+    Observable<PojoResponseVeritrans> send_tokenveritrans_to_backend(
+            @Query("token_id") String token,
+            @Query("order_id") String order_id,
+            @Query("amount") String gross_amount
     );
 }

@@ -24,33 +24,30 @@ import com.kufed.id.rest.Rest_Adapter;
 import com.kufed.id.util.Param_Collection;
 import com.kufed.id.util.Public_Functions;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.text.NumberFormat;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-//import org.greenrobot.eventbus.Subscribe;
-//import id.co.veritrans.sdk.coreflow.core.Constants;
-//import id.co.veritrans.sdk.coreflow.core.LocalDataHandler;
-//import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
-//import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
-//import id.co.veritrans.sdk.coreflow.eventbus.bus.VeritransBusProvider;
-//import id.co.veritrans.sdk.coreflow.eventbus.callback.GetAuthenticationBusCallback;
-//import id.co.veritrans.sdk.coreflow.eventbus.callback.TransactionBusCallback;
-//import id.co.veritrans.sdk.coreflow.eventbus.callback.TransactionFinishedCallback;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.AuthenticationEvent;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.GeneralErrorEvent;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.NetworkUnavailableEvent;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.TransactionFailedEvent;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.TransactionFinishedEvent;
-//import id.co.veritrans.sdk.coreflow.eventbus.events.TransactionSuccessEvent;
-//import id.co.veritrans.sdk.uiflow.PaymentMethods;
+
 import id.co.veritrans.android.api.VTDirect;
 import id.co.veritrans.android.api.VTInterface.ITokenCallback;
 import id.co.veritrans.android.api.VTModel.VTCardDetails;
 import id.co.veritrans.android.api.VTModel.VTToken;
 import id.co.veritrans.android.api.VTUtil.VTConfig;
+import id.co.veritrans.sdk.coreflow.core.SdkCoreFlowBuilder;
+import id.co.veritrans.sdk.coreflow.core.VeritransSDK;
+import id.co.veritrans.sdk.coreflow.eventbus.bus.VeritransBusProvider;
+import id.co.veritrans.sdk.coreflow.eventbus.callback.GetAuthenticationBusCallback;
+import id.co.veritrans.sdk.coreflow.eventbus.callback.TransactionFinishedCallback;
+import id.co.veritrans.sdk.coreflow.eventbus.events.AuthenticationEvent;
+import id.co.veritrans.sdk.coreflow.eventbus.events.GeneralErrorEvent;
+import id.co.veritrans.sdk.coreflow.eventbus.events.NetworkUnavailableEvent;
+import id.co.veritrans.sdk.coreflow.eventbus.events.TransactionFinishedEvent;
+import id.co.veritrans.sdk.uiflow.PaymentMethods;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -59,7 +56,9 @@ import rx.schedulers.Schedulers;
 /**
  * Created by macbook on 8/2/16.
  */
-public class Detail_Cart extends AppCompatActivity {
+public class Detail_Cart extends AppCompatActivity
+        implements GetAuthenticationBusCallback, TransactionFinishedCallback
+{
     @Bind(R.id.rv)
     RecyclerView rv;
     @Bind(R.id.btn_checkout)
@@ -85,12 +84,41 @@ public class Detail_Cart extends AppCompatActivity {
 
     private KufedButton mBtnCheckout;
 
+    @Override
+    protected void onDestroy() {
+        VeritransBusProvider.getInstance().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    @Override
+    public void onEvent(AuthenticationEvent authenticationEvent) {
+        Log.e("veritrans","");
+    }
+
+    @Subscribe
+    @Override
+    public void onEvent(NetworkUnavailableEvent networkUnavailableEvent) {
+        Log.e("veritrans","");
+    }
+
+    @Subscribe
+    @Override
+    public void onEvent(GeneralErrorEvent generalErrorEvent) {
+        Log.e("veritrans","");
+    }
+
+    @Subscribe
+    @Override
+    public void onEvent(TransactionFinishedEvent transactionFinishedEvent) {
+        Log.e("veritrans","");
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Register Veritrans Instance
-//        VeritransBusProvider.getInstance().register(this);
+        VeritransBusProvider.getInstance().register(this);
         setContentView(R.layout.activity_detail_cart);
         ButterKnife.bind(this);
 
@@ -107,6 +135,17 @@ public class Detail_Cart extends AppCompatActivity {
 //        });
 
 //        initSDK(this);
+        //Initial VeritransSDK
+        VeritransSDK veritransSDK = new SdkCoreFlowBuilder(this, Param_Collection.VT_CLIENT,
+                Param_Collection.PAYMENT_API_SANDBOX)
+                .enableLog(true)
+                .setDefaultText("open_sans_regular.ttf")
+                .setSemiBoldText("open_sans_regular.ttf")
+                .setBoldText("open_sans_regular.ttf")
+                .setMerchantName("Kufed")
+                .buildSDK();
+        veritransSDK.setSelectedPaymentMethods(PaymentMethods.getAllPaymentMethods(this));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setBackground(ContextCompat.getDrawable(MainMenu.this, R.drawable.bg_actionbar_gradient));
 //        toolbar.setBackgroundColor(ContextCompat.getColor(MainMenu.this, android.R.color.black));
@@ -140,13 +179,14 @@ public class Detail_Cart extends AppCompatActivity {
         mBtnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                payment();
+//                payment();
+                Intent intent = new Intent(getApplicationContext(), Checkout_OnePage.class);
+                startActivity(intent);
             }
         });
     }
 
     private void payment() {
-        
         VTConfig.CLIENT_KEY = Param_Collection.VT_CLIENT;
         VTConfig.VT_IsProduction = false;
 
